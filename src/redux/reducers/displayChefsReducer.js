@@ -8,6 +8,6 @@ const displayChefsReducer = (state=[], action) => {
   };
   
   // chefs will be on the redux state at:
-  // state.user
+  // props.chefs
   export default displayChefsReducer;
   

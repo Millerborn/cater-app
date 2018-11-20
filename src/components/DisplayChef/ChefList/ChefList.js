@@ -7,19 +7,19 @@ class ChefList extends Component {
     // Displays a vertical list with project details
     render() {
         return (
-            <div className="content">
-                <pre>TESTING:  {JSON.stringify(this.props)}</pre>
-                {this.props.projects.map((project, i) => {
-                    return (<ChefListItem key={i} project={project} />);
+            <div className="chef-list">
+                <pre>TESTING:  {JSON.stringify(this.props.history)}</pre>
+                {this.props.chefs.map((chef, i) => {
+                    return (<ChefListItem key={i} chef={chef} history={this.props.history} />);
                 })}
             </div>
         );
     }
 }
 
-// Makes our project reducer available in our component
-const mapReduxStateToProps = (reduxState) => ({
-    chef_profile: reduxState.projects
+const mapStateToProps = reduxState => ({
+    reduxState,
+    chefs: reduxState.chefs,
 });
 
-export default connect(mapReduxStateToProps)(ChefList);
+export default connect(mapStateToProps)(ChefList);

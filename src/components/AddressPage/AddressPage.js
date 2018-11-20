@@ -50,20 +50,18 @@ class AddressPage extends Component {
      // handle on click, go to next page and dispatch information to state in index
      handleNextClick = (event) => {
         event.preventDefault();
+        console.log('history', this.props);
         this.props.history.push('/display-chef')
-        this.postInformation();
     }
 
-    postInformation = () => {
-        console.log('posting information', this.props.state);
-        
-    }
 
   render() {
     return (
         <div id="mainDiv">
             <br></br>
             <h3>Find a Chef Near You</h3>
+            <pre>TESTING:  {JSON.stringify(this.props.history)}</pre>
+
                 <form id="formInput" onSubmit={this.handleNextClick}>
                     <FormControl variant="filled" className="addressForm">
                     <TextField type='text' label="address" name="address" placeholder="address" margin="normal" variant="outlined"

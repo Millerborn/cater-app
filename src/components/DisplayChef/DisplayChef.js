@@ -12,10 +12,15 @@ class DisplayChef extends Component {
     render() {
         return (
             <div className="App">
-                <ChefList />
+                <pre>TESTING:  {JSON.stringify(this.props.history)}</pre>
+                <ChefList history={this.props.history} />
             </div>
         );
     }
 }
 
-export default connect()(DisplayChef);
+const mapStateToProps = reduxState => ({
+    reduxState,
+});
+
+export default connect(mapStateToProps)(DisplayChef);

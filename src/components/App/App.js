@@ -14,10 +14,10 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import AddressPage from '../AddressPage/AddressPage';
 import DisplayChef from '../DisplayChef/DisplayChef';
+import SelectedChef from '../SelectedChefPage/SelectedChefPage'
 
 import './App.css';
 
@@ -54,7 +54,14 @@ class App extends Component {
               exact
               path="/display-chef"
               component={DisplayChef}
-            />8
+            />
+
+            {/* hire chef page */}
+            <Route
+              exact
+              path="/hire-chef"
+              component={SelectedChef}
+            />
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
