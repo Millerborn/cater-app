@@ -5,7 +5,12 @@ const router = express.Router();
 
 // Return specific Chef information from Server
 router.get('/', (req, res) => {
-    const queryText = 'SELECT first_name, last_name, specialty, min_price FROM chef_profile;';
+    const queryText = `SELECT menu_item.*, chef_profile.id as chef_profile_id, 
+    chef_profile.first_name, chef_profile.last_name
+    FROM menu_item
+    JOIN chef_profile ON chef_profile.chef_id = menu_item.chef_id
+    GROUP BY menu_item.id, chef_profile.id;
+    `;
     pool.query(queryText)
       .then((result) => { res.send(result.rows); })
       .catch((err) => {

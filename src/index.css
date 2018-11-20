@@ -1,3 +1,11 @@
+.card-menu {
+    min-height: 250px;
+    min-width: 350px;
+    flex: 0ex;
+    display: inline-block;
+    margin: 20px;
+}
+
 .chef-list-item {
     background-color: #11111130;
     min-height: 40px;
@@ -22,6 +30,12 @@ body {
     background-color: #eee;
   }
 
+#hire-chef-button {
+    float: right;
+    padding: 35px;
+    margin: 40px;
+}
+
 .login-page {
     text-align: center;
     line-height: 50px;
@@ -35,4 +49,12 @@ body {
     background-color: #eee;
     justify-content: center;
     align-items: center;
+}
+
+.menu-h1 {
+    display: inline-block;
+}
+
+.menu-h1-menu {
+    text-align: center;
 }
