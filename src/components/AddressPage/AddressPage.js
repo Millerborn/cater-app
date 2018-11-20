@@ -60,8 +60,6 @@ class AddressPage extends Component {
         <div id="mainDiv">
             <br></br>
             <h3>Find a Chef Near You</h3>
-            <pre>TESTING:  {JSON.stringify(this.props.history)}</pre>
-
                 <form id="formInput" onSubmit={this.handleNextClick}>
                     <FormControl variant="filled" className="addressForm">
                     <TextField type='text' label="address" name="address" placeholder="address" margin="normal" variant="outlined"

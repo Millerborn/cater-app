@@ -17,7 +17,6 @@ class ChefListItem extends Component {
     render() {
         return (
             <div className="chef-list-item">
-                <pre>TESTING:  {JSON.stringify(this.props.history)}</pre>
                 <img src="https://via.placeholder.com/320x240" />
                 <div className="details">
                     <h3>{this.props.chef.first_name} {this.props.chef.last_name}</h3>

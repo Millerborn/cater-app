@@ -8,7 +8,6 @@ class ChefList extends Component {
     render() {
         return (
             <div className="chef-list">
-                <pre>TESTING:  {JSON.stringify(this.props.history)}</pre>
                 {this.props.chefs.map((chef, i) => {
                     return (<ChefListItem key={i} chef={chef} history={this.props.history} />);
                 })}
