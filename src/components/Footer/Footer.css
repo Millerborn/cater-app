@@ -1,3 +1,5 @@
 footer {
     margin-top: 80px;
+    align-items: flex-end;
+    text-align: center;
 }

@@ -21,3 +21,18 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: #eee;
   }
+
+.login-page {
+    text-align: center;
+    line-height: 50px;
+}
+
+#login-button {
+    justify-content: center;
+}
+
+#login-form {
+    background-color: #eee;
+    justify-content: center;
+    align-items: center;
+}

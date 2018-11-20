@@ -17,14 +17,15 @@ class HireListItem extends Component {
     render() {
         return (
             <div className="chef-list-item">
-                <img src="https://via.placeholder.com/320x240" />
+                <img alt="chef-avatar" src="https://via.placeholder.com/320x240" />
                 <div className="details">
                     <h3>{this.props.chef.first_name} {this.props.chef.last_name}</h3>
-                    <p>{this.props.chef.years_of_experience} Years of experience</p>
-                    <p>{this.props.chef.specialty} Speciality</p>
-                    <p>Bio: {this.props.chef.description}</p>
-                    <p>Chef Rating {this.props.chef.rating}</p>
-                    <p>min price ${this.props.chef.min_price}</p>
+                    <p>{this.props.menu.title}</p>
+                    <p>Required Ingredients: {this.props.menu.ingredients}</p>
+                    <p>{this.props.menu.time_to_make}</p>
+                    <p>Style {this.props.menu.style}</p>
+                    <p>Kitchenware required, {this.props.menu.required_tools}</p>
+                    <p>Price ${this.props.menu.menu_price}</p>
                 </div>
                 <Button variant="outlined" onClick={this.handleClick}>Checkout</Button>
             </div>

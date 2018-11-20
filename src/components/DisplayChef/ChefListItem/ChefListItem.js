@@ -17,7 +17,7 @@ class ChefListItem extends Component {
     render() {
         return (
             <div className="chef-list-item">
-                <img src="https://via.placeholder.com/320x240" />
+                <img alt="chef-avatar" src="https://via.placeholder.com/320x240" />
                 <div className="details">
                     <h3>{this.props.chef.first_name} {this.props.chef.last_name}</h3>
                     <p>{this.props.chef.years_of_experience} Years of experience</p>
