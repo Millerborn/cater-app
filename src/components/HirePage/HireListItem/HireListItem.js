@@ -34,7 +34,7 @@ class HireListItem extends Component {
 }
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    reduxState
 });
 
 export default connect(mapStateToProps)(HireListItem);

@@ -8,9 +8,6 @@ class HireList extends Component {
     render() {
         return (
             <div className="chef-list">
-                {this.props.chefs.map((chef, i) => {
-                    return (<HireListItem key={i} chef={chef} history={this.props.history} />);
-                })}
                 {this.props.menus.map((menu, i) => {
                     return (<HireListItem key={i} menu={menu} history={this.props.history} />);
                 })}
@@ -20,8 +17,6 @@ class HireList extends Component {
 }
 
 const mapStateToProps = reduxState => ({
-    reduxState,
-    chefs: reduxState.chefs,
     menus: reduxState.menus,
 });
 

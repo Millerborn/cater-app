@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 class HirePage extends Component {
     componentDidMount() {
-        this.props.dispatch({type: 'FETCH_CHEFS'});
+        this.props.dispatch({type: 'FETCH_MENU'});
     }
     
     // Renders the entire app on the DOM

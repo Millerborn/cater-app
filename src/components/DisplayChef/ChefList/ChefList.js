@@ -17,7 +17,6 @@ class ChefList extends Component {
 }
 
 const mapStateToProps = reduxState => ({
-    reduxState,
     chefs: reduxState.chefs,
 });
 
