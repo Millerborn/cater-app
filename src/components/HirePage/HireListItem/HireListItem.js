@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import '../../../index.css';
 
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -33,9 +32,10 @@ class HireListItem extends Component {
                         title="Contemplative Reptile"
                     />
                     <CardContent>
-                        <h3>{this.props.menu.title}</h3>
+                        <h2>{this.props.menu.title}</h2>
+                        <h5>Ingredients</h5>
                         <p>{this.props.menu.ingredients}</p>
-                        <p>{this.props.menu.time_to_make}</p>
+                        <p>{this.props.menu.time_to_make} minuets to make</p>
                     </CardContent>
                     <CardActions>
                         <Button varient="contained" color="primary"

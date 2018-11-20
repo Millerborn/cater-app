@@ -14,11 +14,30 @@ router.get('/', (req, res) => {
       });
   });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
+  router.post('/', async (req, res) => {
+    console.log(`in customer.router.js POST for`, req.body);
+    const client = await pool.connect();
+    try {
+        const {
+            street,
+            city,
+            state,
+            zip,
+            address_type
+        } = req.body;
+        await client.query('BEGIN')
+        await client.query(`INSERT INTO addresses ("street", "city", "state", "zip", "address_type")
+        VALUES ($1, $2, $3 $4, $5);`, [ street, city, state, zip, address_type ]);
 
+        await client.query('COMMIT')
+        res.sendStatus(201);
+    } catch (error) {
+        await client.query('ROLLBACK')
+        console.log('Error post /shelf', error);
+        res.sendStatus(500);
+    } finally {
+        client.release()
+    }
 });
 
 module.exports = router;

@@ -3,20 +3,21 @@
     font-weight: 700;
     display: inline-block;
     color: #f2f2f2;
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 .nav {
   overflow: hidden;
-  background-color: #00acb0;
+  background-color: #e53935;
 }
 
 .nav-link {
   float: left;
   color: #f2f2f2;
-  background-color: #00acb0;
+  background-color: #e53935;
   text-align: center;
-  padding: 24px 10px;
+  margin: 10px;
+  padding: 10px 10px;
   text-decoration: none;
   font-size: 15px;
 
@@ -28,7 +29,7 @@
 }
 
 .nav-link:hover {
-  background-color: #008183;
+  background-color: #e53935;
 }
 
 .nav-right {

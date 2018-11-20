@@ -7,44 +7,43 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
 
 class AddressPage extends Component {
 
     state = {
-        newProject: {
-            address: '',
-            style: ''
+        newAddress: {
+            street: '',
+            city: '',
+            state: '',
+            zip: '',
+            address_type: '',
+            style: '',
         }
     }
 
     // handle changes in the form inputs
-    handleChange = event => {
-        console.log('handleChange', event.target.value)
+    handleChangeFor = (propertyName) => (event) => {
         this.setState({
-            newProject: {
-                ...this.state.newProject,
-                [event.target.name]: event.target.value,
-            }
-        });
+            ...this.state,
+            [propertyName]: event.target.value
+        })
     }
 
-    // submit project information from form
-    onSubmit = event => {
-        console.log('onSubmit event: ', this.state);
+    handleSubmit = (event) => {
         event.preventDefault();
-        // this.props.dispatch({ type: 'ADD_P', payload: this.state.newProject })
-        // this.setState({
-        //     newProject: {
-        //         id: this.state.newProject.id + 1,
-        //         name: '',
-        //         description: '',
-        //         thumbnail: '',
-        //         website: '',
-        //         github: '',
-        //         date_completed: '',
-        //         tag_id: ''
-        //     }
-        // });
+        console.log('submit:', this.state);
+        this.props.dispatch( { type: 'ADD_ADDRESS', payload: this.state } );
+        this.setState({
+            ...this.state.newAddress,
+            street: '',
+            city: '',
+            state: '',
+            zip: '',
+            address_type: '',
+            style: '',
+        })
+        this.handleNextClick();
     }
 
      // handle on click, go to next page and dispatch information to state in index
@@ -59,17 +58,32 @@ class AddressPage extends Component {
     return (
         <div id="mainDiv">
             <br></br>
-            <h3>Find a Chef Near You</h3>
+            <h3 id="address-h3">Don't stress, we have the Chefs!</h3>
                 <form id="formInput" onSubmit={this.handleNextClick}>
+                <FormControl variant="filled" className="addressForm">
+                    <TextField type='text' label="street" name="street" margin="normal" variant="outlined"
+                        value={this.state.newAddress.address} onChange={this.handleChange} />
+                    </FormControl>
                     <FormControl variant="filled" className="addressForm">
-                    <TextField type='text' label="address" name="address" placeholder="address" margin="normal" variant="outlined"
-                        value={this.state.newProject.address} onChange={this.handleChange} />
+                    <TextField type='text' label="city" name="city" margin="normal" variant="outlined"
+                        value={this.state.newAddress.address} onChange={this.handleChange} />
+                    </FormControl>
+                    <FormControl variant="filled" className="addressForm">
+                    <TextField type='text' label="state" name="state" margin="normal" variant="outlined"
+                        value={this.state.newAddress.address} onChange={this.handleChange} />
+                    </FormControl>
+                    <FormControl variant="filled" className="addressForm">
+                    <TextField type='text' label="address_type" name="address_type" margin="normal" variant="outlined"
+                        value={this.state.newAddress.address} onChange={this.handleChange} />
+                    </FormControl>
                     <br></br>
+                    <FormControl>
+                    <InputLabel htmlFor="style" className="input-label">Style</InputLabel>
                     <Select
                         placeholder="style"
-                        value={this.state.newProject.style}
+                        value={this.state.newAddress.style}
                         onChange={this.handleChange}
-                        input={<FilledInput name="style" id="filled-age-simple" />}
+                        input={<FilledInput name="style" id="filled-style-simple" />}
                     >
                            <MenuItem value=''>
                            <em>None</em>
@@ -79,9 +93,14 @@ class AddressPage extends Component {
                             <MenuItem value={3}>Chinese</MenuItem> 
                         </Select>
                     </FormControl>
-                    <Button margin="normal" variant="outlined" type='submit'>
-                        Find a Chef
-                    </Button>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <center>
+                        <Button margin="normal" variant="outlined" type='submit'>
+                            Find a Chef
+                        </Button>
+                    </center>
                 </form>
         </div>
     );

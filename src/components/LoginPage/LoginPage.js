@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import '../../index.css';
+
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+
+
 
 class LoginPage extends Component {
   state = {
@@ -41,46 +48,55 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
+          <br></br>
+          <br></br>
           <div>
-            <label htmlFor="username">
+            <FormControl className="form-login">
+            {/* <InputLabel htmlFor="username"> */}
               Username:
-              <input
+              <Input
                 type="text"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
               />
-            </label>
+            {/* </InputLabel> */}
+            </FormControl>
           </div>
+          <br></br>
+          <br></br>
           <div>
-            <label htmlFor="password">
+            <FormControl className="form-login">
+            {/* <InputLabel htmlFor="password"> */}
               Password:
-              <input
+              <Input
                 type="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
-            </label>
+            {/* </InputLabel> */}
+            </FormControl>
           </div>
-          <div>
+          <br></br>
+          <br></br>
+          <center>
             <input
               className="log-in"
               type="submit"
               name="submit"
               value="Log In"
             />
-          </div>
+          </center>
         </form>
         <center>
-          <button
+          <Button
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
             Register
-          </button>
+          </Button>
         </center>
       </div>
     );

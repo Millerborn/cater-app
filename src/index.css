@@ -1,3 +1,8 @@
+#address-h3 {
+    margin: 20px;
+    padding: 20px;
+}
+
 .card-menu {
     min-height: 250px;
     min-width: 350px;
@@ -51,6 +56,11 @@ body {
     align-items: center;
 }
 
+.form-login {
+    margin: 50px;
+    padding: 50px;
+}
+
 .menu-h1 {
     display: inline-block;
 }
@@ -58,3 +68,4 @@ body {
 .menu-h1-menu {
     text-align: center;
 }
+

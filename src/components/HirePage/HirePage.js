@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import HireList from './HireList/HireList';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 
 class HirePage extends Component {
@@ -12,15 +13,17 @@ class HirePage extends Component {
     
     // Renders the entire app on the DOM
     render() {
-        let chef = this.props.menu[0];
-        
+        const chef = this.props.menu[0];
+        console.log('chef', chef);
+        let chefName = '';
+        if (chef !== undefined){
+        chefName = <h2>Chef {chef.first_name} {chef.last_name}'s Menu</h2>;
+        }
         return (
             <div className="App">
-                {JSON.stringify(chef)}
-                {/* need to display chef name here */}
-                {/* <h1 className="menu-h1">Chef {chef.first_name}</h1> */}
-                <h1 className="menu-h1-menu">MENU</h1>
+                {chefName}
                 <HireList history={this.props.history} />
+                <Button>Enter a custom order</Button>
             </div>
         );
     }
