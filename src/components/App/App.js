@@ -14,10 +14,11 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-import InfoPage from '../InfoPage/InfoPage';
+import ProfilePage from '../ProfilePage/ProfilePage';
 import AddressPage from '../AddressPage/AddressPage';
 import DisplayChef from '../DisplayChef/DisplayChef';
-import SelectedChef from '../SelectedChefPage/SelectedChefPage'
+import HirePage from '../HirePage/HirePage';
+import CheckoutPage from '../CheckoutPage/CheckoutPage'
 
 import './App.css';
 
@@ -49,18 +50,25 @@ class App extends Component {
               component={AddressPage}
             /> */}
 
-            {/* display chef route for customers */}
+            {/* Display chef route for customers */}
             <Route
               exact
               path="/display-chef"
               component={DisplayChef}
             />
 
-            {/* hire chef page */}
+            {/* Hire chef page */}
             <Route
               exact
               path="/hire-chef"
-              component={SelectedChef}
+              component={HirePage}
+            />
+
+            {/* Checkout page */}
+            <Route
+              exact
+              path="/checkout"
+              component={CheckoutPage}
             />
 
             {/* For protected routes, the view could show one of several things on the same route.
@@ -76,8 +84,8 @@ class App extends Component {
             they will see the info page instead. */}
             <ProtectedRoute
               exact
-              path="/info"
-              component={InfoPage}
+              path="/profile"
+              component={ProfilePage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
