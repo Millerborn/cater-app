@@ -4,15 +4,11 @@
 }
 
 #main-address-form {
-    text-align: center;
-    display: 'flex';
-    margin: 20px;
+
 }
 
-#address-form {
-    display: inline;
-    padding: 25px;
-    margin: 40px;
+.address-form {
+    align-content: space-around;
 }
 
 .card-menu {
