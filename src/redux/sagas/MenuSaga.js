@@ -3,9 +3,9 @@ import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
-function* fetchMenu(action) {
+function* fetchMenu() {
     try {
-      const response = yield axios.get(`/hire-chef/${action.payload}`);
+      const response = yield axios.get(`/hire-chef`);
       yield put({ type: 'GET_CHEFS', payload: response.data });
       console.log('response data', response.data);
       
