@@ -7,15 +7,16 @@ import Button from '@material-ui/core/Button';
 
 class ChefListItem extends Component {
 
-    handleClick = (key) => {
+    handleClick = (id) => {
         // event.preventDefault();
-        console.log('chef id', key);
-        this.props.history.push('/hire-chef', key);
+        console.log('chef id', id);
+        this.props.dispatch( { type: 'SEND_MENU_ID', payload: id } );
+        this.props.history.push('/hire-chef');
     }
 
     // Displaying details for a single chef
     render() {
-        const key = `${this.props.chef.id}`
+        const key = this.props.chef.id;
         return (
             <div className="chef-list-item">
                 <img alt="chef-avatar" src="https://via.placeholder.com/320x240" />

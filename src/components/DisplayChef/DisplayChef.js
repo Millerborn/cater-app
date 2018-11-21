@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 class DisplayChef extends Component {
 
-    dispatchFunction = () => {
+    dispatchFunction = (id) => {
         this.props.dispatch( { type: 'FETCH_CHEFS' } );
     }
     componentDidMount() {
@@ -13,7 +13,7 @@ class DisplayChef extends Component {
     }
     
     // Renders the entire app on the DOM
-    render() {
+    render() {      
         return (
             <div className="App">
                 <ChefList history={this.props.history} />
