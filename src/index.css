@@ -3,6 +3,18 @@
     padding: 20px;
 }
 
+#main-address-form {
+    text-align: center;
+    display: 'flex';
+    margin: 20px;
+}
+
+#address-form {
+    display: inline;
+    padding: 25px;
+    margin: 40px;
+}
+
 .card-menu {
     min-height: 250px;
     min-width: 350px;

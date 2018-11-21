@@ -1,20 +1,19 @@
 import axios from 'axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, takeEvery } from 'redux-saga/effects';
 
 // add Item to database 
 function* addAddress(action) {
-    console.log('Add Address generator: ', action);
+    console.log('Add Address Saga: ', action.payload);
     try {
       yield call(axios.post, '/display-chef', action.payload);
-      yield put( { type: 'SET_ADDRESS' } );
     }
     catch(error) {
-      console.log('Error in adding item generator', error);
+      console.log('Error in adding address generator', error);
     }
 }
 
-function* itemSaga() {
-    yield takeEvery('ADD_ITEM', addAddress);
+function* AddressSaga() {
+    yield takeEvery('ADD_ADDRESS', addAddress);
 }
 
-export default itemSaga;
+export default AddressSaga;
