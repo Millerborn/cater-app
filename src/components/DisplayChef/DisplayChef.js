@@ -4,8 +4,12 @@ import ChefList from './ChefList/ChefList';
 import { connect } from 'react-redux';
 
 class DisplayChef extends Component {
+
+    dispatchFunction = () => {
+        this.props.dispatch( { type: 'FETCH_CHEFS' } );
+    }
     componentDidMount() {
-        this.props.dispatch({type: 'FETCH_CHEFS'});
+        this.dispatchFunction();
     }
     
     // Renders the entire app on the DOM

@@ -42,11 +42,11 @@ class AddressPage extends Component {
             address_type: '',
             style: '',
         })
+        this.handleClick();
     }
 
      // handle on click, go to next page and dispatch information to state in index
-     handleClick = (event) => {
-        event.preventDefault();
+     handleClick = () => {
         console.log('next click history', this.props.history);
         this.props.history.push('/display-chef');
     }
@@ -57,7 +57,7 @@ class AddressPage extends Component {
         <div id="mainDiv">
             <br></br>
             <h2 id="address-h3">Don't stress, we have the Chefs!</h2>
-                <form id="main-address-form" onSubmit={this.handleClick}>
+                <form id="main-address-form" onSubmit={this.handleSubmit}>
                     <h4>What's your address?</h4>
                     <FormControl className="address-form" variant="filled">
                         <TextField required type='text' label="street" name="street" margin="normal" variant="outlined"

@@ -10,9 +10,7 @@ class ChefListItem extends Component {
     handleClick = (key) => {
         // event.preventDefault();
         console.log('chef id', key);
-        
-        console.log('Hire chef button', this.props);
-        this.props.history.push('/hire-chef');
+        this.props.history.push('/hire-chef', key);
     }
 
     // Displaying details for a single chef
@@ -29,7 +27,7 @@ class ChefListItem extends Component {
                     <p>Chef Rating {this.props.chef.rating}</p>
                     <p>min price ${this.props.chef.min_price}</p>
                 </div>
-                <Button variant="outlined" onClick={this.handleClick(key)}>Hire Chef</Button>
+                <Button variant="outlined" onClick={() => this.handleClick(key)}>Hire Chef</Button>
             </div>
         );
     }

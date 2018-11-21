@@ -14,7 +14,7 @@ class HirePage extends Component {
     // Renders the entire app on the DOM
     render() {
         const chef = this.props.menu[0];
-        console.log('chef', chef);
+        console.log('look here chef', chef);
         let chefName = '';
         if (chef !== undefined){
         chefName = <h2>Chef {chef.first_name} {chef.last_name}'s Menu</h2>;
