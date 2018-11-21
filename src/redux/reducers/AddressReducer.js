@@ -1,6 +1,6 @@
 const address = (state = [], action) => {
     switch (action.type) {
-      case 'SET_ADDRESS':
+      case 'GET_ADDRESS':
         return action.payload;
       default:
         return state;

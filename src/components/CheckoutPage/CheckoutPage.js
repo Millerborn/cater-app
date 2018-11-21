@@ -6,30 +6,6 @@ import Button from '@material-ui/core/Button';
 
 class CheckoutPage extends Component {
 
-    // state = {
-    //     newProject: {
-    //         address: '',
-    //         style: ''
-    //     }
-    // }
-
-    // handle changes in the form inputs
-    handleChange = event => {
-        console.log('handleChange', event.target.value)
-        this.setState({
-            newProject: {
-                ...this.state.newProject,
-                [event.target.name]: event.target.value,
-            }
-        });
-    }
-
-    // submit project information from form
-    onSubmit = event => {
-        console.log('onSubmit event: ', this.state);
-        event.preventDefault();
-    }
-
      // handle on click, go to next page and dispatch information to state in index
      handleNextClick = (event) => {
         event.preventDefault();
@@ -37,11 +13,16 @@ class CheckoutPage extends Component {
         this.props.history.push('/display-chef')
     }
 
+    componentDidMount() {
+        this.props.dispatch( { type: 'FETCH_ADDRESS' } );
+    }
 
   render() {
+      const address = this.props.address[0];
     return (
         <div id="mainDiv">
-            <br></br>
+            {JSON.stringify(address)}
+            {this.props.address}
             <h3>Checkout</h3>
                 <div id="formInput" onSubmit={this.handleNextClick}>
                     <TextField type='text' label="address" name="address" placeholder="address" margin="normal" variant="outlined"
@@ -57,7 +38,7 @@ class CheckoutPage extends Component {
 }
 
 const mapStateToProps = reduxState => ({
-    checkout: reduxState.chefs,
+    address: reduxState.address,
 });
 
 export default connect(mapStateToProps)(CheckoutPage);
