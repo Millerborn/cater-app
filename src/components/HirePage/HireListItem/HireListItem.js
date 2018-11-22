@@ -39,7 +39,7 @@ class HireListItem extends Component {
                     </CardContent>
                     <CardActions>
                         <Button varient="contained" color="primary"
-                            onClick={() =>  {this.addItem(key)}}>
+                            onClick={() =>  this.addItem(key)}>
                             Add to Cart
                         </Button>
                     </CardActions>

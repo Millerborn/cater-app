@@ -13,16 +13,18 @@ class CheckoutPage extends Component {
         this.props.history.push('/display-chef')
     }
 
-    componentDidMount() {
-        this.props.dispatch( { type: 'FETCH_ADDRESS' } );
+    componentWillMount() {
+        console.log('WillUpdate', this.props.user.id)
+        const user = this.props.user.id;
+        this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
     }
 
   render() {
-      const address = this.props.address[0];
+    //   const address = this.props.address[0];
     return (
         <div id="mainDiv">
-            {JSON.stringify(address)}
-            {this.props.address}
+            {JSON.stringify(this.props.order)}
+            {/* {this.props.address} */}
             <h3>Checkout</h3>
                 <div id="formInput" onSubmit={this.handleNextClick}>
                     <TextField type='text' label="address" name="address" placeholder="address" margin="normal" variant="outlined"
@@ -38,7 +40,8 @@ class CheckoutPage extends Component {
 }
 
 const mapStateToProps = reduxState => ({
-    address: reduxState.address,
+    user: reduxState.user,
+    order: reduxState.orders,
 });
 
 export default connect(mapStateToProps)(CheckoutPage);

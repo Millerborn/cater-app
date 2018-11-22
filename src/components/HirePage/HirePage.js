@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 
 class HirePage extends Component {
 
-    componentDidMount() {
+    componentWillUpdate() {
         this.props.dispatch({ type: 'FETCH_MENU' });
     }
     

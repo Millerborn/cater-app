@@ -7,13 +7,20 @@ import Button from '@material-ui/core/Button';
 class HireList extends Component {
     
     handleClick = (event) => {
-        event.preventDefault();
         console.log('Hire chef button', this.props);
         this.props.history.push('/checkout');
     }
 
+    // handleClick = (id) => {
+    //     // event.preventDefault();
+    //     console.log('hire chef info', id);
+    //     this.props.dispatch( { type: 'SEND_ORDER_ID', payload: id } );
+    //     this.props.history.push('/checkout');
+    // }
+
     // Displays a vertical list with project details
     render() {
+        const key = this.props.menu;
         return (
             <div className="chef-list">
                 {/* {JSON.stringify(this.props.menu)} */}
@@ -22,7 +29,7 @@ class HireList extends Component {
                         <HireListItem key={i} menu={menu} history={this.props.history} 
                     />);
                 })}
-                <Button onClick={this.handleClick} id="hire-chef-button">Hire Chef</Button>
+                <Button onClick={() => this.handleClick(key)} id="hire-chef-button">Hire Chef</Button>
             </div>
         );
     }

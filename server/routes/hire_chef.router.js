@@ -43,7 +43,8 @@ const router = express.Router();
 router.get('/:id', (req, res) => {
     const chefInfo = req.params.id
     console.log('GET chef info from id', chefInfo);
-    const queryText = `SELECT menu_item.*, chef_profile.id as chef_profile_id, 
+    const queryText = `SELECT menu_item.*, chef_profile.id as 
+      chef_profile_id, 
       chef_profile.first_name, chef_profile.last_name
       FROM menu_item
       JOIN chef_profile ON chef_profile.chef_id = menu_item.chef_id
@@ -57,7 +58,7 @@ router.get('/:id', (req, res) => {
       });
   });
 
-// Return Chef menu information from Server
+// Return Chef info and chef menu from Server
 router.get('/:id', (req, res) => {
   const chefId = req.params.id;
   console.log('GET chef menu from id', chefId);
