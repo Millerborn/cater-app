@@ -16,7 +16,7 @@ class HirePage extends Component {
         customOrder: '',
     }
 
-    componentWillUpdate() {
+    componentDidMount() {
         this.props.dispatch({ type: 'FETCH_MENU' });
         this.props.dispatch({ type: 'GET_ORDERS' });
     }
@@ -37,7 +37,6 @@ class HirePage extends Component {
     // Renders the entire app on the DOM
     render() {
         const chef = this.props.menu[0];
-        console.log('Hire Page chef', chef);
         let chefName = '';
         if (chef !== undefined){
         chefName = 
@@ -61,13 +60,15 @@ class HirePage extends Component {
                             label="Multiline"
                             multiline
                             rowsMax="4"
+                            name="customOrder"
                             value={this.state.customOrder}
-                            onChange={this.handleChange('customOrder')}
+                            onChange={this.handleChange}
                             className="customOrderInput"
                             margin="normal"
                             helperText="hello"
                             variant="outlined"
                             />
+                            <Button>Add custom Order</Button>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
             </div>
