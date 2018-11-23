@@ -12,12 +12,14 @@ import InputLabel from '@material-ui/core/InputLabel';
 class AddressPage extends Component {
 
     state = {
-            street: '',
-            city: '',
-            state: '',
-            zip: '',
-            address_type: '',
-            style: '',
+        id: '',   
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        address_type: '',
+        style: '',
+        person_id: null,
     }
 
     // handle changes in the form inputs
@@ -26,6 +28,8 @@ class AddressPage extends Component {
         this.setState({
             ...this.state,
             [event.target.name]: event.target.value,
+            person_id: this.props.reduxState.user.id,
+            id: this.props.reduxState.address.id,  
         })
     }
 
@@ -35,12 +39,14 @@ class AddressPage extends Component {
         this.props.dispatch( { type: 'ADD_ADDRESS', payload: this.state } );
         this.setState({
             ...this.state,
+            id: '',
             street: '',
             city: '',
             state: '',
             zip: '',
             address_type: '',
             style: '',
+            person_id: null,
         })
         this.handleClick();
     }
@@ -55,6 +61,7 @@ class AddressPage extends Component {
   render() {
     return (
         <div id="mainDiv">
+        {JSON.stringify(this.props.reduxState.address)}
             <br></br>
             <h2 id="address-h3">Don't stress, we have the Chefs!</h2>
                 <form id="main-address-form" onSubmit={this.handleSubmit}>

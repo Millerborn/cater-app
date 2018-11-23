@@ -6,6 +6,7 @@ import displayChefsSaga from './DisplayChefSaga';
 import menuSaga from './MenuSaga';
 import addressSaga from './AddAddressSaga';
 import displayAddressSaga from './CheckoutSaga';
+import orderSaga from './OrderSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     menuSaga(),
     addressSaga(),
     displayAddressSaga(),
+    orderSaga(),
   ]);
 }

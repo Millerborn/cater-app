@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HireListItem from '../HireListItem/HireListItem';
 import Button from '@material-ui/core/Button';
 
 
-class HireList extends Component {
+class Orders extends Component {
     
     handleClick = (event) => {
         console.log('Hire chef button', this.props);
@@ -13,15 +12,10 @@ class HireList extends Component {
 
     // Displays a vertical list with project details
     render() {
-        const key = this.props.menu;
+        const time = this.props.menu.time_to_make;
         return (
             <div className="chef-list">
-                {this.props.menu.map((menu, i) => {
-                    return (
-                        <HireListItem address={this.props.address} key={i} menu={menu} history={this.props.history} 
-                    />);
-                })}
-                <Button onClick={() => this.handleClick(key)} id="hire-chef-button">Hire Chef</Button>
+                {time}
             </div>
         );
     }
@@ -32,4 +26,4 @@ const mapStateToProps = reduxState => ({
     menu: reduxState.menu,
 });
 
-export default connect(mapStateToProps)(HireList);
+export default connect(mapStateToProps)(Orders);

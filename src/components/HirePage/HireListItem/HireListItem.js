@@ -12,17 +12,36 @@ import Button from '@material-ui/core/Button';
 
 class HireListItem extends Component {
 
-    addItem = (key) => {
-        console.log('Adding Item to Cart:', key);
-        
+    state = {
+        order_date: '',
+        address_id: '',
+        menu_item_id: '',
+        chef_id: ''
+    }
+
+    handleChange = (itemId, address) => {
+        console.log('Running Order Item handle change', itemId, address);
+        this.setState({
+            order_date: '12-15-2019',
+            address_id: address,
+            menu_item_id: itemId,
+            chef_id: this.props.menu.chef_id, 
+        })
+    }
+
+    handleSubmit = () => {
+        console.log('Push to db', this.state);
+        this.props.dispatch( { type: 'ADD_ORDER', payload: this.state } );
     }
 
     // Displaying details of selected chef
     render() {
-        const key = `${this.props.menu.id}`;
+        const itemId = this.props.menu.id;
+        const address = this.props.user.id;
 
         return (
             <div className="card-menu" >
+            {JSON.stringify(address)}
                 <Card id="card">
                     <CardMedia
                         component="img"
@@ -38,8 +57,12 @@ class HireListItem extends Component {
                         <p>{this.props.menu.time_to_make} minuets to make</p>
                     </CardContent>
                     <CardActions>
-                        <Button varient="contained" color="primary"
-                            onClick={() =>  this.addItem(key)}>
+                        <Button variant="contained" color="primary"
+                            onClick={() =>  this.handleChange(itemId, address)}>
+                            Add click
+                        </Button>
+                        <Button variant="contained" color="primary"
+                            onClick={() =>  this.handleSubmit(itemId, address)}>
                             Add to Cart
                         </Button>
                     </CardActions>
@@ -50,7 +73,8 @@ class HireListItem extends Component {
 }
 
 const mapStateToProps = reduxState => ({
-    reduxState
+    address: reduxState.address,
+    user: reduxState.user
 });
 
 export default connect(mapStateToProps)(HireListItem);
