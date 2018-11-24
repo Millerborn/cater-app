@@ -26,15 +26,41 @@ class ProfilePage extends Component {
         })
     }
 
-  
-
+    componentWillMount() {
+        console.log('WillUpdate', this.props.user.id)
+        const user = this.props.user.id;
+        this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
+        this.props.dispatch({ type: 'GET_ORDERS' });
+    }
 
   render() {
+    const profileInfo = this.props.order[0];
+    let profilePage = '';
+    if (profileInfo !== undefined){
+        profilePage = 
+        <center>
+            <div>
+                <br></br>
+                <p>{profileInfo.first_name} {profileInfo.last_name}</p>
+                <p>Address</p>
+                <p>
+                    {profileInfo.street} {profileInfo.city} {profileInfo.state} {profileInfo.zip}
+                </p> 
+                    <p>{profileInfo.address_type}</p>
+                <p>{profileInfo.email}</p>
+                <p>{profileInfo.phone}</p>
+            </div>
+        </center>
+    ;
+    }
     return (
         <div id="mainDiv">
             <br></br>
-            <h2 id="profile-h3">Profile</h2>
-                <form>
+            <center>
+                <h2 id="profile-h3">Profile</h2>
+            </center>
+            {profilePage}
+                {/* <form>
                   <FormControl className="profile-account" variant="filled">
                     <TextField type="text" label="first_name" name="first_name" margin="normal" variant="outlined"
                       value={this.state.customer.first_name} />
@@ -78,14 +104,18 @@ class ProfilePage extends Component {
                         <TextField required type='text' label="address type" name="address_type" margin="normal" variant="outlined"
                             value={this.state.address_type} onChange={this.handleChange} />
                         </FormControl>
-                </form>
+                </form> */}
+                <center>
+                    <Button>Add New Address</Button>
+                </center>
         </div>
     );
   }
 }
 
 const mapStateToProps = reduxState => ({
-    customer: reduxState.customer,
+    order: reduxState.orders,
+    user: reduxState.user,
 });
 
 export default connect(mapStateToProps)(ProfilePage);

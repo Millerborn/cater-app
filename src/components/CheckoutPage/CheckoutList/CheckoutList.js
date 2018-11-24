@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CheckoutListItem from '../ChefListItem/ChefListItem';
+import CheckoutListItem from '../CheckoutListItem/CheckoutListItem';
 
 class CheckoutList extends Component {
 
     // Displays a vertical list with project details
     render() {
         return (
-            <div className="chef-list">
-                {this.props.chefs.map((chef, i) => {
-                    return (<ChefListItem key={i} chef={chef} history={this.props.history} />);
+            <div>
+                {this.props.order.map((order, i) => {
+                    return (<CheckoutListItem key={i} order={order} history={this.props.history} />);
                 })}
             </div>
         );
@@ -17,7 +17,7 @@ class CheckoutList extends Component {
 }
 
 const mapStateToProps = reduxState => ({
-    orders: reduxState.orders,
+    reduxState
 });
 
 export default connect(mapStateToProps)(CheckoutList);

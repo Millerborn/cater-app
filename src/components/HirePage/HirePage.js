@@ -48,7 +48,6 @@ class HirePage extends Component {
         return (
             <div className="App">
                 {chefName}
-                {JSON.stringify(this.props.order)}
                 <HireList address={this.props.address} history={this.props.history} />
                 <ExpansionPanel>
                     <ExpansionPanelSummary>

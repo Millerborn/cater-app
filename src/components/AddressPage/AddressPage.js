@@ -61,7 +61,6 @@ class AddressPage extends Component {
   render() {
     return (
         <div id="mainDiv">
-        {JSON.stringify(this.props.reduxState.address)}
             <br></br>
             <h2 id="address-h3">Don't stress, we have the Chefs!</h2>
                 <form id="main-address-form" onSubmit={this.handleSubmit}>

@@ -16,7 +16,7 @@ class HireListItem extends Component {
         order_date: '',
         address_id: '',
         menu_item_id: '',
-        chef_id: ''
+        chef_id: '',
     }
 
     handleChange = (itemId, address) => {
