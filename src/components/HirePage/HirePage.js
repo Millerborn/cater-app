@@ -6,6 +6,12 @@ import HireList from "./HireList/HireList";
 import QuickView from "./QuickView";
 import CartHeader from '../ShoppingCart/CartHeader';
 
+import Button from '@material-ui/core/Button';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import TextField from '@material-ui/core/TextField';
+
 class HirePage extends Component {
   constructor() {
     super();
@@ -35,13 +41,8 @@ class HirePage extends Component {
   }
   // Fetch Initial Set of Products from external API
   getProducts() {
-    let url =
-      "https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json";
-    axios.get(url).then(response => {
-      this.setState({
-        products: response.data
-      });
-    });
+    this.props.dispatch({ type: 'FETCH_MENU' });
+    this.props.dispatch({ type: 'GET_ORDERS' });
   }
   componentWillMount() {
     this.getProducts();
@@ -152,10 +153,22 @@ class HirePage extends Component {
   }
 
   render() {
+
+    const chef = this.props.menu[0];
+      let chefName = '';
+      if (chef !== undefined){
+      chefName = 
+      <div>
+      <h2>Chef {chef.first_name} {chef.last_name}'s Menu</h2>
+      </div>
+      ;
+    }
+
     return (
       <div className="container">
+        {chefName}
         {JSON.stringify(this.state.cart)}
-        <CartHeader
+        {/* <CartHeader
           cartBounce={this.state.cartBounce}
           total={this.state.totalAmount}
           totalItems={this.state.totalItems}
@@ -167,7 +180,7 @@ class HirePage extends Component {
           categoryTerm={this.state.category}
           updateQuantity={this.updateQuantity}
           productQuantity={this.state.moq}
-        />
+        /> */}
         <HireList
           productsList={this.state.products}
           searchTerm={this.state.term}
@@ -176,6 +189,29 @@ class HirePage extends Component {
           updateQuantity={this.updateQuantity}
           openModal={this.openModal}
         />
+      <HireList chef={this.props.chef} address={this.props.address} history={this.props.history} />
+
+      <ExpansionPanel>
+                     <ExpansionPanelSummary>
+                         <Button onClick={this.createCustomOrder}>Enter a custom order</Button>
+                     </ExpansionPanelSummary>
+                     <ExpansionPanelDetails>
+                         <TextField
+                            id="outlined-multiline-flexible"
+                            label="Custom Order"
+                            multiline
+                            rowsMax="4"
+                            name="customOrder"
+                            value={this.state.customOrder}
+                            onChange={this.handleChange}
+                            className="customOrderInput"
+                            margin="normal"
+                            variant="outlined"
+                            />
+                            <Button onClick={this.customOrderClick}>Add custom Order</Button>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+
         <QuickView
           product={this.state.quickViewProduct}
           openModal={this.state.modalActive}
