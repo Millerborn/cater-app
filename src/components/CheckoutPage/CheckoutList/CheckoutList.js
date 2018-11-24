@@ -8,17 +8,16 @@ class CheckoutList extends Component {
     render() {
         return (
             <div>
-                {JSON.stringify(this.props.order)}
-                {/* {this.props.order.map((order, i) => {
+                {this.props.order.map((order, i) => {
                     return (<CheckoutListItem key={i} order={order} history={this.props.history} />);
-                })} */}
+                })}
             </div>
         );
     }
 }
 
 const mapStateToProps = reduxState => ({
-    reduxState
+    order: reduxState.orders,
 });
 
 export default connect(mapStateToProps)(CheckoutList);

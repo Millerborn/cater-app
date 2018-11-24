@@ -47,7 +47,7 @@ class HirePage extends Component {
 
     handleAddToCart(selectedItem) {
       this.setState({
-        cart: selectedItem,
+        cart: this.props.AddOrder,
       })
     }
 

@@ -7,6 +7,11 @@ import CheckoutList from './CheckoutList/CheckoutList';
 
 class CheckoutPage extends Component {
 
+    state = {
+        orderTotal: 50,
+        hours: 3,
+    }
+
      // handle on click, go to next page and dispatch information to state in index
      handleNextClick = (event) => {
         event.preventDefault();
@@ -36,19 +41,33 @@ class CheckoutPage extends Component {
                 <p>{orderInfo.zip}</p>
                 <p>{orderInfo.address_type}</p>
                 <br></br>
-                <br></br>
                 <p>{orderInfo.email}</p>
                 <p>{orderInfo.phone}</p>
+                <p>{orderInfo.time_to_make}</p>
     </div>
-    ;
+    ;}
+
+    const orderTotal = this.props.order;
+    let orderCost = '';
+    if(orderTotal !== undefined){
+        orderCost =
+        <div>
+            <p>Order cost {orderTotal.time_to_make}</p>
+        </div>
     }
+    const orderz = this.props.order;
     return (
         <div id="main-checkout-div">
+            {JSON.stringify(orderz)}
             <h3>Checkout</h3>
+                <p>{orderCost}</p>
                 <div id="formInput" onSubmit={this.handleNextClick}>
                     <div id="checkout-order-information">{orderList}</div>
                     <br></br>
-                    <CheckoutList order={this.props.order}/>
+                    <h3>Your Order</h3>
+                    <CheckoutList />
+                    <p>Hours to Make: {this.state.hours}</p>
+                    <p>Order total: ${this.state.orderTotal}</p>
                 </div>
                 <Button>Checkout</Button>
         </div>

@@ -17,11 +17,11 @@ class CheckoutListItem extends Component {
 
     // Displaying details for a single chef
     render() {
-        // const key = this.props.order.id;
+        const key = this.props.key;
         return (
             <div className="checkout-list-items">
                 <div className="checkout-list-details">
-                    <p> x1 {this.props.order.title} {this.props.order.time_to_make} minuets</p>
+                    <p key={key}> x1 {this.props.order.title} {this.props.order.time_to_make} Hours</p>
                 </div>
             </div>
         );
