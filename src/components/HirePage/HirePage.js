@@ -59,7 +59,8 @@ class HirePage extends Component {
         // const hourly = this.props.menu.hourly_rate;
         return (
             <div className="App">
-                {JSON.stringify(this.props.chef)}
+                <Orders chefInfo={this.props.chef}/>
+                {/* {JSON.stringify(this.props.chef)} */}
                 {chefName}
                 <HireList chef={this.props.chef} address={this.props.address} history={this.props.history} />
                 <ExpansionPanel>
@@ -69,7 +70,7 @@ class HirePage extends Component {
                     <ExpansionPanelDetails>
                         <TextField
                             id="outlined-multiline-flexible"
-                            label="Multiline"
+                            label="Custom Order"
                             multiline
                             rowsMax="4"
                             name="customOrder"
@@ -77,10 +78,9 @@ class HirePage extends Component {
                             onChange={this.handleChange}
                             className="customOrderInput"
                             margin="normal"
-                            helperText="hello"
                             variant="outlined"
                             />
-                            <Button>Add custom Order</Button>
+                            <Button onClick={this.customOrderClick}>Add custom Order</Button>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
             </div>

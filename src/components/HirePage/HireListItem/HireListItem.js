@@ -38,8 +38,8 @@ class HireListItem extends Component {
     render() {
         const itemId = this.props.menu.id;
         const address = this.props.user.id;
-        const time = this.props.menu.time_to_make;
-        const hourly = this.props.chef;
+        // const time = this.props.chefs.time_to_make;
+        const hourly = this.props.menu.hourly_rate;
 
         return (
             <div className="card-menu" >

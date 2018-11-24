@@ -4,18 +4,14 @@ import Button from '@material-ui/core/Button';
 
 
 class Orders extends Component {
-    
-    handleClick = (event) => {
-        console.log('Hire chef button', this.props);
-        this.props.history.push('/checkout');
-    }
 
     // Displays a vertical list with project details
     render() {
-        const time = this.props.menu.time_to_make;
+        const time = this.props.chefInfo.hourly_rate;
         return (
             <div className="chef-list">
                 {time}
+                {JSON.stringify(this.props.chefInfo.hourly_rate)}
             </div>
         );
     }
