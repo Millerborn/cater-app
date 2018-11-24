@@ -10,53 +10,53 @@ class Products extends Component {
     super();
   }
   render() {
-    let productsData;
-    let term = this.props.searchTerm;
-    let x;
+    // let productsData;
+    // let term = this.props.searchTerm;
+    // let x;
 
-    function searchingFor(term) {
-      return function(x) {
-        return x.name.toLowerCase().includes(term.toLowerCase()) || !term;
-      };
-    }
-    productsData = this.props.menu
-      .filter(searchingFor(term))
-      .map(product => {
-        return (
-          <Product
-            key={product.id}
-            price={product.price}
-            name={product.name}
-            image={product.image}
-            id={product.id}
-            addToCart={this.props.addToCart}
-            productQuantity={this.props.productQuantity}
-            updateQuantity={this.props.updateQuantity}
-            openModal={this.props.openModal}
-          />
-        );
-      });
+    // function searchingFor(term) {
+    //   return function(x) {
+    //     return x.name.toLowerCase().includes(term.toLowerCase()) || !term;
+    //   };
+    // }
+    // productsData = this.props.menu
+    //   .filter(searchingFor(term))
+    //   .map(product => {
+    //     return (
+    //       <Product
+    //         key={product.id}
+    //         price={product.price}
+    //         name={product.name}
+    //         image={product.image}
+    //         id={product.id}
+    //         addToCart={this.props.addToCart}
+    //         productQuantity={this.props.productQuantity}
+    //         updateQuantity={this.props.updateQuantity}
+    //         openModal={this.props.openModal}
+    //       />
+    //     );
+    //   });
 
     // Empty and Loading States
-    let view;
-    if (productsData.length <= 0 && !term) {
-      view = <LoadingProducts />;
-    } else if (productsData.length <= 0 && term) {
-      view = <NoResults />;
-    } else {
-      view = (
-        <CSSTransitionGroup
-          transitionName="fadeIn"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}
-          component="div"
-          className="products"
-        >
-          {productsData}
-        </CSSTransitionGroup>
-      );
-    }
-    return <div className="products-wrapper">{view}</div>;
+//     let view;
+//     if (productsData.length <= 0 && !term) {
+//       view = <LoadingProducts />;
+//     } else if (productsData.length <= 0 && term) {
+//       view = <NoResults />;
+//     } else {
+//       view = (
+//         <CSSTransitionGroup
+//           transitionName="fadeIn"
+//           transitionEnterTimeout={500}
+//           transitionLeaveTimeout={300}
+//           component="div"
+//           className="products"
+//         >
+//           {productsData}
+//         </CSSTransitionGroup>
+//       );
+    
+    return <div className="products-wrapper">view</div>;
   }
 }
 

@@ -1,17 +1,17 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import CartScrollBar from "./CartScrollBar";
 import Counter from "./Counter";
-import EmptyCart from "../empty-states/EmptyCart";
+import EmptyCart from "./EmptyCart";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 import { findDOMNode } from "react-dom";
 
-class Header extends Component {
+class CartHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showCart: false,
       cart: this.props.cartItems,
-      mobileSearch: false
     };
   }
   handleCart(e) {
@@ -23,24 +23,7 @@ class Header extends Component {
   handleSubmit(e) {
     e.preventDefault();
   }
-  handleMobileSearch(e) {
-    e.preventDefault();
-    this.setState({
-      mobileSearch: true
-    });
-  }
-  handleSearchNav(e) {
-    e.preventDefault();
-    this.setState(
-      {
-        mobileSearch: false
-      },
-      function() {
-        this.refs.searchBox.value = "";
-        this.props.handleMobileSearch();
-      }
-    );
-  }
+
   handleClickOutside(event) {
     const cartNode = findDOMNode(this.refs.cartPreview);
     const buttonNode = findDOMNode(this.refs.cartButton);
@@ -68,11 +51,12 @@ class Header extends Component {
     );
   }
   render() {
-    let cartItems;
-    cartItems = this.state.cart.map(product => {
-      return (
-        <li className="cart-item" key={product.name}>
-          <img className="product-image" src={product.image} />
+    // let cartItems;
+    // cartItems = this.state.cart.map(product => {
+    //   return (
+    //     <li className="cart-item">
+    //       <p>cart here</p>
+          {/* <img className="product-image" src={product.image} />
           <div className="product-info">
             <p className="product-name">{product.name}</p>
             <p className="product-price">{product.price}</p>
@@ -89,80 +73,29 @@ class Header extends Component {
             onClick={this.props.removeProduct.bind(this, product.id)}
           >
             ×
-          </a>
-        </li>
-      );
-    });
-    let view;
-    if (cartItems.length <= 0) {
-      view = <EmptyCart />;
-    } else {
-      view = (
-        <CSSTransitionGroup
-          transitionName="fadeIn"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}
-          component="ul"
-          className="cart-items"
-        >
-          {cartItems}
-        </CSSTransitionGroup>
-      );
-    }
+          </a> */}
+    //     </li>
+    //   );
+    // });
+    // let view;
+    // if (cartItems.length <= 0) {
+    //   view = <EmptyCart />;
+    // } else {
+    //   view = (
+    //     <CSSTransitionGroup
+    //       transitionName="fadeIn"
+    //       transitionEnterTimeout={500}
+    //       transitionLeaveTimeout={300}
+    //       component="ul"
+    //       className="cart-items"
+    //     >
+    //       {cartItems}
+    //     </CSSTransitionGroup>
+    //   );
+    // }
     return (
       <header>
         <div className="container">
-          <div className="brand">
-            <img
-              className="logo"
-              src="https://res.cloudinary.com/sivadass/image/upload/v1493547373/dummy-logo/Veggy.png"
-              alt="Veggy Brand Logo"
-            />
-          </div>
-
-          <div className="search">
-            <a
-              className="mobile-search"
-              href="#"
-              onClick={this.handleMobileSearch.bind(this)}
-            >
-              <img
-                src="https://res.cloudinary.com/sivadass/image/upload/v1494756966/icons/search-green.png"
-                alt="search"
-              />
-            </a>
-            <form
-              action="#"
-              method="get"
-              className={
-                this.state.mobileSearch ? "search-form active" : "search-form"
-              }
-            >
-              <a
-                className="back-button"
-                href="#"
-                onClick={this.handleSearchNav.bind(this)}
-              >
-                <img
-                  src="https://res.cloudinary.com/sivadass/image/upload/v1494756030/icons/back.png"
-                  alt="back"
-                />
-              </a>
-              <input
-                type="search"
-                ref="searchBox"
-                placeholder="Search for Vegetables and Fruits"
-                className="search-keyword"
-                onChange={this.props.handleSearch}
-              />
-              <button
-                className="search-button"
-                type="submit"
-                onClick={this.handleSubmit.bind(this)}
-              />
-            </form>
-          </div>
-
           <div className="cart">
             <div className="cart-info">
               <table>
@@ -171,14 +104,14 @@ class Header extends Component {
                     <td>No. of items</td>
                     <td>:</td>
                     <td>
-                      <strong>{this.props.totalItems}</strong>
+                      <strong>total items</strong>
                     </td>
                   </tr>
                   <tr>
                     <td>Sub Total</td>
                     <td>:</td>
                     <td>
-                      <strong>{this.props.total}</strong>
+                      <strong>total</strong>
                     </td>
                   </tr>
                 </tbody>
@@ -202,16 +135,16 @@ class Header extends Component {
               )}
             </a>
             <div
-              className={
-                this.state.showCart ? "cart-preview active" : "cart-preview"
-              }
+              // className={
+              //   this.state.showCart ? "cart-preview active" : "cart-preview"
+              // }
               ref="cartPreview"
             >
-              <CartScrollBar>{view}</CartScrollBar>
+              {/* <CartScrollBar>{view}</CartScrollBar> */}
               <div className="action-block">
                 <button
                   type="button"
-                  className={this.state.cart.length > 0 ? " " : "disabled"}
+                  // className={this.state.cart.length > 0 ? " " : "disabled"}
                 >
                   PROCEED TO CHECKOUT
                 </button>
@@ -224,4 +157,11 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = reduxState => ({
+  address: reduxState.address,
+  menu: reduxState.menu,
+  order: reduxState.orders,
+  chef: reduxState.chefs,
+});
+
+export default connect(mapStateToProps)(CartHeader);

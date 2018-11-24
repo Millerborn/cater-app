@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/:id', (req, res) => {
     console.log('id', req.params.id);
     const personId = req.params.id
-    console.log('response for get addresses');
+    console.log('response for get addresses', personId);
     const queryText = `SELECT addresses.*, orders.menu_item_id, person.id, customers.*, menu_item.title, menu_item.time_to_make FROM addresses 
     JOIN person ON person.id = addresses.person_id
     JOIN customers ON customers.person_id = person.id
