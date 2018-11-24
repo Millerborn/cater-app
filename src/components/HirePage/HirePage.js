@@ -14,6 +14,7 @@ import Orders from './Orders/Orders';
 class HirePage extends Component {
 
     state = {
+        cart: [],
         customOrder: '',
         orderTotal: '',
     }
@@ -44,6 +45,12 @@ class HirePage extends Component {
         
     }
 
+    handleAddToCart(selectedItem) {
+      this.setState({
+        cart: selectedItem,
+      })
+    }
+
     render() {
         const chef = this.props.menu[0];
         let chefName = '';
@@ -59,8 +66,6 @@ class HirePage extends Component {
         // const hourly = this.props.menu.hourly_rate;
         return (
             <div className="App">
-                <Orders chefInfo={this.props.chef}/>
-                {/* {JSON.stringify(this.props.chef)} */}
                 {chefName}
                 <HireList chef={this.props.chef} address={this.props.address} history={this.props.history} />
                 <ExpansionPanel>

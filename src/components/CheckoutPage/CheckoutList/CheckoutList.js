@@ -8,9 +8,10 @@ class CheckoutList extends Component {
     render() {
         return (
             <div>
-                {this.props.order.map((order, i) => {
+                {JSON.stringify(this.props.order)}
+                {/* {this.props.order.map((order, i) => {
                     return (<CheckoutListItem key={i} order={order} history={this.props.history} />);
-                })}
+                })} */}
             </div>
         );
     }

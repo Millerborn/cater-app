@@ -24,8 +24,19 @@ function* fetchUser() {
   }
 }
 
+function* customerAddress() {
+  try {
+    const response = yield axios.get('/customer-address')
+    yield put({ type: 'GET_ADDRESS', payload: response.data});
+  }
+  catch(error) {
+    console.log('error getting user address', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('GET_CUSTOMER_ADDRESS', customerAddress);
 }
 
 export default userSaga;

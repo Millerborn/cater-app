@@ -33,6 +33,12 @@ class ProfilePage extends Component {
         this.props.dispatch({ type: 'GET_ORDERS' });
     }
 
+    editAddress = (id, street, city, state, zip) => {
+        const addressInfo = {id, street, city, state, zip};
+        console.log('editing address', addressInfo);
+        this.props.dispatch( { type: 'SET_ADDRESS', payload: addressInfo } ) 
+    }
+
   render() {
     const profileInfo = this.props.order[0];
     let profilePage = '';
@@ -43,9 +49,10 @@ class ProfilePage extends Component {
                 <br></br>
                 <p>{profileInfo.first_name} {profileInfo.last_name}</p>
                 <p>Address</p>
-                <p>
-                    {profileInfo.street} {profileInfo.city} {profileInfo.state} {profileInfo.zip}
-                </p> 
+                <div>
+                    <p>{profileInfo.id}{profileInfo.street} {profileInfo.city} {profileInfo.state} {profileInfo.zip}</p>
+                    <button onClick={() => this.editAddress(profileInfo.id, profileInfo.street, profileInfo.city, profileInfo.state, profileInfo.zip)}>Edit Address</button>
+                </div> 
                     <p>{profileInfo.address_type}</p>
                 <p>{profileInfo.email}</p>
                 <p>{profileInfo.phone}</p>

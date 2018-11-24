@@ -26,7 +26,7 @@ class ChefListItem extends Component {
                     <p>{this.props.chef.specialty} Speciality</p>
                     <p>Bio: {this.props.chef.description}</p>
                     <p>Chef Rating {this.props.chef.rating}</p>
-                    <p>min price ${this.props.chef.min_price}</p>
+                    <p>Hourly rate ${this.props.chef.hourly_rate}</p>
                 </div>
                 <Button variant="outlined" onClick={() => this.handleClick(key)}>Hire Chef</Button>
             </div>

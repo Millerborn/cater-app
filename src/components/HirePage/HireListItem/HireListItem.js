@@ -8,6 +8,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import Orders from '../Orders/Orders';
+
 
 
 class HireListItem extends Component {
@@ -22,7 +24,7 @@ class HireListItem extends Component {
     handleChange = (itemId, address) => {
         console.log('Running Order Item handle change', itemId, address);
         this.setState({
-            order_date: '12-15-2019',
+            order_date: '11-26-2018',
             address_id: address,
             menu_item_id: itemId,
             chef_id: this.props.menu.chef_id, 
@@ -37,13 +39,13 @@ class HireListItem extends Component {
     // Displaying details of selected chef
     render() {
         const itemId = this.props.menu.id;
-        const address = this.props.user.id;
-        // const time = this.props.chefs.time_to_make;
+        const address = this.props.address.person_id;
         const hourly = this.props.menu.hourly_rate;
 
         return (
             <div className="card-menu" >
-            {JSON.stringify(hourly)}
+            {JSON.stringify(this.state.selectedItem)}
+              {/* <Orders addToCart={this.handleAddToCart} cartItems={this.state.selectedItem}/> */}
                 <Card id="card">
                     <CardMedia
                         component="img"

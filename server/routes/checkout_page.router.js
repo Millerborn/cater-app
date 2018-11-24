@@ -41,4 +41,42 @@ router.get('/:id', (req, res) => {
       });
   });
 
+  router.put('/', (req, res) => {
+    const updatedAddress = req.body;
+  
+    const queryText = `UPDATE addresses
+    SET "street" = $1, 
+    "city" = $2, 
+    "state" = $3, 
+    "zip" = $4, 
+    "address_type" = $5,
+    WHERE id=$6;`;
+  
+    const queryValues = [
+      updatedAddress.street,
+      updatedAddress.city,
+      updatedAddress.state,
+      updatedAddress.zip,
+      updatedAddress.address_type,
+      updatedAddress.id,
+    ];
+  
+    pool.query(queryText, queryValues)
+      .then(() => { res.sendStatus(200); })
+      .catch((err) => {
+        console.log('Error completing SELECT address query', err);
+        res.sendStatus(500);
+      });
+  });
+
+  router.delete('/', (req, res) => {
+    const queryText = 'DELETE FROM addresses WHERE id=$1';
+    pool.query(queryText, [req.query.id])
+      .then(() => { res.sendStatus(200); })
+      .catch((err) => {
+        console.log('Error completing delete address query', err);
+        res.sendStatus(500);
+      });
+  });
+
 module.exports = router;

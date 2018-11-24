@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
+import Cart from '../HirePage/Orders/Orders';
 
 const Nav = (props) => (
   <div className="nav">
@@ -29,9 +30,9 @@ const Nav = (props) => (
         </>
       )}
       {/* Always show this link since the about page is not protected */}
-      {/* <Link className="nav-link" to="/about">
-        About
-      </Link> */}
+      <Link className="nav-link" to="/about">
+        <Cart />
+      </Link>
     </div>
   </div>
 );

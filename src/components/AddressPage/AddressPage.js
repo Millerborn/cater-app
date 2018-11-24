@@ -8,8 +8,14 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FilledInput from '@material-ui/core/FilledInput';
 import InputLabel from '@material-ui/core/InputLabel';
+import Axios from 'axios';
 
 class AddressPage extends Component {
+
+    componentDidMount() {
+        const userId = this.props.reduxState.user.id;
+        this.props.dispatch({type: 'GET_CUSTOMER_ADDRESS', payload: userId})
+    }
 
     state = {
         id: '',   
@@ -59,8 +65,13 @@ class AddressPage extends Component {
 
 
   render() {
+      const user = this.props.reduxState.user.id;
+    //   const addressId = this.props.reduxState.address
+    //   let address;
+    //   if(user === )
     return (
         <div id="mainDiv">
+            {JSON.stringify(user)}
             <br></br>
             <h2 id="address-h3">Don't stress, we have the Chefs!</h2>
                 <form id="main-address-form" onSubmit={this.handleSubmit}>
