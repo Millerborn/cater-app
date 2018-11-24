@@ -9,7 +9,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Orders from './Orders/Orders';
-
+import Products from '../ShoppingCart/Products';
 
 class HirePage extends Component {
 
@@ -59,6 +59,7 @@ class HirePage extends Component {
         // const hourly = this.props.menu.hourly_rate;
         return (
             <div className="App">
+                <Products />
                 <Orders chefInfo={this.props.chef}/>
                 {/* {JSON.stringify(this.props.chef)} */}
                 {chefName}
