@@ -18,7 +18,7 @@ class HireList extends Component {
             <div className="chef-list">
                 {this.props.menu.map((menu, i) => {
                     return (
-                        <HireListItem address={this.props.address} key={i} menu={menu} history={this.props.history} 
+                        <HireListItem chef={this.props.chef} address={this.props.address} key={i} menu={menu} history={this.props.history} 
                     />);
                 })}
                 <Button onClick={() => this.handleClick(key)} id="hire-chef-button">Hire Chef</Button>

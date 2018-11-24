@@ -8,12 +8,14 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import Orders from './Orders/Orders';
 
 
 class HirePage extends Component {
 
     state = {
         customOrder: '',
+        orderTotal: '',
     }
 
     componentDidMount() {
@@ -23,7 +25,12 @@ class HirePage extends Component {
 
     createCustomOrder = () => {
         console.log('creating custom Order');
-        
+    }
+
+    calculateOrderTotal = (time, hourly) => {
+        console.log('calculating order total', time, hourly);
+        let price = time * hourly;
+        return price;
     }
 
     handleChange = (event) => {
@@ -31,10 +38,12 @@ class HirePage extends Component {
         this.setState({
             ...this.state,
             [event.target.name]: event.target.value,
+            orderTotal: this.calculateOrderTotal,
         })
+        console.log('state in hire-page', this.state);
+        
     }
 
-    // Renders the entire app on the DOM
     render() {
         const chef = this.props.menu[0];
         let chefName = '';
@@ -45,10 +54,14 @@ class HirePage extends Component {
         </div>
         ;
         }
+
+        // const time = chef.time_to_make;
+        // const hourly = this.props.menu.hourly_rate;
         return (
             <div className="App">
+                {JSON.stringify(this.props.chef)}
                 {chefName}
-                <HireList address={this.props.address} history={this.props.history} />
+                <HireList chef={this.props.chef} address={this.props.address} history={this.props.history} />
                 <ExpansionPanel>
                     <ExpansionPanelSummary>
                         <Button onClick={this.createCustomOrder}>Enter a custom order</Button>
@@ -79,6 +92,7 @@ const mapStateToProps = reduxState => ({
     address: reduxState.address,
     menu: reduxState.menu,
     order: reduxState.orders,
+    chef: reduxState.chefs,
 });
 
 export default connect(mapStateToProps)(HirePage);

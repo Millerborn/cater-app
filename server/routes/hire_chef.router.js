@@ -9,7 +9,7 @@ router.get('/:id', (req, res) => {
     console.log('GET chef info from id', chefInfo);
     const queryText = `SELECT menu_item.*, chef_profile.id as 
       chef_profile_id, 
-      chef_profile.first_name, chef_profile.last_name
+      chef_profile.first_name, chef_profile.last_name, chef_profile.hourly_rate
       FROM menu_item
       JOIN chef_profile ON chef_profile.chef_id = menu_item.chef_id
       WHERE chef_profile.id=$1;

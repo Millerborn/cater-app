@@ -38,10 +38,12 @@ class HireListItem extends Component {
     render() {
         const itemId = this.props.menu.id;
         const address = this.props.user.id;
+        const time = this.props.menu.time_to_make;
+        const hourly = this.props.chef;
 
         return (
             <div className="card-menu" >
-            {JSON.stringify(address)}
+            {JSON.stringify(hourly)}
                 <Card id="card">
                     <CardMedia
                         component="img"
@@ -74,7 +76,8 @@ class HireListItem extends Component {
 
 const mapStateToProps = reduxState => ({
     address: reduxState.address,
-    user: reduxState.user
+    user: reduxState.user,
+    orders: reduxState.orders,
 });
 
 export default connect(mapStateToProps)(HireListItem);
