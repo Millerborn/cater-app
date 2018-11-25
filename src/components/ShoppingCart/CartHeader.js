@@ -105,36 +105,38 @@ class CartHeader extends Component {
                     <td>No. of items</td>
                     <td>:</td>
                     <td>
-                        <strong>{this.props.totalItems}</strong>
+                    <strong>{this.props.totalItems}</strong>
                     </td>
                   </tr>
                   <tr>
                     <td>Sub Total</td>
                     <td>:</td>
                     <td>
-                        <strong>{this.props.total}</strong>
+                      <strong>{this.props.total}</strong>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <a
-              className="cart-icon"
-              href="/hire-chef"
-              onClick={this.handleCart.bind(this)}
-              ref="cartButton"
-            >
-              <img
-                className={this.props.cartBounce ? "tada" : " "}
-                src="https://res.cloudinary.com/sivadass/image/upload/v1493548928/icons/bag.png"
-                alt="Cart"
-              />
-              {this.props.totalItems ? (
-                <span className="cart-count">{this.props.totalItems}</span>
-              ) : (
-                ""
-              )}
-            </a>
+            <div>
+                <a
+                className="cart-icon"
+                href="/hire-chef"
+                onClick={this.handleCart.bind(this)}
+                ref="cartButton"
+                >
+                <img
+                    className={this.props.cartBounce ? "tada" : " "}
+                    src="https://res.cloudinary.com/sivadass/image/upload/v1493548928/icons/bag.png"
+                    alt="Cart"
+                />
+                {this.props.totalItems ? (
+                    <span className="cart-count">{this.props.totalItems}</span>
+                ) : (
+                    ""
+                )}
+                </a>
+            </div>
             <div
               className={
                 this.state.showCart ? "cart-preview active" : "cart-preview"
@@ -145,7 +147,7 @@ class CartHeader extends Component {
               <div className="action-block">
                 <button
                   type="button"
-                  className={this.state.cart.length > 0 ? " " : "disabled"}
+                  // className={this.state.cart.length > 0 ? " " : "disabled"}
                 >
                   PROCEED TO CHECKOUT
                 </button>

@@ -67,7 +67,7 @@ class HirePage extends Component {
     let productID = selectedProducts.id;
     let productQty = selectedProducts.quantity;
     if (this.checkProduct(productID)) {
-      console.log("hi");
+      console.log('hi from handle add to cart in hire page, selected product: ', selectedProducts);
       let index = cartItem.findIndex(x => x.id === productID);
       cartItem[index].quantity =
         Number(cartItem[index].quantity) + Number(productQty);
