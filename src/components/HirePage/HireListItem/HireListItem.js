@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Counter from "../../ShoppingCart/Counter";
 import { connect } from 'react-redux';
+import '../../../index.css';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -19,7 +20,15 @@ class HireListItem extends Component {
     };
   }
 
-  addToCart(order_date, address_id, menu_id, chef_id, quantity) {
+  addToCart(order_date, address_id, menu_id, chef_id, price, quantity) {
+    let order = { 
+        order_date: order_date,
+        address_id: address_id,
+        menu_item_id: menu_id,
+        chef_id: chef_id,
+        price: price,
+     }
+    this.props.dispatch( { type: 'ADD_TO_CART', payload: order } )
     this.setState(
       {
         selectedProduct: {
@@ -27,6 +36,7 @@ class HireListItem extends Component {
           address_id: address_id,
           menu_item_id: menu_id,
           chef_id: chef_id,
+          price: price,
           quantity: quantity
         }
       },
@@ -48,7 +58,7 @@ class HireListItem extends Component {
       }
     );
   }
-  quickView(order_date, address_id, menu_id, chef_id, quantity) {
+  quickView(order_date, address_id, menu_id, chef_id, price, quantity) {
     this.setState(
       {
         quickViewProdcut: {
@@ -56,6 +66,7 @@ class HireListItem extends Component {
           address_id: address_id,
           menu_item_id: menu_id,
           chef_id: chef_id,
+          price: price,
           quantity: quantity
         }
       },
@@ -64,18 +75,26 @@ class HireListItem extends Component {
       }
     );
   }
+
+  timeToMake = (time) => {
+    if(time <= 1){
+      return (<p>{time} Hour to make</p>);
+    } else if (time > 1) {
+      return (<p>{time} Hours to make</p>);
+    }
+  }
+
   render() {
-    const itemId = this.props.menu.id;
     const address = this.props.user.id;
     let quantity = this.props.productQuantity;
     let menuCard;
     menuCard = this.props.menu.map( (menu, i) => {
       let menu_item_id = menu.id;
       let order_date = '11-26-2018';
-      let address_id = this.props.address.person_id;
       let chef_id = menu.chef_id;
+      let price = menu.price;
         return (
-          <Card id="card" key={i}>
+          <Card className="card-menu" key={i}>
               <CardMedia
                         component="img"
                         alt= "https://via.placeholder.com/160x80"
@@ -87,7 +106,7 @@ class HireListItem extends Component {
                         <h2>{menu.title}</h2>
                         <h5>Ingredients</h5>
                         <p>{menu.ingredients}</p>
-                        <p>{menu.time_to_make} minuets to make</p>
+                        <p>{this.timeToMake(menu.time_to_make)} ${menu.price}</p>
                     </CardContent>
                     <CardActions>
                     <Counter
@@ -101,24 +120,21 @@ class HireListItem extends Component {
                             onClick={this.addToCart.bind(
                               this,
                               order_date,
-                              address_id,
+                              address,
                               menu_item_id,
                               chef_id,
+                              price,
                               quantity
                             )}
                           >
                             {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
                           </Button>
-                        <Button variant="contained" color="primary"
-                            onClick={() =>  this.handleSubmit(itemId, address)}>
-                            Submit Order
-                        </Button>
                     </CardActions>
                 </Card>
         )});
     return (
       <div className="product">
-        <div>{menuCard}</div>
+        {menuCard}
       </div>
     );
   }
@@ -131,120 +147,3 @@ const mapStateToProps = reduxState => ({
 });
 
 export default connect(mapStateToProps)(HireListItem);
-
-
-
-
-
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import '../../../index.css';
-
-// import Card from '@material-ui/core/Card';
-// import CardActions from '@material-ui/core/CardActions';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Button from '@material-ui/core/Button';
-
-
-// class HireListItem extends Component {
-
-// //   state = {
-// //     order_date: '',
-// //     address_id: '',
-// //     menu_item_id: '',
-// //     chef_id: '',
-// // }
-
-//   state = {
-//     selectedItem: {},
-//   }
-
-//     addToCart(itemId, address) {
-//     this.setState(
-//       {
-//         selectedItem: {
-//           order_date: '12-15-2019',
-//           address_id: address,
-//           menu_item_id: itemId,
-//           chef_id: this.props.menu.chef_id,
-//         }
-//       },
-//     );
-//     // this.setState(
-//     //   {
-//     //     isAdded: true
-//     //   },
-//     //   function() {
-//     //     setTimeout(() => {
-//     //       this.setState({
-//     //         isAdded: false,
-//     //         selectedItem: {}
-//     //       });
-//     //     }, 35000);
-//     //   }
-//     // );    
-//   }
-
-//     handleChange = (itemId, address) => {
-//         console.log('Running Order Item handle change', itemId, address);
-//         this.setState({
-//             order_date: '12-15-2019',
-//             address_id: address,
-//             menu_item_id: itemId,
-//             chef_id: this.props.menu.chef_id, 
-//         })
-//     }
-
-//     handleSubmit = () => {
-//         console.log('Push to db', this.state);
-//         this.props.dispatch( { type: 'ADD_ORDER', payload: this.state } );
-//     }
-
-//     // Displaying details of selected chef
-//     render() {
-        // const itemId = this.props.menu.id;
-        // const address = this.props.user.id;
-        // // const time = this.props.chefs.time_to_make;
-        // const hourly = this.props.menu.hourly_rate;
-
-//         return (
-//             <div className="card-menu" >
-//             {JSON.stringify(this.state.selectedItem)}
-                // <Card id="card">
-                //     <CardMedia
-                //         component="img"
-                //         alt= "https://via.placeholder.com/160x80"
-                //         height="200"
-                //         src = "https://via.placeholder.com/160x80"
-                //         title="Contemplative Reptile"
-                //     />
-                //     <CardContent>
-                //         <h2>{this.props.menu.title}</h2>
-                //         <h5>Ingredients</h5>
-                //         <p>{this.props.menu.ingredients}</p>
-                //         <p>{this.props.menu.time_to_make} minuets to make</p>
-                //     </CardContent>
-                //     <CardActions>
-                //         <Button variant="contained" color="primary"
-                //             onClick={() =>  this.addToCart(itemId, address)}>
-                //             Add to Cart
-                //         </Button>
-                //         <Button variant="contained" color="primary"
-                //             onClick={() =>  this.handleSubmit(itemId, address)}>
-                //             Submit Order
-                //         </Button>
-                //     </CardActions>
-                // </Card>
-//           </div>
-//         );
-//     }
-// }
-
-// const mapStateToProps = reduxState => ({
-//     address: reduxState.address,
-//     user: reduxState.user,
-//     orders: reduxState.orders,
-// });
-
-// export default connect(mapStateToProps)(HireListItem);

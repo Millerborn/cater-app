@@ -5,7 +5,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 function* addOrder(action) {
     console.log('Add order Saga: ', action.payload);
     try {
-      yield call(axios.post, '/hire-chef', action.payload);
+      yield call(axios.post, '/add-order', action.payload);
       yield put( { type: 'GET_ORDER', payload: action.payload } );
     }
     catch(error) {
@@ -14,7 +14,7 @@ function* addOrder(action) {
 }
 
 function* orderSaga() {
-    yield takeEvery('ADD_ORDER', addOrder);
+    yield takeEvery('ADD_TO_CART', addOrder);
 }
 
 export default orderSaga;

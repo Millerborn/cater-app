@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const customerRouter = require('./routes/customer.router');
 const hireChefRouter = require('./routes/hire_chef.router');
 const checkoutRouter = require('./routes/checkout_page.router');
+const orderRouter = require('./routes/order.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/display-chef', customerRouter);
 app.use('/hire-chef', hireChefRouter);
 app.use('/checkout', checkoutRouter);
+app.use('/add-order', orderRouter)
 
 // Serve static files
 app.use(express.static('build'));

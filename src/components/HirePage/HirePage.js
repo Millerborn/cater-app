@@ -166,15 +166,21 @@ class HirePage extends Component {
 
     return (
       <div className="container">
-        {JSON.stringify('stringing')}
-        {JSON.stringify(this.state)}
-        {JSON.stringify(this.state.totalAmount)}
+        {JSON.stringify('cart')}
+        {JSON.stringify(this.state.cart)}
+        {JSON.stringify('total')}
+        {JSON.stringify(this.state.totalItems)}
+        {JSON.stringify('user id')}
+        {JSON.stringify(this.props.user.id)}
         {chefName}
         <CartHeader
+          history={this.props.history} 
+          user={this.props.user}
+          order={this.props.order}
           cartBounce={this.state.cartBounce}
           total={this.state.totalAmount}
           totalItems={this.state.totalItems}
-          cartItems={this.state.cart}
+          cart={this.state.cart}
           removeProduct={this.handleRemoveProduct}
           handleSearch={this.handleSearch}
           handleMobileSearch={this.handleMobileSearch}
@@ -233,6 +239,7 @@ const mapStateToProps = reduxState => ({
     menu: reduxState.menu,
     order: reduxState.orders,
     chef: reduxState.chefs,
+    user: reduxState.user,
 });
 
 export default connect(mapStateToProps)(HirePage);
