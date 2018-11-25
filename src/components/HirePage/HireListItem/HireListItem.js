@@ -65,15 +65,8 @@ class HireListItem extends Component {
     );
   }
   render() {
-    const menu = this.props.menu;
     const itemId = this.props.menu.id;
     const address = this.props.user.id;
-    // const time = this.props.chefs.time_to_make;
-    const hourly = this.props.menu.hourly_rate;
-    let image = this.props.image;
-    let name = this.props.name;
-    let price = this.props.price;
-    let id = this.props.menu.id;
     let quantity = this.props.productQuantity;
     let menuCard;
     menuCard = this.props.menu.map( (menu, i) => {
@@ -97,6 +90,11 @@ class HireListItem extends Component {
                         <p>{menu.time_to_make} minuets to make</p>
                     </CardContent>
                     <CardActions>
+                    <Counter
+                      productQuantity={quantity}
+                      updateQuantity={this.props.updateQuantity}
+                      resetQuantity={this.resetQuantity}
+                    />
                     <Button
                             className={!this.state.isAdded ? "" : "added"}
                             type="button"

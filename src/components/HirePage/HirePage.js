@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import ReactDOM from "react-dom";
-import axios from "axios";
+// import ReactDOM from "react-dom";
+// import axios from "axios";
 import HireList from "./HireList/HireList";
 import QuickView from "./QuickView";
 import CartHeader from '../ShoppingCart/CartHeader';
@@ -68,7 +68,7 @@ class HirePage extends Component {
     let productQty = selectedProducts.quantity;
     if (this.checkProduct(productID)) {
       console.log("hi");
-      let index = cartItem.findIndex(x => x.id == productID);
+      let index = cartItem.findIndex(x => x.id === productID);
       cartItem[index].quantity =
         Number(cartItem[index].quantity) + Number(productQty);
       this.setState({
@@ -168,6 +168,7 @@ class HirePage extends Component {
       <div className="container">
         {JSON.stringify('stringing')}
         {JSON.stringify(this.state)}
+        {JSON.stringify(this.state.totalAmount)}
         {chefName}
         <CartHeader
           cartBounce={this.state.cartBounce}

@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import HireListItem from '../HireListItem/HireListItem';
-import LoadingProducts from "../../ShoppingCart/loaders/Products";
-import NoResults from "../../ShoppingCart/NoResults";
-import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
+// import LoadingProducts from "../../ShoppingCart/loaders/Products";
+// import NoResults from "../../ShoppingCart/NoResults";
+// import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 import { connect } from 'react-redux';
 
 
 class HireList extends Component {
-  constructor() {
-    super();
-  }
+  // constructor() {
+  //   super();
+  // }
   render() {
         return (
           <HireListItem

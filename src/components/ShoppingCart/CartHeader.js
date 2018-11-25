@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import CartScrollBar from "./CartScrollBar";
-import Counter from "./Counter";
 import EmptyCart from "./EmptyCart";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 import { findDOMNode } from "react-dom";
@@ -26,7 +25,7 @@ class CartHeader extends Component {
 
   handleClickOutside(event) {
     const cartNode = findDOMNode(this.refs.cartPreview);
-    const buttonNode = findDOMNode(this.refs.cartButton);
+    // const buttonNode = findDOMNode(this.refs.cartButton);
     if (cartNode.classList.contains("active")) {
       if (!cartNode || !cartNode.contains(event.target)) {
         this.setState({
@@ -51,7 +50,7 @@ class CartHeader extends Component {
     );
   }
   render() {
-    let quantity = this.props.productQuantity;
+    // let quantity = this.props.productQuantity;
     let cartItems;
     cartItems = this.props.menu.map(menu => {
         let quantity = this.props.productQuantity;
@@ -121,7 +120,7 @@ class CartHeader extends Component {
             </div>
             <a
               className="cart-icon"
-              href="#"
+              href="/hire-chef"
               onClick={this.handleCart.bind(this)}
               ref="cartButton"
             >
@@ -142,11 +141,11 @@ class CartHeader extends Component {
               }
               ref="cartPreview"
             >
-              {/* <CartScrollBar>{view}</CartScrollBar> */}
+              <CartScrollBar>{view}</CartScrollBar>
               <div className="action-block">
                 <button
                   type="button"
-                  // className={this.state.cart.length > 0 ? " " : "disabled"}
+                  className={this.state.cart.length > 0 ? " " : "disabled"}
                 >
                   PROCEED TO CHECKOUT
                 </button>

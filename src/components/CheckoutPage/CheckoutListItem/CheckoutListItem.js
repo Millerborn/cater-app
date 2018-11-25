@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../../../index.css';
-import Button from '@material-ui/core/Button';
-import '../../../index.css';
+// import Button from '@material-ui/core/Button';
 
 
 class CheckoutListItem extends Component {
