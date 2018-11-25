@@ -3,78 +3,92 @@ import { connect } from 'react-redux';
 import CartScrollBar from "./CartScrollBar";
 import EmptyCart from "./EmptyCart";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
-import { findDOMNode } from "react-dom";
+import Popover from '@material-ui/core/Popover';
+import Button from '@material-ui/core/Button';
 
 class CartHeader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showCart: false,
-      cart: this.props.cartItems,
-    };
-  }
-  handleCart(e) {
-    e.preventDefault();
-    this.setState({
-      showCart: !this.state.showCart
-    });
-  }
-  handleSubmit(e) {
-    e.preventDefault();
-  }
 
-  handleClickOutside(event) {
-    const cartNode = findDOMNode(this.refs.cartPreview);
-    // const buttonNode = findDOMNode(this.refs.cartButton);
-    if (cartNode.classList.contains("active")) {
-      if (!cartNode || !cartNode.contains(event.target)) {
-        this.setState({
-          showCart: false
-        });
-        event.stopPropagation();
-      }
+    state = {
+      showCart: null,
+      cart: this.props.cartItems,
     }
-  }
-  componentDidMount() {
-    document.addEventListener(
-      "click",
-      this.handleClickOutside.bind(this),
-      true
-    );
-  }
-  componentWillUnmount() {
-    document.removeEventListener(
-      "click",
-      this.handleClickOutside.bind(this),
-      true
-    );
-  }
+
+  handleClick = event => {
+    this.setState({
+      showCart: event.currentTarget,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      showCart: null,
+    });
+  };
+
+//   handleCart(e) {
+//     e.preventDefault();
+//     this.setState({
+//       showCart: !this.state.showCart
+//     });
+//   }
+//   handleSubmit(e) {
+//     e.preventDefault();
+//   }
+
+//   handleClickOutside(event) {
+//     const cartNode = findDOMNode(this.refs.cartPreview);
+//     // const buttonNode = findDOMNode(this.refs.cartButton);
+//     if (cartNode.classList.contains("active")) {
+//       if (!cartNode || !cartNode.contains(event.target)) {
+//         this.setState({
+//           showCart: false
+//         });
+//         event.stopPropagation();
+//       }
+//     }
+//   }
+//   componentDidMount() {
+//     document.addEventListener(
+//       "click",
+//       this.handleClickOutside.bind(this),
+//       true
+//     );
+//   }
+//   componentWillUnmount() {
+//     document.removeEventListener(
+//       "click",
+//       this.handleClickOutside.bind(this),
+//       true
+//     );
+//   }
   render() {
+    const showCart = this.state.showCart;
+    const open = Boolean(showCart);
     // let quantity = this.props.productQuantity;
     let cartItems;
     cartItems = this.props.menu.map(menu => {
         let quantity = this.props.productQuantity;
       return (
-        <li className="cart-item" key={menu.id}>
-          <p>cart here</p>
-          <div className="product-info">
-            <p className="product-name">{menu.title}</p>
-            <p className="product-price">{menu.time_to_make}</p>
-          </div>
-          <div className="product-total">
-            <p className="quantity">
-              {quantity} {quantity > 1 ? "Nos." : "No."}{" "}
-            </p>
-            <p className="amount">{quantity * this.props.chef.hourly_rate}</p>
-          </div>
-          {/* <a
-            className="product-remove"
-            href="#"
-            onClick={this.props.removeProduct.bind(this, menu.id)}
-          >
-            ×
-          </a> */}
-        </li>
+            <li className="cart-item" key={menu.id}>
+            <p>cart here</p>
+            <div className="product-info">
+                <p className="product-name">{menu.title}</p>
+                <p className="product-price">{menu.time_to_make}</p>
+            </div>
+            <div className="product-total">
+                <p className="quantity">
+                {quantity} {quantity > 1 ? "Nos." : "No."}{" "}
+                </p>
+                <p className="amount">{quantity * this.props.chef.hourly_rate}</p>
+            </div>
+            {/* <a
+                className="product-remove"
+                href="#"
+                onClick={this.props.removeProduct.bind(this, menu.id)}
+            >
+                ×
+            </a> */}
+            </li>
       );
     });
     let view;
@@ -94,9 +108,29 @@ class CartHeader extends Component {
       );
     }
     return (
-      <header>
         <div className="container">
-        {JSON.stringify(this.props.cartItems)}
+        <Button
+            aria-owns={open ? 'simple-popper' : undefined}
+            aria-haspopup="true"
+            variant="contained"
+            onClick={this.handleClick}
+        >
+            View Cart
+        </Button>
+        <Popover
+                id="simple-popper"
+                open={open}
+                showcart={showCart}
+                onClose={this.handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+              >
           <div className="cart">
             <div className="cart-info">
               <table>
@@ -118,7 +152,7 @@ class CartHeader extends Component {
                 </tbody>
               </table>
             </div>
-            <div>
+            {/* <div>
                 <a
                 className="cart-icon"
                 href="/hire-chef"
@@ -136,7 +170,7 @@ class CartHeader extends Component {
                     ""
                 )}
                 </a>
-            </div>
+            </div> */}
             <div
               className={
                 this.state.showCart ? "cart-preview active" : "cart-preview"
@@ -154,8 +188,8 @@ class CartHeader extends Component {
               </div>
             </div>
           </div>
+          </Popover>
         </div>
-      </header>
     );
   }
 }
