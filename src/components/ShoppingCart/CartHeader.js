@@ -51,6 +51,7 @@ class CartHeader extends Component {
     );
   }
   render() {
+    let quantity = this.props.productQuantity;
     let cartItems;
     cartItems = this.props.menu.map(menu => {
         let quantity = this.props.productQuantity;
@@ -105,14 +106,14 @@ class CartHeader extends Component {
                     <td>No. of items</td>
                     <td>:</td>
                     <td>
-                      <strong>total items</strong>
+                        <strong>{this.props.totalItems}</strong>
                     </td>
                   </tr>
                   <tr>
                     <td>Sub Total</td>
                     <td>:</td>
                     <td>
-                      <strong>total</strong>
+                        <strong>{this.props.total}</strong>
                     </td>
                   </tr>
                 </tbody>
