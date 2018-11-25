@@ -321,6 +321,7 @@ import EmptyCart from "./EmptyCart";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
+import CartHeaderListItems from "./CartHeaderListItems";
 
 class CartHeader extends Component {
 
@@ -398,49 +399,52 @@ class CartHeader extends Component {
     const key = this.props.menu;
     const showCart = this.state.showCart;
     const open = Boolean(showCart);
-    // let quantity = this.props.productQuantity;
-    let cartItems;
-    cartItems = this.props.menu.map(menu => {
-        let quantity = this.props.productQuantity;
-      return (
-            <li className="cart-item" key={menu.id}>
-            <p>cart here</p>
-            <div className="product-info">
-                <p className="product-name">{menu.title}</p>
-                <p className="product-price">{menu.time_to_make}</p>
-            </div>
-            <div className="product-total">
-                <p className="quantity">
-                {quantity} {quantity > 1 ? "Nos." : "No."}{" "}
-                </p>
-                <p className="amount">{quantity * this.props.chef.hourly_rate}</p>
-            </div>
-            {/* <a
-                className="product-remove"
-                href="#"
-                onClick={this.props.removeProduct.bind(this, menu.id)}
-            >
-                ×
-            </a> */}
-            </li>
-      );
-    });
-    let view;
-    if (cartItems.length <= 0) {
-      view = <EmptyCart />;
-    } else {
-      view = (
-        <CSSTransitionGroup
-          transitionName="fadeIn"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}
-          component="ul"
-          className="cart-items"
-        >
-          {cartItems}
-        </CSSTransitionGroup>
-      );
-    }
+    const cart = this.state.cart;
+
+    // // let quantity = this.props.productQuantity;
+    // let cartItems;
+    // cartItems = this.props.menu.map(menu => {
+    //     let quantity = this.props.productQuantity;
+    //   return (
+    //         <li className="cart-item" key={menu.id}>
+    //         {JSON.stringify(this.props.menu)}
+    //         <p>cart here</p>
+    //         <div className="product-info">
+    //             <p className="product-name">{menu.title}</p>
+    //             <p className="product-price">{menu.time_to_make}</p>
+    //         </div>
+    //         <div className="product-total">
+    //             <p className="quantity">
+    //             {quantity} {quantity > 1 ? "Nos." : "No."}{" "}
+    //             </p>
+    //             <p className="amount">{quantity * this.props.chef.hourly_rate}</p>
+    //         </div>
+    //         {/* <a
+    //             className="product-remove"
+    //             href="#"
+    //             onClick={this.props.removeProduct.bind(this, menu.id)}
+    //         >
+    //             ×
+    //         </a> */}
+    //         </li>
+    //   );
+    // });
+    // let view;
+    // if (cartItems.length <= 0) {
+    //   view = <EmptyCart />;
+    // } else {
+    //   view = (
+    //     <CSSTransitionGroup
+    //       transitionName="fadeIn"
+    //       transitionEnterTimeout={500}
+    //       transitionLeaveTimeout={300}
+    //       component="ul"
+    //       className="cart-items"
+    //     >
+    //       {cartItems}
+    //     </CSSTransitionGroup>
+    //   );
+    // }
     return (
         <div className="container">
         <Button
@@ -476,7 +480,7 @@ class CartHeader extends Component {
                     <strong>{this.props.totalItems}</strong>
                     </td>
                     <td>{JSON.stringify('cart here:')}</td>
-                    <td>{JSON.stringify(this.state.cart)}</td>
+                    {/* <td>{JSON.stringify(this.state.cart)}</td> */}
                   </tr>
                   <tr>
                     <td>Sub Total</td>
@@ -494,7 +498,8 @@ class CartHeader extends Component {
               }
               ref="cartPreview"
             >
-              <CartScrollBar>{view}</CartScrollBar>
+            <CartHeaderListItems cart={cart} />
+              {/* <CartScrollBar>{view}</CartScrollBar> */}
               <div className="action-block">
                 <button
                   type="button"

@@ -26,6 +26,11 @@
     overflow: auto;
 }
 
+.chef-profile-pic {
+    width: 350px;
+    height: 250px;
+}
+
 .chef_list_item img {
     float: left;
 }
@@ -71,6 +76,11 @@ body {
     max-width: 800px;
     margin: 0 auto;
     
+}
+
+.menu-item-image {
+    max-height: 250px;
+    max-width: 350px;
 }
 
 .main-checkout-div {

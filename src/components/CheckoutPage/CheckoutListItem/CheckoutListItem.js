@@ -20,7 +20,7 @@ class CheckoutListItem extends Component {
         return (
             <div className="checkout-list-items">
                 <div className="checkout-list-details">
-                    <p> x1 {this.props.order.title} {this.props.order.time_to_make} minuets</p>
+                    <p> x1 {this.props.order.title} {this.props.order.time_to_make} Hours to make</p>
                 </div>
             </div>
         );

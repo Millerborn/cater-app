@@ -168,10 +168,6 @@ class HirePage extends Component {
       <div className="container">
         {JSON.stringify('cart')}
         {JSON.stringify(this.state.cart)}
-        {JSON.stringify('total')}
-        {JSON.stringify(this.state.totalItems)}
-        {JSON.stringify('user id')}
-        {JSON.stringify(this.props.user.id)}
         {chefName}
         <CartHeader
           history={this.props.history} 

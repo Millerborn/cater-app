@@ -19,7 +19,8 @@ class CartHeaderListItem extends Component {
         return (
             <div className="checkout-list-items">
                 <div className="checkout-list-details">
-                    <p> x1 {this.props.order.title} {this.props.order.time_to_make} minuets</p>
+                    <p> x1 {this.props.cart.price}</p>
+                    {JSON.stringify(this.props.cart)}
                 </div>
             </div>
         );

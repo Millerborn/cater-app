@@ -96,10 +96,11 @@ class HireListItem extends Component {
         return (
           <Card className="card-menu" key={i}>
               <CardMedia
+                        className="menu-item-image"
                         component="img"
                         alt= "https://via.placeholder.com/160x80"
                         height="200"
-                        src = "https://via.placeholder.com/160x80"
+                        src={menu.image}
                         title="Contemplative Reptile"
                     />
                     <CardContent>
