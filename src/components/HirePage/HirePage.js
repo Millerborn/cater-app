@@ -97,7 +97,7 @@ class HirePage extends Component {
   }
   handleRemoveProduct(id, e) {
     let cart = this.state.cart;
-    let index = cart.findIndex(x => x.id == id);
+    let index = cart.findIndex(x => x.id === id);
     cart.splice(index, 1);
     this.setState({
       cart: cart
@@ -166,9 +166,10 @@ class HirePage extends Component {
 
     return (
       <div className="container">
+        {JSON.stringify('stringing')}
+        {JSON.stringify(this.state)}
         {chefName}
-        {JSON.stringify(this.state.cart)}
-        {/* <CartHeader
+        <CartHeader
           cartBounce={this.state.cartBounce}
           total={this.state.totalAmount}
           totalItems={this.state.totalItems}
@@ -180,7 +181,7 @@ class HirePage extends Component {
           categoryTerm={this.state.category}
           updateQuantity={this.updateQuantity}
           productQuantity={this.state.moq}
-        /> */}
+        />
         <HireList
           productsList={this.state.products}
           searchTerm={this.state.term}
@@ -188,8 +189,12 @@ class HirePage extends Component {
           productQuantity={this.state.quantity}
           updateQuantity={this.updateQuantity}
           openModal={this.openModal}
-        />
-      <HireList chef={this.props.chef} address={this.props.address} history={this.props.history} />
+          chef={this.props.chef}
+          address={this.props.address} 
+          history={this.props.history}
+          menu={this.props.menu}
+          orders={this.props.orders} 
+          />
 
       <ExpansionPanel>
                      <ExpansionPanelSummary>
