@@ -19,6 +19,7 @@ class HireList extends Component {
             history={this.props.history}
             menu={this.props.menu}
             orders={this.props.orders}
+            cart={this.props.cart}
           />
         );
       }

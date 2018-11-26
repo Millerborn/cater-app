@@ -6,19 +6,18 @@ import '../../index.css';
 
 class CartHeaderListItem extends Component {
 
-    // handleClick = (id) => {
-    //     event.preventDefault();
-    //     console.log('chef id', id);
-    //     this.props.dispatch( { type: 'SEND_MENU_ID', payload: id } );
-    //     this.props.history.push('/hire-chef');
-    // }
+    componentDidMount() {
+        this.props.dispatch({type: 'GET_ORDERS'});
+    }
 
-    // Displaying details for a single chef
     render() {
+        // const cart = this.props.cart[0];
+        const menu = this.props.reduxState.menu;
         return (
             <div className="checkout-list-items">
                 <div className="checkout-list-details">
-                    <p> x1 {this.props.order.price}</p>
+                    {JSON.stringify(menu)}
+                    <p> x1 cart item here</p>
                 </div>
             </div>
         );
@@ -30,27 +29,3 @@ const mapStateToProps = reduxState => ({
 });
 
 export default connect(mapStateToProps)(CartHeaderListItem);
-
-//  <li className="cart-item" key={order.id}>
-//             <p>cart here</p>
-//             <div className="product-info">
-//                 <p className="product-name">{order.title}</p>
-//                 <p className="product-price">{order.time_to_make}</p>
-//             </div>
-//             <div className="product-total">
-//                 <p className="quantity">
-//                 {quantity} {quantity > 1 ? "Nos." : "No."}{" "}
-//                 </p>
-//                 <p className="amount">{quantity * this.props.chef.hourly_rate}</p>
-//             </div>
-//              <a
-//                 className="product-remove"
-//                 href="#"
-//                 onClick={this.props.removeProduct.bind(this, menu.id)}
-//             >
-//                 ×
-//             </a>
-//              </li>
-
-
-

@@ -1,7 +1,7 @@
 const orderReducer = (state=[], action) => {
     switch (action.type) {
       case 'GET_ORDER':
-        return action.payload;
+        return [action.payload];
       default:
         return state;
     }

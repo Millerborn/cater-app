@@ -25,11 +25,12 @@ class CheckoutListItem extends Component {
     // Displaying details for a single chef
     render() {
         // const key = this.props.order.id;
-    const orderCart = this.props.menu;
+    const orderCart = this.props.orders;
     let orderReview = '';
     if (orderCart !== undefined){
         orderReview = 
         <div>
+            {JSON.stringify('CL Item orderCart: ')}
             {JSON.stringify(orderCart)}
             <p>x1 {orderCart.title} {orderCart.price}</p>
         </div>
@@ -39,8 +40,8 @@ class CheckoutListItem extends Component {
             <div className="checkout-list-items">
                 <div className="checkout-list-details">
                 {orderReview}
-                {/* {JSON.stringify('cl props.order')}
-                {JSON.stringify(this.props.order)}
+                {/* {/* {JSON.stringify('cl props.order')}
+                {JSON.stringify(this.props.order)} */}
                 <p>Hello this is order info {this.props.order.time_to_make} ${this.props.order.price}</p> */}
                 </div>
             </div>

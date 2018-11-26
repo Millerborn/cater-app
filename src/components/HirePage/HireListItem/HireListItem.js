@@ -20,7 +20,7 @@ class HireListItem extends Component {
     };
   }
 
-  addToCart(order_date, address_id, menu_id, chef_id, price, quantity) {
+  addToCart(order_date, address_id, menu_id, chef_id, price, quantity, title) {
     let order = { 
         order_date: order_date,
         address_id: address_id,
@@ -28,6 +28,7 @@ class HireListItem extends Component {
         chef_id: chef_id,
         price: price,
         quantity: quantity,
+        title: title
      }
     this.props.dispatch( { type: 'ADD_TO_CART', payload: order } )
     this.setState(
@@ -39,7 +40,8 @@ class HireListItem extends Component {
           menu_item_id: menu_id,
           chef_id: chef_id,
           price: price,
-          quantity: quantity
+          quantity: quantity,
+          title: title
         }
       },
       function() {
@@ -62,7 +64,7 @@ class HireListItem extends Component {
       }
     );
   }
-  quickView(order_date, address_id, menu_id, chef_id, price, quantity) {
+  quickView(order_date, address_id, menu_id, chef_id, price, quantity, title) {
     this.setState(
       {
         ...this.state,
@@ -72,7 +74,8 @@ class HireListItem extends Component {
           menu_item_id: menu_id,
           chef_id: chef_id,
           price: price,
-          quantity: quantity
+          quantity: quantity,
+          title: title
         }
       },
       function() {
@@ -98,6 +101,7 @@ class HireListItem extends Component {
       let order_date = '11-26-2018';
       let chef_id = menu.chef_id;
       let price = menu.price;
+      let title = menu.title;
         return (
           <Card className="card-menu" key={i}>
               <CardMedia
@@ -112,7 +116,7 @@ class HireListItem extends Component {
                         <h2>{menu.title}</h2>
                         <h5>Ingredients</h5>
                         <p>{menu.ingredients}</p>
-                        <p>{this.timeToMake(menu.time_to_make)} ${menu.price}</p>
+                        <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
                     </CardContent>
                     <CardActions>
                     <Counter
@@ -130,7 +134,8 @@ class HireListItem extends Component {
                               menu_item_id,
                               chef_id,
                               price,
-                              quantity
+                              quantity,
+                              title
                             )}
                           >
                             {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
