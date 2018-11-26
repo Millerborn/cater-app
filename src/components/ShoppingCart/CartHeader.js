@@ -346,7 +346,7 @@ class CartHeader extends Component {
     console.log('WillUpdate', this.props.user.id)
     const user = this.props.user.id;
     this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
-    this.props.dispatch({ type: 'GET_ALL_ORDERS' });
+    this.props.dispatch({ type: 'GET_ORDERS' });
 }
 
   handleHistoryClick = () => {
@@ -368,6 +368,7 @@ class CartHeader extends Component {
         let quantity = this.props.productQuantity;
       return (
             <li className="cart-item" key={menu.id}>
+            {JSON.stringify(this.props.orders)}
             <div className="product-info">
                 <p className="quantity">x1 {menu.title} ${menu.price}</p>
             </div>
@@ -491,7 +492,7 @@ class CartHeader extends Component {
 const mapStateToProps = reduxState => ({
   address: reduxState.address,
   menu: reduxState.menu,
-  order: reduxState.orders,
+  orders: reduxState.orders,
   chef: reduxState.chefs,
   user: reduxState.user,
 });

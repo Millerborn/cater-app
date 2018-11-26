@@ -11,25 +11,28 @@ import Button from '@material-ui/core/Button';
 
 
 class HireListItem extends Component {
-    state = {
-      cart: [ ],
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedProduct: {},
       quickViewProdcut: {},
       isAdded: false
+    };
   }
 
   addToCart(order_date, address_id, menu_id, chef_id, price, quantity) {
     let order = { 
-      selectedProduct: {
         order_date: order_date,
         address_id: address_id,
         menu_item_id: menu_id,
         chef_id: chef_id,
         price: price,
-      }
+        quantity: quantity,
      }
     this.props.dispatch( { type: 'ADD_TO_CART', payload: order } )
     this.setState(
       {
+        ...this.state,
         selectedProduct: {
           order_date: order_date,
           address_id: address_id,
@@ -40,16 +43,18 @@ class HireListItem extends Component {
         }
       },
       function() {
-        this.props.addToCart(this.state.selectedProduct);
+        this.props.addToCart(order);
       }
     );
     this.setState(
       {
+        ...this.state,
         isAdded: true
       },
       function() {
         setTimeout(() => {
           this.setState({
+            ...this.state,
             isAdded: false,
             selectedProduct: {}
           });
@@ -60,6 +65,7 @@ class HireListItem extends Component {
   quickView(order_date, address_id, menu_id, chef_id, price, quantity) {
     this.setState(
       {
+        ...this.state,
         quickViewProdcut: {
           order_date: order_date,
           address_id: address_id,

@@ -35,7 +35,7 @@ class HirePage extends Component {
     this.sumTotalAmount = this.sumTotalAmount.bind(this);
     this.checkProduct = this.checkProduct.bind(this);
     this.updateQuantity = this.updateQuantity.bind(this);
-    this.handleRemoveProduct = this.handleRemoveProduct.bind(this);
+    // this.handleRemoveProduct = this.handleRemoveProduct.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -50,73 +50,90 @@ class HirePage extends Component {
 
   // Search by Keyword
   handleSearch(event) {
-    this.setState({ term: event.target.value });
+    this.setState({ ...this.state, term: event.target.value });
   }
   // Mobile Search Reset
   handleMobileSearch() {
-    this.setState({ term: "" });
+    this.setState({ ...this.state, term: "" });
   }
   // Filter by Category
   handleCategory(event) {
-    this.setState({ category: event.target.value });
+    this.setState({ ...this.state, category: event.target.value });
     console.log(this.state.category);
   }
   // Add to Cart
   handleAddToCart(selectedProducts) {
-    let cartItem = this.state.cart;
-    let productID = selectedProducts.id;
+    let cart = this.state.cart;
+    console.log('cart beginning of handle add: ', this.state.cart);
+    console.log('hi from handle add to cart in hire page, selected product: ', selectedProducts);
+    let productID = selectedProducts.menu_item_id;
     let productQty = selectedProducts.quantity;
-    if (this.checkProduct(productID)) {
-      console.log('hi from handle add to cart in hire page, selected product: ', selectedProducts);
-      let index = cartItem.findIndex(x => x.id === productID);
-      cartItem[index].quantity =
-        Number(cartItem[index].quantity) + Number(productQty);
+    console.log('checkProduct:',this.checkProduct(productID), 'productID:',productID);
+    if (this.checkProduct(productID) !== false) {
+      console.log('if statement', this.checkProduct(productID));
+      let index = this.checkProduct(productID);
+      cart[index].quantity =
+        Number(cart[index].quantity) + Number(productQty);
       this.setState({
-        cart: cartItem
+        ...this.state,
+        cart: cart
       });
     } else {
-      cartItem.push(selectedProducts);
+      console.log('else statement');
+      
+      cart.push(selectedProducts);
     }
     this.setState({
-      cart: cartItem,
+      ...this.state,
+      // cart: [...this.state.cart,cart],
       cartBounce: true
     });
     setTimeout(
       function() {
         this.setState({
+          ...this.state,
           cartBounce: false,
           quantity: 1
         });
         console.log(this.state.quantity);
-        console.log(this.state.cart);
+        console.log('cart: ', this.state.cart);
       }.bind(this),
       1000
     );
     this.sumTotalItems(this.state.cart);
     this.sumTotalAmount(this.state.cart);
   }
-  handleRemoveProduct(id, e) {
-    let cart = this.state.cart;
-    let index = cart.findIndex(x => x.id === id);
-    cart.splice(index, 1);
-    this.setState({
-      cart: cart
-    });
-    this.sumTotalItems(this.state.cart);
-    this.sumTotalAmount(this.state.cart);
-    e.preventDefault();
-  }
+  // handleRemoveProduct(id, e) {
+  //   let cart = this.state.cart;
+  //   let index = cart.findIndex(x => x.id === id);
+  //   cart.splice(index, 1);
+  //   this.setState({
+  //     ...this.state,
+  //     cart: [...this.state.cart,cart]
+  //   });
+  //   this.sumTotalItems(this.state.cart);
+  //   this.sumTotalAmount(this.state.cart);
+  //   e.preventDefault();
+  // }
   checkProduct(productID) {
     let cart = this.state.cart;
-    return cart.some(function(item) {
-      return item.id === productID;
-    });
+    for (let i=0; i<cart.length; i++) {
+      if (cart[i].menu_item_id===productID) {
+        return i;
+      }
+    }
+    return false;
+    // return cart.some(function(item) {
+    // // cart.some(function(item) {
+    //   return item.menu_item_id === productID;
+    // });
   }
   sumTotalItems() {
     let total = 0;
     let cart = this.state.cart;
     total = cart.length;
     this.setState({
+      ...this.state,
       totalItems: total
     });
   }
@@ -127,6 +144,7 @@ class HirePage extends Component {
       total += cart[i].price * parseInt(cart[i].quantity);
     }
     this.setState({
+      ...this.state,
       totalAmount: total
     });
   }
@@ -135,12 +153,14 @@ class HirePage extends Component {
   updateQuantity(qty) {
     console.log("quantity added...");
     this.setState({
+      ...this.state,
       quantity: qty
     });
   }
   // Open Modal
   openModal(product) {
     this.setState({
+      ...this.state,
       quickViewProduct: product,
       modalActive: true
     });
@@ -148,6 +168,7 @@ class HirePage extends Component {
   // Close Modal
   closeModal() {
     this.setState({
+      ...this.state,
       modalActive: false
     });
   }
@@ -172,7 +193,7 @@ class HirePage extends Component {
         <CartHeader
           history={this.props.history} 
           user={this.props.user}
-          order={this.props.order}
+          orders={this.props.orders}
           cartBounce={this.state.cartBounce}
           total={this.state.totalAmount}
           totalItems={this.state.totalItems}
@@ -238,7 +259,7 @@ class HirePage extends Component {
 const mapStateToProps = reduxState => ({
     address: reduxState.address,
     menu: reduxState.menu,
-    order: reduxState.orders,
+    orders: reduxState.orders,
     chef: reduxState.chefs,
     user: reduxState.user,
 });
