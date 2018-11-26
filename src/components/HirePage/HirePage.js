@@ -25,7 +25,7 @@ class HirePage extends Component {
       cartBounce: false,
       quantity: 1,
       quickViewProduct: {},
-      modalActive: false
+      modalActive: false,
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.handleMobileSearch = this.handleMobileSearch.bind(this);
@@ -166,8 +166,8 @@ class HirePage extends Component {
 
     return (
       <div className="container">
-        {JSON.stringify('cart')}
-        {JSON.stringify(this.state.cart)}
+        {/* {JSON.stringify('history')}
+        {JSON.stringify(this.props.history)} */}
         {chefName}
         <CartHeader
           history={this.props.history} 
@@ -184,6 +184,8 @@ class HirePage extends Component {
           categoryTerm={this.state.category}
           updateQuantity={this.updateQuantity}
           productQuantity={this.state.moq}
+          quantity={this.state.quantity}
+
         />
         <HireList
           productsList={this.state.products}
@@ -225,6 +227,9 @@ class HirePage extends Component {
           openModal={this.state.modalActive}
           closeModal={this.closeModal}
         />
+        {/* <div>
+          <CartHeader history={this.props.history} />
+        </div> */}
       </div>
     );
   }

@@ -13,41 +13,56 @@ class CheckoutPage extends Component {
         this.props.history.push('/display-chef')
     }
 
-    componentWillMount() {
-        console.log('WillUpdate', this.props.user.id)
-        const user = this.props.user.id;
-        this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
-        this.props.dispatch({ type: 'GET_ORDERS' });
+    removeItem = (id) => {
+        console.log('removing from cart id: ', id);
+        this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: id } );
     }
 
   render() {
 
-    // const orderInfo = this.props.order[0];
-    // let orderList = '';
-    // if (orderInfo !== undefined){
-    // orderList = 
-    // <div>
-    // <h4>Review and order Chef</h4>
-    //             <h5>Your order information</h5>
-    //             <br></br>
-    //             <p>{orderInfo.first_name} {orderInfo.last_name}</p>
-    //             <p>{orderInfo.street} {orderInfo.city} {orderInfo.state}</p>
-    //             <p>{orderInfo.zip}</p>
-    //             <p>{orderInfo.address_type}</p>
-    //             <br></br>
-    //             <br></br>
-    //             <p>{orderInfo.email}</p>
-    //             <p>{orderInfo.phone}</p>
-    // </div>
-    // ;
-    // }
+    const orderInfo = this.props.order[0];
+    let orderList = '';
+    if (orderInfo !== undefined){
+    orderList = 
+    <div>
+    <h4>Review and order Chef</h4>
+                <h5>Your order information</h5>
+                <br></br>
+                <p>{orderInfo.first_name} {orderInfo.last_name}</p>
+                <p>{orderInfo.street} {orderInfo.city} {orderInfo.state}</p>
+                <p>{orderInfo.zip}</p>
+                <p>{orderInfo.address_type}</p>
+                <br></br>
+                <br></br>
+                <p>{orderInfo.email}</p>
+                <p>{orderInfo.phone}</p>
+    </div>
+    ;
+    }
+
+    let cartItems;
+    cartItems = this.props.menu.map(menu => {
+        let quantity = this.props.productQuantity;
+      return (
+            <div className="cart-item" key={menu.id}>
+                <div className="product-info">
+                    <p className="quantity">x1 {menu.title} ${menu.price} {menu.time_to_make} hour to make</p>
+                </div>
+                <button className="product-remove" onClick={() => this.removeItem(menu.id)}>
+                    remove from cart
+                </button>
+            </div>
+      );
+    });
+
     return (
         <div id="main-checkout-div">
             <h3>Checkout</h3>
                 <div id="formInput" onSubmit={this.handleNextClick}>
-                    {/* <div id="checkout-order-information">{orderList}</div> */}
+                    <div id="checkout-order-information">{orderList}</div>
                     <br></br>
-                    <CheckoutList order={this.props.order}/>
+                    {cartItems}
+                    {/* <CheckoutList order={this.props.order}/> */}
                 </div>
                 <Button>Checkout</Button>
         </div>
@@ -58,6 +73,7 @@ class CheckoutPage extends Component {
 const mapStateToProps = reduxState => ({
     user: reduxState.user,
     order: reduxState.orders,
+    menu: reduxState.menu,
 });
 
 export default connect(mapStateToProps)(CheckoutPage);

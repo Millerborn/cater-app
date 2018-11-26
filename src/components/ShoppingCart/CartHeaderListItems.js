@@ -15,12 +15,10 @@ class CartHeaderListItem extends Component {
 
     // Displaying details for a single chef
     render() {
-        // const key = this.props.order.id;
         return (
             <div className="checkout-list-items">
                 <div className="checkout-list-details">
-                    <p> x1 {this.props.cart.price}</p>
-                    {JSON.stringify(this.props.cart)}
+                    <p> x1 {this.props.order.price}</p>
                 </div>
             </div>
         );

@@ -7,9 +7,6 @@ import { connect } from 'react-redux';
 
 
 class HireList extends Component {
-  // constructor() {
-  //   super();
-  // }
   render() {
         return (
           <HireListItem

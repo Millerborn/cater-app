@@ -31,6 +31,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          {JSON.stringify(this.props.history)}
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -96,4 +97,10 @@ class App extends Component {
   )}
 }
 
-export default connect()(App);
+const mapStateToProps = reduxState => ({
+  user: reduxState.user,
+  menu: reduxState.menu,
+  reduxState,
+});
+
+export default connect(mapStateToProps)(App);

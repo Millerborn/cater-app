@@ -342,109 +342,61 @@ class CartHeader extends Component {
     });
   };
 
-//   handleCart(e) {
-//     e.preventDefault();
-//     this.setState({
-//       showCart: !this.state.showCart
-//     });
-//   }
-//   handleSubmit(e) {
-//     e.preventDefault();
-//   }
-
-//   handleClickOutside(event) {
-//     const cartNode = findDOMNode(this.refs.cartPreview);
-//     // const buttonNode = findDOMNode(this.refs.cartButton);
-//     if (cartNode.classList.contains("active")) {
-//       if (!cartNode || !cartNode.contains(event.target)) {
-//         this.setState({
-//           showCart: false
-//         });
-//         event.stopPropagation();
-//       }
-//     }
-//   }
-//   componentDidMount() {
-//     document.addEventListener(
-//       "click",
-//       this.handleClickOutside.bind(this),
-//       true
-//     );
-//   }
-//   componentWillUnmount() {
-//     document.removeEventListener(
-//       "click",
-//       this.handleClickOutside.bind(this),
-//       true
-//     );
-//   }
-
-  // componentWillMount() {
-  //   console.log('WillUpdate', this.props.user.id)
-  //   const user = this.props.user.id;
-  //   this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
-  //   this.props.dispatch({ type: 'GET_ORDERS' });
-  // }
+  componentWillMount() {
+    console.log('WillUpdate', this.props.user.id)
+    const user = this.props.user.id;
+    this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
+    this.props.dispatch({ type: 'GET_ALL_ORDERS' });
+}
 
   handleHistoryClick = () => {
     console.log('event');
     this.props.history.push('/checkout');
 }
 
-  handleSubmit = () => {
-    console.log('In HRI pushing order to db', this.state.cart);
-    // this.props.dispatch( { type: 'ADD_ORDER', payload: this.state.selectedProduct } );
-  }
+  // handleSubmit = () => {
+  //   console.log('In HRI pushing order to db', this.state.cart);
+  //   // this.props.dispatch( { type: 'ADD_ORDER', payload: this.state.selectedProduct } );
+  // }
   render() {
-    const key = this.props.menu;
     const showCart = this.state.showCart;
     const open = Boolean(showCart);
-    const cart = this.state.cart;
 
-    // // let quantity = this.props.productQuantity;
-    // let cartItems;
-    // cartItems = this.props.menu.map(menu => {
-    //     let quantity = this.props.productQuantity;
-    //   return (
-    //         <li className="cart-item" key={menu.id}>
-    //         {JSON.stringify(this.props.menu)}
-    //         <p>cart here</p>
-    //         <div className="product-info">
-    //             <p className="product-name">{menu.title}</p>
-    //             <p className="product-price">{menu.time_to_make}</p>
-    //         </div>
-    //         <div className="product-total">
-    //             <p className="quantity">
-    //             {quantity} {quantity > 1 ? "Nos." : "No."}{" "}
-    //             </p>
-    //             <p className="amount">{quantity * this.props.chef.hourly_rate}</p>
-    //         </div>
-    //         {/* <a
-    //             className="product-remove"
-    //             href="#"
-    //             onClick={this.props.removeProduct.bind(this, menu.id)}
-    //         >
-    //             ×
-    //         </a> */}
-    //         </li>
-    //   );
-    // });
-    // let view;
-    // if (cartItems.length <= 0) {
-    //   view = <EmptyCart />;
-    // } else {
-    //   view = (
-    //     <CSSTransitionGroup
-    //       transitionName="fadeIn"
-    //       transitionEnterTimeout={500}
-    //       transitionLeaveTimeout={300}
-    //       component="ul"
-    //       className="cart-items"
-    //     >
-    //       {cartItems}
-    //     </CSSTransitionGroup>
-    //   );
-    // }
+    // let quantity = this.props.productQuantity;
+    let cartItems;
+    cartItems = this.props.menu.map(menu => {
+        let quantity = this.props.productQuantity;
+      return (
+            <li className="cart-item" key={menu.id}>
+            <div className="product-info">
+                <p className="quantity">x1 {menu.title} ${menu.price}</p>
+            </div>
+            {/* <a
+                className="product-remove"
+                href="#"
+                onClick={this.props.removeProduct.bind(this, menu.id)}
+            >
+                ×
+            </a> */}
+            </li>
+            );
+          });
+    let view;
+    if (cartItems.length <= 0) {
+      view = <EmptyCart />;
+    } else {
+      view = (
+        <CSSTransitionGroup
+          transitionName="fadeIn"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+          component="ul"
+          className="cart-items"
+        >
+          {cartItems}
+        </CSSTransitionGroup>
+      );
+    }
     return (
         <div className="container">
         <Button
@@ -453,6 +405,8 @@ class CartHeader extends Component {
             variant="contained"
             onClick={this.handleClick}
         >
+        {/* {JSON.stringify('history here:')}
+        {JSON.stringify(this.props.history)} */}
             View Cart
         </Button>
         <Popover
@@ -475,18 +429,18 @@ class CartHeader extends Component {
                 <tbody>
                   <tr>
                     <td>No. of items</td>
+                    {JSON.stringify('order here')}
+                    {JSON.stringify(this.props.order)}
                     <td>:</td>
                     <td>
                     <strong>{this.props.totalItems}</strong>
                     </td>
-                    <td>{JSON.stringify('cart here:')}</td>
-                    {/* <td>{JSON.stringify(this.state.cart)}</td> */}
                   </tr>
                   <tr>
                     <td>Sub Total</td>
                     <td>:</td>
                     <td>
-                      <strong>{this.props.total}</strong>
+                      <strong>${this.props.total}</strong>
                     </td>
                   </tr>
                 </tbody>
@@ -498,13 +452,29 @@ class CartHeader extends Component {
               }
               ref="cartPreview"
             >
-            <CartHeaderListItems cart={cart} />
-              {/* <CartScrollBar>{view}</CartScrollBar> */}
+            {/* <CartHeaderListItems 
+            history={this.props.history} 
+            user={this.props.user}
+            order={this.props.order}
+            cartBounce={this.state.cartBounce}
+            total={this.state.totalAmount}
+            totalItems={this.state.totalItems}
+            cart={this.state.cart}
+            removeProduct={this.handleRemoveProduct}
+            handleSearch={this.handleSearch}
+            handleMobileSearch={this.handleMobileSearch}
+            handleCategory={this.handleCategory}
+            categoryTerm={this.state.category}
+            updateQuantity={this.updateQuantity}
+            productQuantity={this.state.moq}
+            cart={cart} 
+            /> */}
+              <CartScrollBar>{view}</CartScrollBar>
               <div className="action-block">
                 <button
                   type="button"
                   className="checkout-button"
-                  onClick={() => this.handleHistoryClick(key)}
+                  onClick={this.handleHistoryClick}
                   id="hire-chef-button"
                 >
                   PROCEED TO CHECKOUT
