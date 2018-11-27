@@ -6,17 +6,14 @@ import '../../index.css';
 
 class CartHeaderListItem extends Component {
 
-    componentDidMount() {
-        this.props.dispatch({type: 'GET_ORDERS'});
-    }
-
     render() {
         // const cart = this.props.cart[0];
-        const menu = this.props.reduxState.menu;
+        const orders = this.props.reduxState.orders;
         return (
             <div className="checkout-list-items">
                 <div className="checkout-list-details">
-                    {JSON.stringify(menu)}
+                {JSON.stringify('JSON orders in CHL Items')}
+                {JSON.stringify(orders)}
                     <p> x1 cart item here</p>
                 </div>
             </div>

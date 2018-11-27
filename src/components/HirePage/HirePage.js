@@ -66,7 +66,7 @@ class HirePage extends Component {
   handleAddToCart(selectedProducts) {
     let cart = this.state.cart;
     console.log('cart beginning of handle add: ', this.state.cart);
-    console.log('hi from handle add to cart in hire page, selected product: ', selectedProducts);
+    console.log('Hire page add to cart selected product: ', selectedProducts);
     let productID = selectedProducts.menu_item_id;
     let productQty = selectedProducts.quantity;
     console.log('checkProduct:',this.checkProduct(productID), 'productID:',productID);
@@ -81,7 +81,6 @@ class HirePage extends Component {
       });
     } else {
       console.log('else statement');
-      
       cart.push(selectedProducts);
     }
     this.setState({
@@ -96,8 +95,9 @@ class HirePage extends Component {
           cartBounce: false,
           quantity: 1
         });
-        console.log('state quantity', this.state.quantity);
-        console.log('cart: ', this.state.cart);
+        // console.log('state quantity', this.state.quantity);
+        console.log('Products in cart: ', this.state.cart);
+        this.props.dispatch( { type: 'ADD_ORDER_TO_CART', payload: this.state.cart } )
       }.bind(this),
       1000
     );
