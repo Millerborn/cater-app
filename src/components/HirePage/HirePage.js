@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // import ReactDOM from "react-dom";
 // import axios from "axios";
 import HireList from "./HireList/HireList";
-import QuickView from "./QuickView";
+// import QuickView from "./QuickView";
 import CartHeader from '../ShoppingCart/CartHeader';
 import CheckoutPage from '../CheckoutPage/CheckoutPage';
 
@@ -37,8 +37,8 @@ class HirePage extends Component {
     this.checkProduct = this.checkProduct.bind(this);
     this.updateQuantity = this.updateQuantity.bind(this);
     // this.handleRemoveProduct = this.handleRemoveProduct.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    // this.openModal = this.openModal.bind(this);
+    // this.closeModal = this.closeModal.bind(this);
   }
   // Fetch Initial Set of Products from external API
   getProducts() {
@@ -119,15 +119,11 @@ class HirePage extends Component {
   checkProduct(productID) {
     let cart = this.state.cart;
     for (let i=0; i<cart.length; i++) {
-      if (cart[i].menu_item_id===productID) {
+      if (cart[i].menu_item_id === productID) {
         return i;
       }
     }
     return false;
-    // return cart.some(function(item) {
-    // // cart.some(function(item) {
-    //   return item.menu_item_id === productID;
-    // });
   }
   sumTotalItems() {
     let total = 0;
@@ -158,21 +154,21 @@ class HirePage extends Component {
       quantity: qty
     });
   }
-  // Open Modal
-  openModal(product) {
-    this.setState({
-      ...this.state,
-      quickViewProduct: product,
-      modalActive: true
-    });
-  }
-  // Close Modal
-  closeModal() {
-    this.setState({
-      ...this.state,
-      modalActive: false
-    });
-  }
+  // // Open Modal
+  // openModal(product) {
+  //   this.setState({
+  //     ...this.state,
+  //     quickViewProduct: product,
+  //     modalActive: true
+  //   });
+  // }
+  // // Close Modal
+  // closeModal() {
+  //   this.setState({
+  //     ...this.state,
+  //     modalActive: false
+  //   });
+  // }
 
   render() {
 
@@ -188,8 +184,8 @@ class HirePage extends Component {
 
     return (
       <div className="container">
-        {/* {JSON.stringify('history')}
-        {JSON.stringify(this.props.history)} */}
+        {JSON.stringify('history')}
+        {JSON.stringify(this.state.cart)}
         {chefName}
         <CartHeader
           history={this.props.history} 
@@ -223,34 +219,28 @@ class HirePage extends Component {
           orders={this.props.orders}
           cart={this.state.cart} 
           />
-
-          <div hidden>
-          <CheckoutPage
-          history={this.props.history} 
-          user={this.props.user}
-          orders={this.props.orders}
-          cartBounce={this.state.cartBounce}
-          total={this.state.totalAmount}
-          totalItems={this.state.totalItems}
-          cartItems={this.state.cart}
-          removeProduct={this.handleRemoveProduct}
-          handleSearch={this.handleSearch}
-          handleMobileSearch={this.handleMobileSearch}
-          handleCategory={this.handleCategory}
-          categoryTerm={this.state.category}
-          updateQuantity={this.updateQuantity}
-          productQuantity={this.state.moq}
-          quantity={this.state.quantity}
-
-        />
-          </div>
-
       <ExpansionPanel>
-                     <ExpansionPanelSummary>
-                         <Button onClick={this.createCustomOrder}>Enter a custom order</Button>
-                     </ExpansionPanelSummary>
-                     <ExpansionPanelDetails>
-                         <TextField
+        <ExpansionPanelSummary>
+            <Button onClick={this.createCustomOrder}>View Your Cart</Button>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <div>
+            <CheckoutPage
+              history={this.props.history} 
+              user={this.props.user}
+              orders={this.props.orders}
+              total={this.state.totalAmount}
+              totalItems={this.state.totalItems}
+              cart={this.state.cart}
+              removeProduct={this.handleRemoveProduct}
+              handleCategory={this.handleCategory}
+              categoryTerm={this.state.category}
+              updateQuantity={this.updateQuantity}
+              productQuantity={this.state.moq}
+              quantity={this.state.quantity}
+            />
+          </div>
+                         {/* <TextField
                             id="outlined-multiline-flexible"
                             label="Custom Order"
                             multiline
@@ -262,15 +252,14 @@ class HirePage extends Component {
                             margin="normal"
                             variant="outlined"
                             />
-                            <Button onClick={this.customOrderClick}>Add custom Order</Button>
+                            <Button onClick={this.customOrderClick}>Add custom Order</Button> */}
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
-
-        <QuickView
+        {/* <QuickView
           product={this.state.quickViewProduct}
           openModal={this.state.modalActive}
           closeModal={this.closeModal}
-        />
+        /> */}
         {/* <div>
           <CartHeader history={this.props.history} />
         </div> */}

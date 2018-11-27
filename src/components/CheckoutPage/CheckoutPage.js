@@ -18,30 +18,26 @@ class CheckoutPage extends Component {
     }
 
   render() {
-    const address = this.props.address[0];
     const orderInfo = this.props.orders;
     let orderList = '';
     if (orderInfo !== undefined){
-        console.log('order info', orderInfo);
-        
-    orderList = 
-    <div>
-    <h4>Review and order Chef</h4>
+        console.log('order info', orderInfo); 
+        orderList = 
+        <div>
+            <h4>Review and order Chef</h4>
                 <h5>Your order information</h5>
-                {JSON.stringify('order info')}
-                {JSON.stringify(orderInfo)}
                 <br></br>
                 <p>{orderInfo.first_name} {orderInfo.last_name}</p>
-                <p>{orderInfo.street} {orderInfo.city} {orderInfo.state}</p>
-                <p>{orderInfo.zip}</p>
-                <p>{orderInfo.address_type}</p>
+                <p>{this.props.address.street} {this.props.address.city} {this.props.address.state}</p>
+                <p>{this.props.address.zip}</p>
+                <p>{this.props.address.address_type}</p>
                 <br></br>
                 <br></br>
                 <p>{orderInfo.email}</p>
                 <p>{orderInfo.phone}</p>
-    </div>
-    } else {
-        orderList = [];
+            </div>
+        } else {
+            orderList = [];
     }
 
     // let cartItems;
@@ -60,28 +56,20 @@ class CheckoutPage extends Component {
     // });
 
     let cartItems;
-    if(this.props.cartItems){
-    cartItems = this.props.cartItems.map((order, i) => {
-        console.log('this.props.orders: ', this.props.orders);
-        let quantity = this.props.productQuantity;
-      return (
-            <li className="cart-item" key={i}>
-                {JSON.stringify('users cart information')}
-                {JSON.stringify(this.props.orders)}
-
-            <div className="product-info">
-                <p className="quantity">x1 {order.title} ${order.price}</p>
-            </div>
-            {/* <a
-                className="product-remove"
-                href="#"
-                onClick={this.props.removeProduct.bind(this, menu.id)}
-            >
-                ×
-            </a> */}
-            </li>
-            );
-          });
+    if(this.props.cart){
+    cartItems = this.props.cart.map((order, i) => {
+        return (
+              <div className="cart-item" key={i}>
+                  <div className="product-info">
+                      <p className="quantity">x1 {order.title} ${order.price} {order.time_to_make} hour to make
+                          <button className="product-remove" onClick={() => this.removeItem(i)}>
+                              remove from cart
+                          </button>
+                      </p>
+                  </div>
+              </div>
+        );
+      })
         } else {
           cartItems=[];
         }
@@ -90,10 +78,30 @@ class CheckoutPage extends Component {
     return (
         <div id="main-checkout-div">
             <h3>Checkout</h3>
+            {/* {JSON.stringify('order info here--------:')}
+            {JSON.stringify(this.props.orders)} */}
                 <div id="formInput" onSubmit={this.handleNextClick}>
                     <div id="checkout-order-information">{orderList}</div>
                     <br></br>
-                    {cartItems}
+                    <div>
+                        <p>cart items here</p>
+                        {cartItems}
+                        {JSON.stringify('history')}
+                        {JSON.stringify(this.props.cart)}
+                        {/* {this.props.cart.map((order, i) => {
+                          return (
+                                <div className="cart-item" key={i}>
+                                    <div className="product-info">
+                                        <p className="quantity">x1 {order.title} ${order.price} {order.time_to_make} hour to make
+                                            <button className="product-remove" onClick={() => this.removeItem(i)}>
+                                                remove from cart
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                          );
+                        })} */}
+                    </div>
                     {/* <CheckoutList order={this.props.order}/> */}
                 </div>
                 <Button>Checkout</Button>

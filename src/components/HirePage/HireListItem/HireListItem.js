@@ -60,7 +60,7 @@ class HireListItem extends Component {
             isAdded: false,
             selectedProduct: {}
           });
-        }, 3500);
+        }, 2000);
       }
     );
   }
