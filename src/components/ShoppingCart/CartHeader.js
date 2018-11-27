@@ -5,7 +5,7 @@ import EmptyCart from "./EmptyCart";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
-import CartHeaderListItems from "./CartHeaderListItems";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class CartHeader extends Component {
 
@@ -50,20 +50,13 @@ class CartHeader extends Component {
     let cartItems;
     if(this.props.cartItems){
     cartItems = this.props.cartItems.map((order, i) => {
-        let quantity = this.props.productQuantity;
       return (
             <li className="cart-item" key={i}>
-
-            <div className="product-info">
-                <p className="quantity">x1 {order.title} ${order.price}</p>
-            </div>
-            {/* <a
-                className="product-remove"
-                href="#"
-                onClick={this.props.removeProduct.bind(this, menu.id)}
-            >
-                ×
-            </a> */}
+              <div className="product-info">
+                  <p className="quantity">x{order.quantity} <strong>{order.title}</strong> ${order.price * order.quantity}              
+                    <DeleteIcon></DeleteIcon>
+                  </p>
+              </div>
             </li>
             );
           });

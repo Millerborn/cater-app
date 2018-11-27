@@ -1,14 +1,16 @@
 #address-h3 {
-    margin: 20px;
-    padding: 20px;
+    /* margin: 20px;
+    padding: 20px; */
+    /* align-content: space-around; */
 }
 
 #main-address-form {
-
+    display: inline-block;
 }
 
 .address-form {
-    align-content: space-around;
+    justify-content: center;
+    align-items: center;    
 }
 
 .card-menu {
@@ -126,5 +128,9 @@ body {
 
 .payment-button {
     justify-content: flex-end;
+}
+
+.user-update-form {
+    display: inline;
 }
 

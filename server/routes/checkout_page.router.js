@@ -12,7 +12,7 @@ router.get('/:id', (req, res) => {
     JOIN customers ON customers.person_id = person.id
     JOIN orders ON orders.address_id = addresses.id 
     JOIN menu_item ON menu_item.id = orders.menu_item_id
-    WHERE customers.person_id=${personId};`;
+    WHERE customers.id=${personId};`;
     pool.query(queryText)
       .then((result) => { res.send(result.rows); })
       .catch((err) => {

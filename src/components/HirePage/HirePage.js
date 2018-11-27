@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-// import ReactDOM from "react-dom";
-// import axios from "axios";
 import HireList from "./HireList/HireList";
-// import QuickView from "./QuickView";
 import CartHeader from '../ShoppingCart/CartHeader';
 import CheckoutPage from '../CheckoutPage/CheckoutPage';
-
 import Button from '@material-ui/core/Button';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import TextField from '@material-ui/core/TextField';
 
 class HirePage extends Component {
   constructor() {
@@ -41,13 +36,13 @@ class HirePage extends Component {
     // this.closeModal = this.closeModal.bind(this);
   }
   // Fetch Initial Set of Products from external API
-  getProducts() {
-    this.props.dispatch({ type: 'FETCH_MENU' });
-    this.props.dispatch({ type: 'GET_ORDERS' });
-  }
-  componentWillMount() {
-    this.getProducts();
-  }
+  // getProducts() {
+  //   this.props.dispatch({ type: 'FETCH_MENU' });
+  //   this.props.dispatch({ type: 'GET_ORDERS' });
+  // }
+  // componentWillMount() {
+  //   this.getProducts();
+  // }
 
   // Search by Keyword
   handleSearch(event) {
@@ -223,46 +218,18 @@ class HirePage extends Component {
         <ExpansionPanelSummary>
             <Button onClick={this.createCustomOrder}>View Your Cart</Button>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <div>
-            <CheckoutPage
-              history={this.props.history} 
-              user={this.props.user}
-              orders={this.props.orders}
-              total={this.state.totalAmount}
-              totalItems={this.state.totalItems}
-              cart={this.state.cart}
-              removeProduct={this.handleRemoveProduct}
-              handleCategory={this.handleCategory}
-              categoryTerm={this.state.category}
-              updateQuantity={this.updateQuantity}
-              productQuantity={this.state.moq}
-              quantity={this.state.quantity}
-            />
-          </div>
-                         {/* <TextField
-                            id="outlined-multiline-flexible"
-                            label="Custom Order"
-                            multiline
-                            rowsMax="4"
-                            name="customOrder"
-                            value={this.state.customOrder}
-                            onChange={this.handleChange}
-                            className="customOrderInput"
-                            margin="normal"
-                            variant="outlined"
-                            />
-                            <Button onClick={this.customOrderClick}>Add custom Order</Button> */}
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
-        {/* <QuickView
-          product={this.state.quickViewProduct}
-          openModal={this.state.modalActive}
-          closeModal={this.closeModal}
-        /> */}
-        {/* <div>
-          <CartHeader history={this.props.history} />
-        </div> */}
+          <ExpansionPanelDetails>
+            <div>
+              <CheckoutPage
+                history={this.props.history} 
+                user={this.props.user}
+                orders={this.props.orders}
+                total={this.state.totalAmount}
+                cart={this.state.cart}
+              />
+            </div>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
       </div>
     );
   }

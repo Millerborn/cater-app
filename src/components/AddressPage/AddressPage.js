@@ -12,14 +12,12 @@ import InputLabel from '@material-ui/core/InputLabel';
 class AddressPage extends Component {
 
     state = {
-        id: '',   
         street: '',
         city: '',
         state: '',
         zip: '',
         address_type: '',
         style: '',
-        person_id: null,
     }
 
     // handle changes in the form inputs
@@ -39,14 +37,12 @@ class AddressPage extends Component {
         this.props.dispatch( { type: 'ADD_ADDRESS', payload: this.state } );
         this.setState({
             ...this.state,
-            id: '',
             street: '',
             city: '',
             state: '',
             zip: '',
             address_type: '',
             style: '',
-            person_id: null,
         })
         this.handleClick();
     }
@@ -57,14 +53,71 @@ class AddressPage extends Component {
         this.props.history.push('/display-chef');
     }
 
+    componentDidMount() {
+        const id = this.props.reduxState.user.id;
+        console.log('user id', id);
+        this.props.dispatch( { type: 'FIND_ADDRESS', payload: id } );
+    }
+
 
   render() {
-    return (
-        <div id="mainDiv">
-            <br></br>
-            <h2 id="address-h3">Don't stress, we have the Chefs!</h2>
-                <form id="main-address-form" onSubmit={this.handleSubmit}>
+
+    const customerAddress = this.props.reduxState.address[0];
+    let customerList = '';
+    if (customerAddress !== undefined){
+        console.log('order info', customerAddress); 
+        customerList = 
+        <form id="main-address-form" onSubmit={this.handleSubmit}>
                     <h4>What's your address?</h4>
+                    <FormControl className="address-form" variant="filled">
+                        <TextField required type='text' label="street" name="street" margin="normal" variant="outlined"
+                            value={customerAddress.street} onChange={this.handleChange} />
+                        </FormControl>
+                        <FormControl className="address-form" variant="filled">
+                        <TextField required type='text' label="city" name="city" margin="normal" variant="outlined"
+                            value={customerAddress.city} onChange={this.handleChange} />
+                        </FormControl>
+                        <FormControl className="address-form" variant="filled">
+                        <TextField required type='text' label="state" name="state" margin="normal" variant="outlined"
+                            value={customerAddress.state} onChange={this.handleChange} />
+                        </FormControl>
+                        <FormControl className="address-form" variant="filled">
+                        <TextField required type='text' label="zip" name="zip" margin="normal" variant="outlined"
+                            value={customerAddress.zip} onChange={this.handleChange} />
+                        </FormControl>
+                        <FormControl className="address-form" variant="filled">
+                        <TextField required type='text' label="address type" name="address_type" margin="normal" variant="outlined"
+                            value={customerAddress.address_type} onChange={this.handleChange} />
+                        </FormControl>
+                        <br></br>
+                        <FormControl>
+                        <InputLabel htmlFor="style" className="input-label">Style</InputLabel>
+                        <Select
+                            placeholder="style"
+                            value={this.state.style}
+                            onChange={this.handleChange}
+                            input={<FilledInput name="style" />}
+                        >
+                            <MenuItem value=''>
+                            <em>None</em>
+                            </MenuItem>
+                                <MenuItem value={1}>Mexican</MenuItem> 
+                                <MenuItem value={2}>Indian</MenuItem> 
+                                <MenuItem value={3}>Chinese</MenuItem> 
+                            </Select>
+                        </FormControl>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <center>
+                            <Button margin="normal" variant="outlined" type='submit'>
+                                Find a Chef
+                            </Button>
+                        </center>
+                </form>
+        } else {
+        customerList =            
+            <form id="main-address-form" onSubmit={this.handleSubmit}>
                     <FormControl className="address-form" variant="filled">
                         <TextField required type='text' label="street" name="street" margin="normal" variant="outlined"
                             value={this.state.street} onChange={this.handleChange} />
@@ -111,6 +164,14 @@ class AddressPage extends Component {
                             </Button>
                         </center>
                 </form>
+    }
+
+    return (
+        <div id="main-address-div">
+            {JSON.stringify(this.props.reduxState.address)}
+            <center>
+                {customerList}
+            </center>
         </div>
     );
   }
