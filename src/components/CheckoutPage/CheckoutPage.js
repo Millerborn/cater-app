@@ -74,7 +74,7 @@ class CheckoutPage extends Component {
                         <br></br>
                         <div>
                         <h3>Your Order</h3>
-                            {this.props.orders.map( (order, i) => {
+                            {this.props.cart.map( (order, i) => {
                                 console.log('mapping orders: ', order); 
                             return (
                                     <div id="checkout-order-information" key={i}>
@@ -89,6 +89,7 @@ class CheckoutPage extends Component {
                                 <Button className="payment-button">Checkout</Button>
                             </div>
                         </div>
+                            <p>Order Total: {this.props.total}</p>
                     </GridList>
                 </div>
         </div>
