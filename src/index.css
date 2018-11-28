@@ -131,6 +131,6 @@ body {
 }
 
 .user-update-form {
-    display: inline;
+    display: inline-block;
 }
 

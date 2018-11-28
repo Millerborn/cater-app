@@ -30,7 +30,7 @@ class HireListItem extends Component {
         quantity: quantity,
         title: title
      }
-    this.props.dispatch( { type: 'ADD_TO_CART', payload: order } )
+    // this.props.dispatch( { type: 'ADD_TO_CART', payload: order } )
     this.setState(
       {
         ...this.state,

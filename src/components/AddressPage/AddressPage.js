@@ -25,9 +25,7 @@ class AddressPage extends Component {
         console.log('handle change', event.target.value);
         this.setState({
             ...this.state,
-            [event.target.name]: event.target.value,
-            person_id: this.props.reduxState.user.id,
-            id: this.props.reduxState.address.id,  
+            [event.target.name]: event.target.value, 
         })
     }
 
@@ -65,7 +63,6 @@ class AddressPage extends Component {
     const customerAddress = this.props.reduxState.address[0];
     let customerList = '';
     if (customerAddress !== undefined){
-        console.log('order info', customerAddress); 
         customerList = 
         <form id="main-address-form" onSubmit={this.handleSubmit}>
                     <h4>What's your address?</h4>
@@ -168,7 +165,7 @@ class AddressPage extends Component {
 
     return (
         <div id="main-address-div">
-            {JSON.stringify(this.props.reduxState.address)}
+            <h3>Don't stress, we have the Chefs!</h3>
             <center>
                 {customerList}
             </center>

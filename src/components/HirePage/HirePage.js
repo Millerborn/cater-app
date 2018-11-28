@@ -31,18 +31,8 @@ class HirePage extends Component {
     this.sumTotalAmount = this.sumTotalAmount.bind(this);
     this.checkProduct = this.checkProduct.bind(this);
     this.updateQuantity = this.updateQuantity.bind(this);
-    // this.handleRemoveProduct = this.handleRemoveProduct.bind(this);
-    // this.openModal = this.openModal.bind(this);
-    // this.closeModal = this.closeModal.bind(this);
+    this.handleRemoveProduct = this.handleRemoveProduct.bind(this);
   }
-  // Fetch Initial Set of Products from external API
-  // getProducts() {
-  //   this.props.dispatch({ type: 'FETCH_MENU' });
-  //   this.props.dispatch({ type: 'GET_ORDERS' });
-  // }
-  // componentWillMount() {
-  //   this.getProducts();
-  // }
 
   // Search by Keyword
   handleSearch(event) {
@@ -92,25 +82,27 @@ class HirePage extends Component {
         });
         // console.log('state quantity', this.state.quantity);
         console.log('Products in cart: ', this.state.cart);
-        this.props.dispatch( { type: 'ADD_ORDER_TO_CART', payload: this.state.cart } )
+        // this.props.dispatch( { type: 'ADD_ORDER_TO_CART', payload: this.state.cart } )
       }.bind(this),
       1000
     );
     this.sumTotalItems(this.state.cart);
     this.sumTotalAmount(this.state.cart);
   }
-  // handleRemoveProduct(id, e) {
-  //   let cart = this.state.cart;
-  //   let index = cart.findIndex(x => x.id === id);
-  //   cart.splice(index, 1);
-  //   this.setState({
-  //     ...this.state,
-  //     cart: [...this.state.cart,cart]
-  //   });
-  //   this.sumTotalItems(this.state.cart);
-  //   this.sumTotalAmount(this.state.cart);
-  //   e.preventDefault();
-  // }
+  handleRemoveProduct(id, e) {
+    let cart = this.state.cart;
+    let index = cart.findIndex(x => x.id === id);
+    console.log('removing product at index: ', index);
+    // this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: index } )
+    cart.splice(index, 1);
+    this.setState({
+      ...this.state,
+      cart: [...this.state.cart,cart]
+    });
+    this.sumTotalItems(this.state.cart);
+    this.sumTotalAmount(this.state.cart);
+    e.preventDefault();
+  }
   checkProduct(productID) {
     let cart = this.state.cart;
     for (let i=0; i<cart.length; i++) {
@@ -149,21 +141,6 @@ class HirePage extends Component {
       quantity: qty
     });
   }
-  // // Open Modal
-  // openModal(product) {
-  //   this.setState({
-  //     ...this.state,
-  //     quickViewProduct: product,
-  //     modalActive: true
-  //   });
-  // }
-  // // Close Modal
-  // closeModal() {
-  //   this.setState({
-  //     ...this.state,
-  //     modalActive: false
-  //   });
-  // }
 
   render() {
 
@@ -179,26 +156,16 @@ class HirePage extends Component {
 
     return (
       <div className="container">
-        {JSON.stringify('history')}
-        {JSON.stringify(this.state.cart)}
         {chefName}
+        {JSON.stringify('total')}
+        {JSON.stringify(this.state.totalAmount)}
         <CartHeader
           history={this.props.history} 
-          user={this.props.user}
           orders={this.props.orders}
-          cartBounce={this.state.cartBounce}
           total={this.state.totalAmount}
           totalItems={this.state.totalItems}
           cartItems={this.state.cart}
           removeProduct={this.handleRemoveProduct}
-          handleSearch={this.handleSearch}
-          handleMobileSearch={this.handleMobileSearch}
-          handleCategory={this.handleCategory}
-          categoryTerm={this.state.category}
-          updateQuantity={this.updateQuantity}
-          productQuantity={this.state.moq}
-          quantity={this.state.quantity}
-
         />
         <HireList
           productsList={this.state.products}
@@ -226,6 +193,7 @@ class HirePage extends Component {
                 orders={this.props.orders}
                 total={this.state.totalAmount}
                 cart={this.state.cart}
+                removeProduct={this.handleRemoveProduct}
               />
             </div>
           </ExpansionPanelDetails>

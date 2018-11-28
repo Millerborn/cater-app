@@ -38,10 +38,19 @@ class ProfilePage extends Component {
       };
 
     // handle changes in the form inputs
-    handleChange = event => {
+    handleAddressChange = event => {
         console.log('handle change', event.target.value);
         this.setState({
-            ...this.state,
+            ...this.state.address,
+            [event.target.name]: event.target.value,
+        })
+    }
+
+    // handle changes in the form inputs
+    handleCustomerChange = event => {
+        console.log('handle change', event.target.value);
+        this.setState({
+            ...this.state.customer,
             [event.target.name]: event.target.value,
         })
     }
@@ -53,14 +62,10 @@ class ProfilePage extends Component {
         this.props.dispatch({ type: 'GET_ORDERS' });
     }
 
-    handleAddressSubmit = (event) => {
+    handleSubmit = (event) => {
         event.preventDefault();
-        console.log('updating address information', this.state.address);
-    }
-
-    handleCustomerSubmit = (event) => {
-        event.preventDefault();
-        console.log('updating customer information', this.state.customer);
+        let addressInformation = this.state.address;
+        console.log('updating address information', addressInformation);
     }
 
   render() {
@@ -105,27 +110,27 @@ class ProfilePage extends Component {
                     horizontal: 'center',
                     }}
                 >
-                    <form className="user-update-form" onSubmit={this.handleAddressSubmit}>
+                    <form className="user-update-form" onSubmit={this.handleAddressChange}>
                         <h4>Update your address</h4>
                         <FormControl className="address-form" variant="filled">
                             <TextField required type='text' label={profileInfo.street} name="street" margin="normal" variant="outlined"
-                                value={this.state.address.street} onChange={this.handleChange} />
+                                value={this.state.address.street} onChange={this.handleAddressChange} />
                         </FormControl>
                         <FormControl className="address-form" variant="filled">
                             <TextField required type='text' label={profileInfo.city} name="city" margin="normal" variant="outlined"
-                                value={this.state.address.city} onChange={this.handleChange} />
+                                value={this.state.address.city} onChange={this.handleAddressChange} />
                         </FormControl>
                         <FormControl className="address-form" variant="filled">
                             <TextField required type='text' label={profileInfo.state} name="state" margin="normal" variant="outlined"
-                                value={this.state.address.state} onChange={this.handleChange} />
+                                value={this.state.address.state} onChange={this.handleAddressChange} />
                         </FormControl>
                         <FormControl className="address-form" variant="filled">
-                            <TextField required type='text' label={profileInfo.zip} name="zip" margin="normal" variant="outlined"
-                                value={this.state.address.zip} onChange={this.handleChange} />
+                            <TextField required type='number' label={profileInfo.zip} name="zip" margin="normal" variant="outlined"
+                                value={this.state.address.zip} onChange={this.handleAddressChange} />
                         </FormControl>
                         <FormControl className="address-form" variant="filled">
                             <TextField required type='text' label={profileInfo.address_type} name="address_type" margin="normal" variant="outlined"
-                                value={this.state.address.address_type} onChange={this.handleChange} />
+                                value={this.state.address_type} onChange={this.handleAddressChange} />
                         </FormControl>
                         <Button 
                             margin="normal" 
@@ -140,19 +145,19 @@ class ProfilePage extends Component {
                         <h4>Update your Profile Information</h4>
                         <FormControl className="address-form" variant="filled">
                             <TextField required type='text' label={profileInfo.first_name} name="first_name" margin="normal" variant="outlined"
-                                value={this.state.customer.first_name} onChange={this.handleChange} />
+                                value={this.state.customer.first_name} onChange={this.handleCustomerChange} />
                         </FormControl>
                         <FormControl className="address-form" variant="filled">
                             <TextField required type='text' label={profileInfo.last_name} name="last_name" margin="normal" variant="outlined"
-                                value={this.state.customer.last_name} onChange={this.handleChange} />
+                                value={this.state.customer.last_name} onChange={this.handleCustomerChange} />
                         </FormControl>
                         <FormControl className="address-form" variant="filled">
                             <TextField required type='text' label={profileInfo.email} name="email" margin="normal" variant="outlined"
-                                value={this.state.customer.email} onChange={this.handleChange} />
+                                value={this.state.customer.email} onChange={this.handleCustomerChange} />
                         </FormControl>
                         <FormControl className="address-form" variant="filled">
-                            <TextField required type='text' label={profileInfo.phone} name="phone" margin="normal" variant="outlined"
-                                value={this.state.customer.phone} onChange={this.handleChange} />
+                            <TextField required type='number' label={profileInfo.phone} name="phone" margin="normal" variant="outlined"
+                                value={this.state.customer.phone} onChange={this.handleCustomerChange} />
                         </FormControl>
                         <Button margin="normal" variant="outlined" type='submit'>
                             Submit

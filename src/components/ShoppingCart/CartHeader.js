@@ -54,7 +54,7 @@ class CartHeader extends Component {
             <li className="cart-item" key={i}>
               <div className="product-info">
                   <p className="quantity">x{order.quantity} <strong>{order.title}</strong> ${order.price * order.quantity}              
-                    <DeleteIcon></DeleteIcon>
+                    <DeleteIcon onClick={this.props.removeProduct.bind(this, order.id)}></DeleteIcon>
                   </p>
               </div>
             </li>
@@ -62,18 +62,7 @@ class CartHeader extends Component {
           });
         } else {
           cartItems=[];
-        }
-
-    // let cartItems = this.props.cart;
-    // cartList = '';
-    // if (cartItems !== undefined){
-    //   cartList = 
-    // <div>
-    //             <br></br>
-    //             <p>{cartItem.title} {cartItem.price}</p>
-    // </div>
-    // ;
-    // }
+    }
     let view;
     if (cartItems.length <= 0) {
       view = <EmptyCart />;
@@ -143,25 +132,6 @@ class CartHeader extends Component {
               }
               ref="cartPreview"
             >
-            {JSON.stringify('props cart')}
-            {JSON.stringify(this.props.cart)}
-            {/* <CartHeaderListItems 
-                  history={this.props.history} 
-                  user={this.props.user}
-                  cartBounce={this.state.cartBounce}
-                  total={this.state.totalAmount}
-                  totalItems={this.state.totalItems}
-                  cart={this.props.cart}
-                  removeProduct={this.handleRemoveProduct}
-                  handleSearch={this.handleSearch}
-                  handleMobileSearch={this.handleMobileSearch}
-                  handleCategory={this.handleCategory}
-                  categoryTerm={this.state.category}
-                  updateQuantity={this.updateQuantity}
-                  productQuantity={this.state.moq}
-                  cart={this.props.cart} 
-                  orders={this.props.orders}
-                /> */}
               <CartScrollBar>{view}</CartScrollBar>
               <div className="action-block">
                 <button

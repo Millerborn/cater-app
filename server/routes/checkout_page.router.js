@@ -7,7 +7,7 @@ router.get('/:id', (req, res) => {
     console.log('id', req.params.id);
     const personId = req.params.id
     console.log('response for get addresses', personId);
-    const queryText = `SELECT addresses.*, orders.menu_item_id, person.id, customers.*, menu_item.* FROM addresses 
+    const queryText = `SELECT addresses.*, orders.*, person.id, customers.*, menu_item.* FROM addresses 
     JOIN person ON person.id = addresses.person_id
     JOIN customers ON customers.person_id = person.id
     JOIN orders ON orders.address_id = addresses.id 

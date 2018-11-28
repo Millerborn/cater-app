@@ -20,7 +20,8 @@ function* removeItem(action){
   const itemId = action.payload;
   try {
     yield call(axios.delete, `/add-order/${itemId}`);
-    yield put( { type: 'GET_ORDER' } );
+    const response = yield call (axios.get, `/checkout/${itemId}`);
+      yield put( { type: 'GET_ORDER', payload: response.data } );
   }
   catch(error) {
     console.log('error with delete request', error);

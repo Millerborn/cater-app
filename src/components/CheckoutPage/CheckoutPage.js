@@ -8,6 +8,11 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 class CheckoutPage extends Component {
 
+    state = {
+        cart: this.props.orders,
+        totalAmount: 0,
+    }
+
     removeItem = (id) => {
         console.log('removing from cart id: ', id);
         this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: id } );
@@ -17,8 +22,21 @@ class CheckoutPage extends Component {
         const user = this.props.user.id;
         console.log('WillUpdate', user)
         this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
-        // this.props.dispatch( { type: 'GET_ORDER', payload: id } );
     }
+
+    calculateOrder = () => {        
+        let total = 0;
+        let cart = this.state.cart;
+        for (let i = 0; i < cart.length; i++) {
+            console.log('in calculate order', cart);
+            total += cart[i].price * parseInt(cart[i].quantity);
+        }
+        this.setState({
+            ...this.state,
+            totalAmount: total
+        });
+    }
+
 
   render() {
     const orderInfo = this.props.orders[0];
@@ -48,6 +66,8 @@ class CheckoutPage extends Component {
     return (
         <div id="main-checkout-div">
             <h3>Checkout</h3>
+            {JSON.stringify('total amount')}
+            {JSON.stringify(this.props.total)}
                 <div id="checkout-cart" onSubmit={this.handleNextClick}>
                     <GridList className="checkout-gridList" cols={2.5} >
                         {orderList}
@@ -59,19 +79,14 @@ class CheckoutPage extends Component {
                             return (
                                     <div id="checkout-order-information" key={i}>
                                         <p>
-                                            xx {order.title} ${order.price} 
-                                        <DeleteIcon 
-                                            className="product-remove" 
-                                            onClick={() => this.removeItem(i)}>
-                                            remove from cart
-                                        </DeleteIcon>    
+                                            x{order.quantity} {order.title} ${order.price} 
+                                            <DeleteIcon onClick={this.props.removeProduct.bind(this, order.id)}></DeleteIcon>
                                         </p>
                                     </div>
                             );
                             })}
                             <div>
                                 <Button className="payment-button">Checkout</Button>
-                                <p>Cart Total: {this.props.total}</p>
                             </div>
                         </div>
                     </GridList>
