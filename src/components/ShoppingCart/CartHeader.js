@@ -26,22 +26,19 @@ class CartHeader extends Component {
     });
   };
 
-  componentWillMount() {
-    console.log('WillUpdate', this.props.user.id)
-    const user = this.props.user.id;
-    this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
-    this.props.dispatch({ type: 'GET_ORDERS' });
-}
+//   componentWillMount() {
+//     console.log('WillUpdate', this.props.user.id)
+//     const user = this.props.user.id;
+//     this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
+//     this.props.dispatch({ type: 'GET_ORDERS' });
+// }
 
   handleHistoryClick = () => {
     console.log('event');
     this.props.history.push('/checkout');
 }
 
-  // handleSubmit = () => {
-  //   console.log('In HRI pushing order to db', this.state.cart);
-  //   // this.props.dispatch( { type: 'ADD_ORDER', payload: this.state.selectedProduct } );
-  // }
+
   render() {
     const showCart = this.state.showCart;
     const open = Boolean(showCart);

@@ -24,19 +24,18 @@ class CheckoutPage extends Component {
         this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
     }
 
-    calculateOrder = () => {        
-        let total = 0;
-        let cart = this.state.cart;
-        for (let i = 0; i < cart.length; i++) {
-            console.log('in calculate order', cart);
-            total += cart[i].price * parseInt(cart[i].quantity);
-        }
-        this.setState({
-            ...this.state,
-            totalAmount: total
-        });
-    }
-
+    // calculateOrder = () => {        
+    //     let total = 0;
+    //     let cart = this.state.cart;
+    //     for (let i = 0; i < cart.length; i++) {
+    //         console.log('in calculate order', cart);
+    //         total += cart[i].price * parseInt(cart[i].quantity);
+    //     }
+    //     this.setState({
+    //         ...this.state,
+    //         totalAmount: total
+    //     });
+    // }
 
   render() {
     const orderInfo = this.props.orders[0];

@@ -57,7 +57,6 @@ class AddressPage extends Component {
         this.props.dispatch( { type: 'FIND_ADDRESS', payload: id } );
     }
 
-
   render() {
 
     const customerAddress = this.props.reduxState.address[0];
@@ -175,6 +174,7 @@ class AddressPage extends Component {
 }
 
 const mapStateToProps = reduxState => ({
+    address: reduxState.address,
     reduxState,
 });
 

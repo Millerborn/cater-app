@@ -82,7 +82,6 @@ class HirePage extends Component {
         });
         // console.log('state quantity', this.state.quantity);
         console.log('Products in cart: ', this.state.cart);
-        // this.props.dispatch( { type: 'ADD_ORDER_TO_CART', payload: this.state.cart } )
       }.bind(this),
       1000
     );
@@ -92,8 +91,6 @@ class HirePage extends Component {
   handleRemoveProduct(id, e) {
     let cart = this.state.cart;
     let index = cart.findIndex(x => x.id === id);
-    console.log('removing product at index: ', index);
-    // this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: index } )
     cart.splice(index, 1);
     this.setState({
       ...this.state,
