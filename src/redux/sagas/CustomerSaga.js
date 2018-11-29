@@ -22,26 +22,24 @@ function* findAddress(action) {
   }
 }
 
-function* editAddress(action) {
-  console.log('edit address', action.payload);
-  const addressUpdate = action.payload.id
-  console.log('edit address', addressUpdate);
+function* editCustomer(action) {
+  console.log('edit customer', action.payload);
+  const customerUpdate = action.payload.id
+  console.log('edit customer', customerUpdate);
   try {
-    yield call(axios.put, `/edit-address/${addressUpdate}`, action.payload);
-    // const response = yield axios.get(`/customer-information/${id}`);
-    // yield put({ type: 'GET_ADDRESS', payload: response.data });  
+    yield call(axios.put, `/edit-customer/${customerUpdate}`, action.payload);
+    const response = yield axios.get(`/customer-information/${customerUpdate}`);
+    yield put({ type: 'GET_ADDRESS', payload: response.data });  
   }
   catch(error) {
-    console.log('line 35 ', `/edit-address/${addressUpdate}`);
+    console.log('line 35 ', `/edit-customer/${customerUpdate}`);
     
     console.log('error editing address', error);
   }
 }
 
-function* AddressSaga() {
-    yield takeEvery('ADD_ADDRESS', addAddress);
-    yield takeEvery('FIND_ADDRESS', findAddress);
-    yield takeEvery('EDIT_ADDRESS', editAddress);
+function* CustomerSaga() {
+    yield takeEvery('EDIT_CUSTOMER', editCustomer);
 }
 
-export default AddressSaga;
+export default CustomerSaga;

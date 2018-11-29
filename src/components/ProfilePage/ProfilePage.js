@@ -9,6 +9,7 @@ import '../../index.css';
 class ProfilePage extends Component {
 
     state = {
+        id: this.props.user.id,
         street: '',
         city: '',
         state: '',
@@ -43,7 +44,7 @@ class ProfilePage extends Component {
 
     componentDidMount() {
         const user = this.props.user.id;
-        this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
+        this.props.dispatch( { type: 'FIND_ADDRESS', payload: user  } );
     }
 
     handleAddressSubmit = (event) => {
@@ -52,10 +53,16 @@ class ProfilePage extends Component {
         this.props.dispatch( { type: 'EDIT_ADDRESS', payload: this.state } );
     }
 
+    handleCustomerSubmit = (event) => {
+        event.preventDefault();
+        console.log('updating customer information', this.state);
+        this.props.dispatch( { type: 'EDIT_CUSTOMER', payload: this.state } );
+    }
+
   render() {
     const anchorEl = this.state.anchorEl;
     const open = Boolean(anchorEl);
-    const profileInfo = this.props.order[0];
+    const profileInfo = this.props.address[0];
     let profilePage = '';
     if (profileInfo !== undefined){
         profilePage = 
@@ -169,6 +176,7 @@ class ProfilePage extends Component {
 const mapStateToProps = reduxState => ({
     order: reduxState.orders,
     user: reduxState.user,
+    address: reduxState.address,
 });
 
 export default connect(mapStateToProps)(ProfilePage);
