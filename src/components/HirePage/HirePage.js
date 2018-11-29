@@ -189,7 +189,7 @@ class HirePage extends Component {
                 user={this.props.user}
                 orders={this.props.orders}
                 total={this.state.totalAmount}
-                cart={this.state.cart}
+                cartItems={this.state.cart}
                 removeProduct={this.handleRemoveProduct}
               />
             </div>

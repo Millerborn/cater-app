@@ -42,8 +42,6 @@ class CartHeader extends Component {
   render() {
     const showCart = this.state.showCart;
     const open = Boolean(showCart);
-
-    // let quantity = this.props.productQuantity;
     let cartItems;
     if(this.props.cartItems){
     cartItems = this.props.cartItems.map((order, i) => {
@@ -84,8 +82,6 @@ class CartHeader extends Component {
             variant="contained"
             onClick={this.handleClick}
         >
-        {/* {JSON.stringify('order info here--------:')}
-        {JSON.stringify(this.props.orders)} */}
             View Cart
         </Button>
         <Popover

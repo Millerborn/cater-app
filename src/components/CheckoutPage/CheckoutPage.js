@@ -65,21 +65,19 @@ class CheckoutPage extends Component {
     return (
         <div id="main-checkout-div">
             <h3>Checkout</h3>
-            {JSON.stringify('total amount')}
-            {JSON.stringify(this.props.total)}
                 <div id="checkout-cart" onSubmit={this.handleNextClick}>
                     <GridList className="checkout-gridList" cols={2.5} >
                         {orderList}
                         <br></br>
                         <div>
                         <h3>Your Order</h3>
-                            {this.props.cart.map( (order, i) => {
+                            {this.props.orders.map( (order, i) => {
                                 console.log('mapping orders: ', order); 
                             return (
                                     <div id="checkout-order-information" key={i}>
                                         <p>
                                             x{order.quantity} {order.title} ${order.price} 
-                                            <DeleteIcon onClick={this.props.removeProduct.bind(this, order.id)}></DeleteIcon>
+                                            <DeleteIcon onClick={() => this.removeItem(order.id)}></DeleteIcon>
                                         </p>
                                     </div>
                             );
