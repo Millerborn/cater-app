@@ -120,6 +120,11 @@ class HirePage extends Component {
     });
   }
 
+  // componentDidMount() {
+  //   console.log('hire page history', this.props.history);
+  //   this.props.dispatch({ type: 'FETCH_HISTORY', payload: this.props.history });
+  // }
+
   render() {
     const chef = this.props.menu[0];
       let chefName = '';
