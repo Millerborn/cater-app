@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import HireList from "./HireList/HireList";
 import CartHeader from '../ShoppingCart/CartHeader';
 import CheckoutPage from '../CheckoutPage/CheckoutPage';
-import Button from '@material-ui/core/Button';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 
 class HirePage extends Component {
   constructor() {
@@ -133,10 +129,11 @@ class HirePage extends Component {
       <h2>Chef {chef.first_name} {chef.last_name}'s Menu</h2>
       </div>
       ;
-    }
+      }
 
     return (
       <div className="container">
+      {JSON.stringify(this.props.history)}
         {chefName}
         <div>
           <CartHeader
@@ -149,6 +146,7 @@ class HirePage extends Component {
           />
         </div>
         <HireList
+          total={this.state.totalAmount}
           productsList={this.state.products}
           searchTerm={this.state.term}
           addToCart={this.handleAddToCart}
@@ -176,22 +174,3 @@ const mapStateToProps = reduxState => ({
 });
 
 export default connect(mapStateToProps)(HirePage);
-
-
-{/* <ExpansionPanel>
-  <ExpansionPanelSummary>
-      <Button onClick={this.createCustomOrder}>View Your Cart</Button>
-  </ExpansionPanelSummary>
-    <ExpansionPanelDetails>
-      <div>
-        <CheckoutPage
-          history={this.props.history} 
-          user={this.props.user}
-          orders={this.props.orders}
-          total={this.state.totalAmount}
-          cartItems={this.state.cart}
-          removeProduct={this.handleRemoveProduct}
-        />
-      </div>
-    </ExpansionPanelDetails>
-</ExpansionPanel> */}

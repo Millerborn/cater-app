@@ -9,6 +9,7 @@ import orders from './orderReducer';
 import cart from './cartReducer';
 import quantity from './quantityReducer';
 import total from './totalReducer';
+import history from './historyReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   cart,
   quantity,
   total,
+  history,
 });
 
 export default rootReducer;

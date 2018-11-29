@@ -11,13 +11,11 @@ import Button from '@material-ui/core/Button';
 
 
 class HireListItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+
+    state = {
       selectedProduct: {},
       quickViewProdcut: {},
       isAdded: false
-    };
   }
 
   addToCart(order_date, address_id, menu_id, chef_id, price, quantity, title) {
@@ -30,9 +28,9 @@ class HireListItem extends Component {
         quantity: quantity,
         title: title
      }
-    this.props.dispatch( { type: 'ADD_TO_CART', payload: order } )
-    this.props.dispatch( { type: 'UPDATE_QUANTITY', payload: order.quantity } )
-    this.props.dispatch( { type: 'UPDATE_TOTAL', payload: order.price } )
+    this.props.dispatch( { type: 'ADD_TO_CART', payload: order } );
+    this.props.dispatch( { type: 'UPDATE_QUANTITY', payload: order.quantity } );
+    // this.props.dispatch( { type: 'UPDATE_TOTAL', payload: order.price } );
     this.setState(
       {
         ...this.state,
@@ -119,6 +117,8 @@ class HireListItem extends Component {
                         <h5>Ingredients</h5>
                         <p>{menu.ingredients}</p>
                         <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
+                        <br></br>
+                        <h5>How many people will be having this?</h5>
                     </CardContent>
                     <CardActions>
                     <Counter
@@ -126,22 +126,22 @@ class HireListItem extends Component {
                       updateQuantity={this.props.updateQuantity}
                       resetQuantity={this.resetQuantity}
                     />
-                    <Button
-                            className={!this.state.isAdded ? "" : "added"}
-                            type="button"
-                            onClick={this.addToCart.bind(
-                              this,
-                              order_date,
-                              address,
-                              menu_item_id,
-                              chef_id,
-                              price,
-                              quantity,
-                              title
-                            )}
-                          >
-                            {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
-                          </Button>
+                      <Button
+                        className={!this.state.isAdded ? "" : "added"}
+                        type="button"
+                        onClick={this.addToCart.bind(
+                          this,
+                          order_date,
+                          address,
+                          menu_item_id,
+                          chef_id,
+                          price,
+                          quantity,
+                          title
+                        )}
+                      >
+                        {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
+                      </Button>
                     </CardActions>
                 </Card>
         )});

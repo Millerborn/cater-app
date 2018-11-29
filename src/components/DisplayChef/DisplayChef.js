@@ -16,6 +16,7 @@ class DisplayChef extends Component {
     render() {      
         return (
             <div className="App">
+                {JSON.stringify(this.props.history)}
                 <ChefList history={this.props.history} />
             </div>
         );

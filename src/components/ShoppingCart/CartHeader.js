@@ -38,7 +38,6 @@ class CartHeader extends Component {
   };
 
   handleHistoryClick = () => {
-    console.log('event');
     this.props.history.push('/checkout');
   }
 
@@ -62,6 +61,11 @@ class CartHeader extends Component {
       totalAmount: total
     });
   }
+
+  // componentDidMount() {
+  //   this.props.dispatch( { type: 'FETCH_HISTORY', payload: this.props.history } );
+  //   console.log('order history----------------------: ', this.props.history);
+  // }
 
   render() {
     const showCart = this.state.showCart;
@@ -125,7 +129,7 @@ class CartHeader extends Component {
               >
           <div className="cart">
             <div className="cart-info">
-            {JSON.stringify(this.props.total)}
+            {JSON.stringify(this.props.history)}
               <table>
                 <tbody>
                   <tr>
@@ -180,6 +184,7 @@ const mapStateToProps = reduxState => ({
   user: reduxState.user,
   quantity: reduxState.quantity,
   total: reduxState.total,
+  history: reduxState.history,
 });
 
 export default connect(mapStateToProps)(CartHeader);

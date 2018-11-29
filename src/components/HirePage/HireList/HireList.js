@@ -6,6 +6,7 @@ class HireList extends Component {
   render() {
         return (
           <HireListItem
+            total={this.props.total}
             addToCart={this.props.addToCart}
             productQuantity={this.props.productQuantity}
             updateQuantity={this.props.updateQuantity}

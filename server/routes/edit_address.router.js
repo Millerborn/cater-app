@@ -7,11 +7,11 @@ const router = express.Router();
     const addressId = req.params.id;
     const updatedAddress = req.body;
     const queryText = `UPDATE addresses
-    SET "street" = $1, 
-    "city" = $2, 
-    "state" = $3, 
-    "zip" = $4, 
-    "address_type" = $5,
+    SET street = $1, 
+    city = $2, 
+    state = $3, 
+    zip = $4, 
+    address_type = $5
     WHERE id=$6;`;
   
     const queryValues = [
@@ -26,7 +26,7 @@ const router = express.Router();
     pool.query(queryText, queryValues)
       .then(() => { res.sendStatus(200); })
       .catch((err) => {
-        console.log('Error completing SELECT plant query', err);
+        console.log('Error completing update address query', err);
         res.sendStatus(500);
       });
   });

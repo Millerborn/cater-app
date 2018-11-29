@@ -16,6 +16,7 @@ const checkoutRouter = require('./routes/checkout_page.router');
 const orderRouter = require('./routes/order.router');
 const customerInformationRouter = require('./routes/customer_information.router');
 const editAddressRouter = require('./routes/edit_address.router');
+const editCustomerRouter = require('./routes/edit_customer.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -36,7 +37,7 @@ app.use('/checkout', checkoutRouter);
 app.use('/add-order', orderRouter)
 app.use('/customer-information', customerInformationRouter);
 app.use('/edit-address', editAddressRouter);
-app.use('/edit-customer', customerRouter);
+app.use('/edit-customer', editCustomerRouter);
 
 // Serve static files
 app.use(express.static('build'));
