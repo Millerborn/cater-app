@@ -7,6 +7,8 @@ import menu from '../reducers/MenuReducer';
 import address from './AddressReducer';
 import orders from './orderReducer';
 import cart from './cartReducer';
+import quantity from './quantityReducer';
+import total from './totalReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +25,8 @@ const rootReducer = combineReducers({
   address,
   orders,
   cart,
+  quantity,
+  total,
 });
 
 export default rootReducer;

@@ -16,12 +16,15 @@ function* addOrder(action) {
 }
 
 function* removeItem(action){
-  console.log('remove item: ', action.payload);
-  const itemId = action.payload;
+  console.log('remove item: ', action.payload.order_id);
+  const itemId = action.payload.order_id;
+  const orderId = action.payload.person_id
   try {
     yield call(axios.delete, `/add-order/${itemId}`);
-    const response = yield call (axios.get, `/checkout/${itemId}`);
+    const response = yield call (axios.get, `/checkout/${orderId}`);
       yield put( { type: 'GET_ORDER', payload: response.data } );
+      console.log('response data after remove item', response.data);
+      
   }
   catch(error) {
     console.log('error with delete request', error);
@@ -32,7 +35,7 @@ function* getOrders(action) {
   console.log('getting orders generator: ', action.payload);
   try {
     const response = yield call(axios.get, '/checkout');
-    yield put( { type: 'GET_ORDERS', payload: response.data } ); 
+    yield put( { type: 'GET_ORDER', payload: response.data } ); 
   }
   catch(error) {
     console.log('Error in fetch items generator', error);

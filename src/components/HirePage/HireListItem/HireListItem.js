@@ -31,6 +31,8 @@ class HireListItem extends Component {
         title: title
      }
     this.props.dispatch( { type: 'ADD_TO_CART', payload: order } )
+    this.props.dispatch( { type: 'UPDATE_QUANTITY', payload: order.quantity } )
+    this.props.dispatch( { type: 'UPDATE_TOTAL', payload: order.price } )
     this.setState(
       {
         ...this.state,

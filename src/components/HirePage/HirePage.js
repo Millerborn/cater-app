@@ -23,8 +23,6 @@ class HirePage extends Component {
       quickViewProduct: {},
       modalActive: false,
     };
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleMobileSearch = this.handleMobileSearch.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.sumTotalItems = this.sumTotalItems.bind(this);
@@ -34,29 +32,18 @@ class HirePage extends Component {
     this.handleRemoveProduct = this.handleRemoveProduct.bind(this);
   }
 
-  // Search by Keyword
-  handleSearch(event) {
-    this.setState({ ...this.state, term: event.target.value });
-  }
-  // Mobile Search Reset
-  handleMobileSearch() {
-    this.setState({ ...this.state, term: "" });
-  }
   // Filter by Category
   handleCategory(event) {
     this.setState({ ...this.state, category: event.target.value });
     console.log(this.state.category);
   }
+
   // Add to Cart
   handleAddToCart(selectedProducts) {
     let cart = this.state.cart;
-    console.log('cart beginning of handle add: ', this.state.cart);
-    console.log('Hire page add to cart selected product: ', selectedProducts);
     let productID = selectedProducts.menu_item_id;
     let productQty = selectedProducts.quantity;
-    console.log('checkProduct:',this.checkProduct(productID), 'productID:',productID);
     if (this.checkProduct(productID) !== false) {
-      console.log('if statement', this.checkProduct(productID));
       let index = this.checkProduct(productID);
       cart[index].quantity =
         Number(cart[index].quantity) + Number(productQty);
@@ -65,7 +52,6 @@ class HirePage extends Component {
         cart: cart
       });
     } else {
-      console.log('else statement');
       cart.push(selectedProducts);
     }
     this.setState({
@@ -80,8 +66,6 @@ class HirePage extends Component {
           cartBounce: false,
           quantity: 1
         });
-        // console.log('state quantity', this.state.quantity);
-        console.log('Products in cart: ', this.state.cart);
       }.bind(this),
       1000
     );
@@ -100,6 +84,7 @@ class HirePage extends Component {
     this.sumTotalAmount(this.state.cart);
     e.preventDefault();
   }
+
   checkProduct(productID) {
     let cart = this.state.cart;
     for (let i=0; i<cart.length; i++) {
@@ -118,7 +103,7 @@ class HirePage extends Component {
       totalItems: total
     });
   }
-  sumTotalAmount() {
+  sumTotalAmount() {    
     let total = 0;
     let cart = this.state.cart;
     for (var i = 0; i < cart.length; i++) {
@@ -140,7 +125,6 @@ class HirePage extends Component {
   }
 
   render() {
-
     const chef = this.props.menu[0];
       let chefName = '';
       if (chef !== undefined){
@@ -154,47 +138,30 @@ class HirePage extends Component {
     return (
       <div className="container">
         {chefName}
-        {JSON.stringify('total')}
-        {JSON.stringify(this.state.totalAmount)}
-        <CartHeader
-          history={this.props.history} 
-          orders={this.props.orders}
-          total={this.state.totalAmount}
-          totalItems={this.state.totalItems}
-          cartItems={this.state.cart}
-          removeProduct={this.handleRemoveProduct}
-        />
+        <div>
+          <CartHeader
+            history={this.props.history} 
+            orders={this.props.orders}
+            total={this.state.totalAmount}
+            totalItems={this.state.totalItems}
+            cartItems={this.state.cart}
+            removeProduct={this.handleRemoveProduct}
+          />
+        </div>
         <HireList
           productsList={this.state.products}
           searchTerm={this.state.term}
           addToCart={this.handleAddToCart}
           productQuantity={this.state.quantity}
           updateQuantity={this.updateQuantity}
-          openModal={this.openModal}
-          chef={this.props.chef}
-          address={this.props.address} 
           history={this.props.history}
-          menu={this.props.menu}
-          orders={this.props.orders}
-          cart={this.state.cart} 
           />
-      <ExpansionPanel>
-        <ExpansionPanelSummary>
-            <Button onClick={this.createCustomOrder}>View Your Cart</Button>
-        </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <div>
+            <div hidden>
               <CheckoutPage
                 history={this.props.history} 
-                user={this.props.user}
-                orders={this.props.orders}
                 total={this.state.totalAmount}
-                cartItems={this.state.cart}
-                removeProduct={this.handleRemoveProduct}
               />
             </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
       </div>
     );
   }
@@ -209,3 +176,22 @@ const mapStateToProps = reduxState => ({
 });
 
 export default connect(mapStateToProps)(HirePage);
+
+
+{/* <ExpansionPanel>
+  <ExpansionPanelSummary>
+      <Button onClick={this.createCustomOrder}>View Your Cart</Button>
+  </ExpansionPanelSummary>
+    <ExpansionPanelDetails>
+      <div>
+        <CheckoutPage
+          history={this.props.history} 
+          user={this.props.user}
+          orders={this.props.orders}
+          total={this.state.totalAmount}
+          cartItems={this.state.cart}
+          removeProduct={this.handleRemoveProduct}
+        />
+      </div>
+    </ExpansionPanelDetails>
+</ExpansionPanel> */}

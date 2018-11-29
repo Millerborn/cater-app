@@ -4,6 +4,11 @@ import Button from '@material-ui/core/Button';
 import '../../index.css';
 import GridList from '@material-ui/core/GridList';
 import DeleteIcon from '@material-ui/icons/Delete';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
 
 
 class CheckoutPage extends Component {
@@ -13,35 +18,20 @@ class CheckoutPage extends Component {
         totalAmount: 0,
     }
 
-    removeItem = (id) => {
-        console.log('removing from cart id: ', id);
-        this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: id } );
+    removeItem = (order) => {
+        console.log('item order_id: ', order);
+        this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: order } );
     }
 
     componentWillMount() {
         const user = this.props.user.id;
-        console.log('WillUpdate', user)
         this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
     }
-
-    // calculateOrder = () => {        
-    //     let total = 0;
-    //     let cart = this.state.cart;
-    //     for (let i = 0; i < cart.length; i++) {
-    //         console.log('in calculate order', cart);
-    //         total += cart[i].price * parseInt(cart[i].quantity);
-    //     }
-    //     this.setState({
-    //         ...this.state,
-    //         totalAmount: total
-    //     });
-    // }
 
   render() {
     const orderInfo = this.props.orders[0];
     let orderList = '';
     if (orderInfo !== undefined){
-        console.log('order info', orderInfo); 
         orderList = 
         <div>
                 <h4>Review and order Chef</h4>
@@ -65,6 +55,7 @@ class CheckoutPage extends Component {
     return (
         <div id="main-checkout-div">
             <h3>Checkout</h3>
+            {/* {JSON.stringify(this.props.orders)} */}
                 <div id="checkout-cart" onSubmit={this.handleNextClick}>
                     <GridList className="checkout-gridList" cols={2.5} >
                         {orderList}
@@ -72,21 +63,29 @@ class CheckoutPage extends Component {
                         <div>
                         <h3>Your Order</h3>
                             {this.props.orders.map( (order, i) => {
-                                console.log('mapping orders: ', order); 
+                                const cartOrder = <p>x{order.quantity} {order.title} ${order.price} order id here -> {order.order_id}</p>
                             return (
-                                    <div id="checkout-order-information" key={i}>
-                                        <p>
-                                            x{order.quantity} {order.title} ${order.price} 
-                                            <DeleteIcon onClick={() => this.removeItem(order.id)}></DeleteIcon>
-                                        </p>
-                                    </div>
-                            );
+                                <List key={i}>
+                                    <ListItem>
+                                    <ListItemText
+                                        primary={cartOrder}
+                                    />
+                                    <ListItemSecondaryAction>
+                                        <IconButton aria-label="Delete">
+                                        <DeleteIcon 
+                                            onClick={() => this.removeItem(order)}
+                                        />
+                                        </IconButton>
+                                    </ListItemSecondaryAction>
+                                    </ListItem>
+                                </List>
+                                );
                             })}
                             <div>
+                                <p>Order Total: {this.props.total}</p>
                                 <Button className="payment-button">Checkout</Button>
                             </div>
                         </div>
-                            <p>Order Total: {this.props.total}</p>
                     </GridList>
                 </div>
         </div>

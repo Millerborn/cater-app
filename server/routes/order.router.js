@@ -62,9 +62,8 @@ router.post('/', (req, res) => {
 router.delete('/:id', (req, res) => {
   let reqId = req.params.id;
   console.log('Delete request for id', reqId);
-  let sqlText = `DELETE FROM orders WHERE orders.menu_item_id=$1;`;
+  let sqlText = `DELETE FROM orders WHERE orders.id=$1;`;
   console.log(sqlText);
-
   pool.query(sqlText, [reqId])
       .then((result) => {
           console.log('item deleted');

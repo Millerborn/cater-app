@@ -9,10 +9,21 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 class CartHeader extends Component {
 
-    state = {
-      showCart: null,
-      cart: this.props.cart,
-    }
+  state = {
+    showCart: null,
+    totalItems: 0,
+    totalAmount: 0,
+  }
+
+  componentDidMount() {
+    const user = this.props.user.id;
+    this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
+  }
+
+  removeItem = (order) => {
+    console.log('item order_id: ', order);
+    this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: order } );
+  }
 
   handleClick = event => {
     this.setState({
@@ -26,30 +37,43 @@ class CartHeader extends Component {
     });
   };
 
-//   componentWillMount() {
-//     console.log('WillUpdate', this.props.user.id)
-//     const user = this.props.user.id;
-//     this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
-//     this.props.dispatch({ type: 'GET_ORDERS' });
-// }
-
   handleHistoryClick = () => {
     console.log('event');
     this.props.history.push('/checkout');
-}
+  }
 
+  sumTotalItems(orders) {
+    let total = 0;
+    let cart = orders;
+    total = cart.length;
+    console.log('cart length', total);
+    this.setState({
+      totalItems: total
+    });
+  }
+
+  sumTotalAmount(cartItems) {  
+    console.log('cart items', cartItems);
+    let total = 0;
+    for (var i = 0; i < cartItems.length; i++) {
+      total += cartItems[i].price * parseInt(cartItems[i].quantity);
+    }
+    this.setState({
+      totalAmount: total
+    });
+  }
 
   render() {
     const showCart = this.state.showCart;
     const open = Boolean(showCart);
     let cartItems;
-    if(this.props.cartItems){
-    cartItems = this.props.cartItems.map((order, i) => {
+    if(this.props.orders !== undefined){
+    cartItems = this.props.orders.map((order, i) => {
       return (
             <li className="cart-item" key={i}>
               <div className="product-info">
                   <p className="quantity">x{order.quantity} <strong>{order.title}</strong> ${order.price * order.quantity}              
-                    <DeleteIcon onClick={this.props.removeProduct.bind(this, order.id)}></DeleteIcon>
+                    <DeleteIcon onClick={() => this.removeItem(order)}></DeleteIcon>
                   </p>
               </div>
             </li>
@@ -74,6 +98,7 @@ class CartHeader extends Component {
         </CSSTransitionGroup>
       );
     }
+
     return (
         <div className="container">
         <Button
@@ -100,20 +125,23 @@ class CartHeader extends Component {
               >
           <div className="cart">
             <div className="cart-info">
+            {JSON.stringify(this.props.total)}
               <table>
                 <tbody>
                   <tr>
                     <td>No. of items</td>
                     <td>:</td>
                     <td>
-                    <strong>{this.props.totalItems}</strong>
+                    <strong>{cartItems.length}</strong>
                     </td>
                   </tr>
                   <tr>
                     <td>Sub Total</td>
                     <td>:</td>
                     <td>
-                      <strong>${this.props.total}</strong>
+                      <button onClick={() => this.sumTotalAmount(this.props.total)}>
+                        <strong>${this.state.totalAmount}</strong>
+                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -150,6 +178,8 @@ const mapStateToProps = reduxState => ({
   orders: reduxState.orders,
   chef: reduxState.chefs,
   user: reduxState.user,
+  quantity: reduxState.quantity,
+  total: reduxState.total,
 });
 
 export default connect(mapStateToProps)(CartHeader);
