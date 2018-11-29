@@ -31,7 +31,7 @@ const Nav = (props) => (
       )}
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/hire-chef">
-        <CartHeader />
+        <CartHeader history={props.history} />
       </Link>
     </div>
   </div>
@@ -44,6 +44,13 @@ const Nav = (props) => (
 // const mapStateToProps = ({ user }) => ({ user });
 const mapStateToProps = state => ({
   user: state.user,
+  history: state.history,
+  address: state.address,
+  menu: state.menu,
+  orders: state.orders,
+  chef: state.chefs,
+  quantity: state.quantity,
+  total: state.total,
 });
 
 export default connect(mapStateToProps)(Nav);

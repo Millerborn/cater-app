@@ -369,12 +369,14 @@ class CartHeader extends Component {
 
   componentDidMount() {
     const user = this.props.user.id;
+    console.log('this.props.history', this.props.history);
     this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
   }
 
   removeItem = (order) => {
     console.log('item order_id: ', order);
     this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: order } );
+    this.props.removeProduct();
   }
 
   handleClick = event => {
@@ -391,33 +393,18 @@ class CartHeader extends Component {
 
   handleHistoryClick = () => {
     console.log('push to checkout', this.props.history);
+    // this.props.dispatch( { type: 'FETCH_HISTORY', payload: this.props.history } ); 
     this.props.history.push('/checkout');
   }
 
-  sumTotalItems(orders) {
-    let total = 0;
-    let cart = orders;
-    total = cart.length;
-    console.log('cart length', total);
-    this.setState({
-      totalItems: total
-    });
-  }
-
-  sumTotalAmount(cartItems) {  
-    console.log('cart items', cartItems);
-    let total = 0;
-    for (var i = 0; i < cartItems.length; i++) {
-      total += cartItems[i].price * parseInt(cartItems[i].quantity);
-    }
-    this.setState({
-      totalAmount: total
-    });
-  }
-
-  // componentDidMount() {
-  //   this.props.dispatch( { type: 'FETCH_HISTORY', payload: this.props.history } );
-  //   console.log('order history----------------------: ', this.props.history);
+  // sumTotalItems(orders) {
+  //   let total = 0;
+  //   let cart = orders;
+  //   total = cart.length;
+  //   console.log('cart length', total);
+  //   this.setState({
+  //     totalItems: total
+  //   });
   // }
 
   render() {
@@ -482,7 +469,7 @@ class CartHeader extends Component {
               >
           <div className="cart">
             <div className="cart-info">
-            {JSON.stringify(this.props.history)}
+            {JSON.stringify(this.props.totalAmount)}
               <table>
                 <tbody>
                   <tr>
@@ -496,9 +483,7 @@ class CartHeader extends Component {
                     <td>Sub Total</td>
                     <td>:</td>
                     <td>
-                      <button onClick={() => this.sumTotalAmount(this.props.total)}>
-                        <strong>${this.state.totalAmount}</strong>
-                      </button>
+                        <strong>${this.props.totalAmount}</strong>
                     </td>
                   </tr>
                 </tbody>

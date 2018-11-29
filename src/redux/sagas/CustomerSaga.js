@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-// add Item to database 
+// add Customer Address to database 
 function* addAddress(action) {
     try {
       yield call(axios.post, '/display-chef', action.payload);
@@ -38,8 +38,22 @@ function* editCustomer(action) {
   }
 }
 
+// add Customer information to database 
+function* addCustomer(action) {
+  try {
+    yield call(axios.post, '/create-customer', action.payload);
+    yield put( { type: 'GET_ADDRESS', payload: action.payload } );
+  }
+  catch(error) {
+    console.log('Error in adding address generator', error);
+  }
+}
+
 function* CustomerSaga() {
-    yield takeEvery('EDIT_CUSTOMER', editCustomer);
+  yield takeEvery('EDIT_CUSTOMER', editCustomer);
+  yield takeEvery('ADD_ADDRESS', addAddress);
+  yield takeEvery('ADD_CUSTOMER', addCustomer);
+    
 }
 
 export default CustomerSaga;

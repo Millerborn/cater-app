@@ -17,8 +17,8 @@ router.get('/', (req, res) => {
   router.post('/', (req, res) => {
     console.log(`in customer.router.js POST for`, req.body);
     const newAddress = req.body;
-    const queryText = `INSERT INTO addresses ("street", "city", "state", "zip", "address_type")
-    VALUES ($1, $2, $3, $4, $5);`;
+    const queryText = `INSERT INTO addresses ("street", "city", "state", "zip", "address_type", "person_id")
+    VALUES ($1, $2, $3, $4, $5, $6);`;
 
     const queryValues = [
       newAddress.street,
@@ -26,6 +26,7 @@ router.get('/', (req, res) => {
       newAddress.state,
       newAddress.zip,
       newAddress.address_type,
+      newAddress.id,
     ];
     pool.query(queryText, queryValues)
       .then(() => { res.sendStatus(201); })

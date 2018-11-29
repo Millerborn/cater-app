@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import HireList from "./HireList/HireList";
 import CartHeader from '../ShoppingCart/CartHeader';
 import CheckoutPage from '../CheckoutPage/CheckoutPage';
+import Nav from '../Nav/Nav';
 
 class HirePage extends Component {
   constructor() {
@@ -78,7 +79,7 @@ class HirePage extends Component {
     });
     this.sumTotalItems(this.state.cart);
     this.sumTotalAmount(this.state.cart);
-    e.preventDefault();
+    // e.preventDefault();
   }
 
   checkProduct(productID) {
@@ -109,6 +110,7 @@ class HirePage extends Component {
       ...this.state,
       totalAmount: total
     });
+    // console.log('cart total', this.state.totalAmount);
   }
 
   //Reset Quantity
@@ -120,10 +122,10 @@ class HirePage extends Component {
     });
   }
 
-  // componentDidMount() {
-  //   console.log('hire page history', this.props.history);
-  //   this.props.dispatch({ type: 'FETCH_HISTORY', payload: this.props.history });
-  // }
+  componentDidMount() {
+    console.log('hire page history', this.props.history);
+    // this.props.dispatch( { type: 'FETCH_HISTORY', payload: this.props.history } );
+  }
 
   render() {
     const chef = this.props.menu[0];
@@ -138,33 +140,38 @@ class HirePage extends Component {
 
     return (
       <div className="container">
-      {JSON.stringify(this.props.history)}
+      {JSON.stringify(this.state.totalAmount)}
         {chefName}
         <div>
           <CartHeader
             history={this.props.history} 
             orders={this.props.orders}
-            total={this.state.totalAmount}
+            totalAmount={this.state.totalAmount}
             totalItems={this.state.totalItems}
             cartItems={this.state.cart}
             removeProduct={this.handleRemoveProduct}
           />
         </div>
-        <HireList
-          total={this.state.totalAmount}
-          productsList={this.state.products}
-          searchTerm={this.state.term}
-          addToCart={this.handleAddToCart}
-          productQuantity={this.state.quantity}
-          updateQuantity={this.updateQuantity}
-          history={this.props.history}
+          <HireList
+            total={this.state.totalAmount}
+            productsList={this.state.products}
+            searchTerm={this.state.term}
+            addToCart={this.handleAddToCart}
+            productQuantity={this.state.quantity}
+            updateQuantity={this.updateQuantity}
+            history={this.props.history}
+            />
+        <div hidden>
+          <CheckoutPage
+            history={this.props.history} 
+            total={this.state.totalAmount}
           />
-            <div hidden>
-              <CheckoutPage
-                history={this.props.history} 
-                total={this.state.totalAmount}
-              />
-            </div>
+        </div>
+        <div hidden>
+          <Nav
+            history={this.props.history} 
+          />
+        </div>
       </div>
     );
   }
