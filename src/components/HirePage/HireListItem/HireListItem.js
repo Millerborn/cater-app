@@ -14,29 +14,37 @@ class HireListItem extends Component {
 
     state = {
       selectedProduct: {},
-      quickViewProdcut: {},
       isAdded: false
   }
 
-  addToCart(order_date, address_id, menu_id, chef_id, price, quantity, title) {
+  addToCart(order_date, person_id, menu_id, chef_id, price, quantity, title) {
+    const orderInfo = {
+      order_date: order_date,
+      person_id: person_id,
+      menu_item_id: menu_id,
+      chef_id: chef_id,
+      price: price,
+      quantity: quantity,
+    }
     let order = { 
         order_date: order_date,
-        address_id: address_id,
+        person_id: person_id,
         menu_item_id: menu_id,
         chef_id: chef_id,
         price: price,
         quantity: quantity,
         title: title
      }
-    this.props.dispatch( { type: 'ADD_TO_CART', payload: order } );
-    this.props.dispatch( { type: 'UPDATE_QUANTITY', payload: order.quantity } );
+    this.props.dispatch( { type: 'ADD_TO_CART', payload: orderInfo } );
+    console.log('order', orderInfo);
+    // this.props.dispatch( { type: 'UPDATE_QUANTITY', payload: order.quantity } );
     // this.props.dispatch( { type: 'UPDATE_TOTAL', payload: order.price } );
     this.setState(
       {
         ...this.state,
         selectedProduct: {
           order_date: order_date,
-          address_id: address_id,
+          person_id: person_id,
           menu_item_id: menu_id,
           chef_id: chef_id,
           price: price,
@@ -63,25 +71,7 @@ class HireListItem extends Component {
         }, 2000);
       }
     );
-  }
-  quickView(order_date, address_id, menu_id, chef_id, price, quantity, title) {
-    this.setState(
-      {
-        ...this.state,
-        quickViewProdcut: {
-          order_date: order_date,
-          address_id: address_id,
-          menu_item_id: menu_id,
-          chef_id: chef_id,
-          price: price,
-          quantity: quantity,
-          title: title
-        }
-      },
-      function() {
-        this.props.openModal(this.state.quickViewProdcut);
-      }
-    );
+      // this.props.dispatch({ type:  })
   }
 
   timeToMake = (time) => {
@@ -93,7 +83,7 @@ class HireListItem extends Component {
   }
 
   render() {
-    const address = this.props.user.id;
+    const person_id = this.props.user.id;
     let quantity = this.props.productQuantity;
     let menuCard;
     menuCard = this.props.menu.map( (menu, i) => {
@@ -132,7 +122,7 @@ class HireListItem extends Component {
                         onClick={this.addToCart.bind(
                           this,
                           order_date,
-                          address,
+                          person_id,
                           menu_item_id,
                           chef_id,
                           price,

@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
@@ -31,7 +30,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {JSON.stringify(this.props.history)}
+          {/* {JSON.stringify(this.props.history)} */}
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -66,7 +65,7 @@ class App extends Component {
             />
 
             {/* Checkout page */}
-            <Route
+            <ProtectedRoute
               exact
               path="/checkout"
               component={CheckoutPage}

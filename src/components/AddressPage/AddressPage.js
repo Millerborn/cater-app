@@ -9,16 +9,12 @@ import FilledInput from '@material-ui/core/FilledInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import CreateCustomer from './CreateCustomer';
 import CreateCustomerAddress from './CreateCustomerAddress';
+import OrderDate from './OrderDate';
 
 class AddressPage extends Component {
 
     state = {
-        street: '',
-        city: '',
-        state: '',
-        zip: '',
-        address_type: '',
-        style: '',
+        date: '',
     }
 
     // handle changes in the form inputs
@@ -33,16 +29,7 @@ class AddressPage extends Component {
     handleSubmit = (event) => {
         event.preventDefault();        
         console.log('submit:', event);
-        this.props.dispatch( { type: 'ADD_ADDRESS', payload: this.state } );
-        this.setState({
-            ...this.state,
-            street: '',
-            city: '',
-            state: '',
-            zip: '',
-            address_type: '',
-            style: '',
-        })
+        this.props.dispatch( { type: 'ADD_DATE', payload: this.state } );
         this.handleClick();
     }
 
@@ -65,7 +52,6 @@ class AddressPage extends Component {
     if (customerAddress !== undefined){
         customerList = 
         <form id="main-address-form" onSubmit={this.handleClick}>
-                    {JSON.stringify(this.props.address)}
                     <h4>What's your address?</h4>
                     <FormControl className="address-form" variant="filled">
                         <TextField required type='text' label="street" name="street" margin="normal" variant="outlined"
@@ -88,7 +74,7 @@ class AddressPage extends Component {
                             value={customerAddress.address_type} onChange={this.handleChange} />
                         </FormControl>
                         <br></br>
-                        <FormControl>
+                        {/* <FormControl>
                         <InputLabel htmlFor="style" className="input-label">Style</InputLabel>
                         <Select
                             placeholder="style"
@@ -103,10 +89,12 @@ class AddressPage extends Component {
                                 <MenuItem value={2}>Indian</MenuItem> 
                                 <MenuItem value={3}>Chinese</MenuItem> 
                             </Select>
+                        </FormControl> */}
+                        <FormControl className="address-form" variant="filled">
+                        <TextField required type='date' name="date" margin="normal" variant="outlined"
+                            value={this.state.date} onChange={this.handleChange} />
                         </FormControl>
-                        <br></br>
-                        <br></br>
-                        <br></br>
+                        {/* <OrderDate /> */}
                         <center>
                             <Button margin="normal" variant="outlined" type='submit'>
                                 Find a Chef
@@ -118,54 +106,7 @@ class AddressPage extends Component {
             <div>
                 <CreateCustomer /> 
                 <CreateCustomerAddress history={this.props.history} />  
-            </div>        
-            // <form id="main-address-form" onSubmit={this.handleSubmit}>
-            //         <FormControl className="address-form" variant="filled">
-            //             <TextField required type='text' label="street" name="street" margin="normal" variant="outlined"
-            //                 value={this.state.street} onChange={this.handleChange} />
-            //             </FormControl>
-            //             <FormControl className="address-form" variant="filled">
-            //             <TextField required type='text' label="city" name="city" margin="normal" variant="outlined"
-            //                 value={this.state.city} onChange={this.handleChange} />
-            //             </FormControl>
-            //             <FormControl className="address-form" variant="filled">
-            //             <TextField required type='text' label="state" name="state" margin="normal" variant="outlined"
-            //                 value={this.state.state} onChange={this.handleChange} />
-            //             </FormControl>
-            //             <FormControl className="address-form" variant="filled">
-            //             <TextField required type='text' label="zip" name="zip" margin="normal" variant="outlined"
-            //                 value={this.state.zip} onChange={this.handleChange} />
-            //             </FormControl>
-            //             <FormControl className="address-form" variant="filled">
-            //             <TextField required type='text' label="address type" name="address_type" margin="normal" variant="outlined"
-            //                 value={this.state.address_type} onChange={this.handleChange} />
-            //             </FormControl>
-            //             <br></br>
-            //             <FormControl>
-            //             <InputLabel htmlFor="style" className="input-label">Style</InputLabel>
-            //             <Select
-            //                 placeholder="style"
-            //                 value={this.state.style}
-            //                 onChange={this.handleChange}
-            //                 input={<FilledInput name="style" />}
-            //             >
-            //                 <MenuItem value=''>
-            //                 <em>None</em>
-            //                 </MenuItem>
-            //                     <MenuItem value={1}>Mexican</MenuItem> 
-            //                     <MenuItem value={2}>Indian</MenuItem> 
-            //                     <MenuItem value={3}>Chinese</MenuItem> 
-            //                 </Select>
-            //             </FormControl>
-            //             <br></br>
-            //             <br></br>
-            //             <br></br>
-            //             <center>
-            //                 <Button margin="normal" variant="outlined" type='submit'>
-            //                     Find a Chef
-            //                 </Button>
-            //             </center>
-            //     </form>
+            </div>
     }
 
     return (

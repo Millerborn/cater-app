@@ -3,8 +3,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 // add order to database 
 function* addOrder(action) {
-    const actionResponse = action.payload.address_id;
-    console.log('Add order Saga: ', action.payload.address_id);
+    const actionResponse = action.payload.person_id;
+    console.log('Add order Saga: ', action.payload.person_id);
     try {
       yield call(axios.post, '/add-order', action.payload);
       const response = yield call (axios.get, `/checkout/${actionResponse}`);
@@ -18,7 +18,7 @@ function* addOrder(action) {
 function* removeItem(action){
   console.log('remove item: ', action.payload.order_id);
   const itemId = action.payload.order_id;
-  const orderId = action.payload.person_id
+  const orderId = action.payload.person_id;
   try {
     yield call(axios.delete, `/add-order/${itemId}`);
     const response = yield call (axios.get, `/checkout/${orderId}`);

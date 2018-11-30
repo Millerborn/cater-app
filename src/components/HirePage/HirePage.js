@@ -4,6 +4,8 @@ import HireList from "./HireList/HireList";
 import CartHeader from '../ShoppingCart/CartHeader';
 import CheckoutPage from '../CheckoutPage/CheckoutPage';
 import Nav from '../Nav/Nav';
+import { withRouter } from 'react-router-dom';
+
 
 class HirePage extends Component {
   constructor() {
@@ -185,4 +187,4 @@ const mapStateToProps = reduxState => ({
     user: reduxState.user,
 });
 
-export default connect(mapStateToProps)(HirePage);
+export default connect(mapStateToProps)(withRouter(HirePage));

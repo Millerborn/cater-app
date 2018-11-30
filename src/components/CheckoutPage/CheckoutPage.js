@@ -9,7 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
-
+import { withRouter } from 'react-router-dom';
 
 class CheckoutPage extends Component {
 
@@ -27,6 +27,19 @@ class CheckoutPage extends Component {
         const user = this.props.user.id;
         this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
     }
+
+    sumTotalAmount() {    
+        let total = 0;
+        let orders = this.props.orders;
+        for (var i = 0; i < orders.length; i++) {
+          total += orders[i].price * parseInt(orders[i].quantity);
+        }
+        this.setState({
+          ...this.state,
+          totalAmount: total
+        });
+        // console.log('cart total', this.state.totalAmount);
+      }
 
   render() {
     const orderInfo = this.props.orders[0];
@@ -55,7 +68,6 @@ class CheckoutPage extends Component {
     return (
         <div id="main-checkout-div">
             <h3>Checkout</h3>
-            {/* {JSON.stringify(this.props.orders)} */}
                 <div id="checkout-cart" onSubmit={this.handleNextClick}>
                     <GridList className="checkout-gridList" cols={2.5} >
                         {orderList}
@@ -63,7 +75,7 @@ class CheckoutPage extends Component {
                         <div>
                         <h3>Your Order</h3>
                             {this.props.orders.map( (order, i) => {
-                                const cartOrder = <p>x{order.quantity} {order.title} ${order.price} order id here -> {order.order_id}</p>
+                                const cartOrder = <p>x{order.quantity} {order.title} ${order.price}</p>
                             return (
                                 <List key={i}>
                                     <ListItem>
@@ -100,4 +112,4 @@ const mapStateToProps = reduxState => ({
     address: reduxState.address,
 });
 
-export default connect(mapStateToProps)(CheckoutPage);
+export default connect(mapStateToProps)(withRouter(CheckoutPage));

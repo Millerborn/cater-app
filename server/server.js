@@ -18,6 +18,7 @@ const customerInformationRouter = require('./routes/customer_information.router'
 const editAddressRouter = require('./routes/edit_address.router');
 const editCustomerRouter = require('./routes/edit_customer.router');
 const createCustomerRouter = require('./routes/create_customer.router');
+const orderDateRouter = require('./routes/order_date.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -40,6 +41,7 @@ app.use('/customer-information', customerInformationRouter);
 app.use('/edit-address', editAddressRouter);
 app.use('/edit-customer', editCustomerRouter);
 app.use('/create-customer', createCustomerRouter);
+app.use('/order-date', orderDateRouter);
 
 // Serve static files
 app.use(express.static('build'));

@@ -6,12 +6,12 @@ const router = express.Router();
 router.post('/', (req, res) => {
   console.log(`in hire_chef.router.js POST for`, req.body);
   const newOrder = req.body;
-  const queryText = `INSERT INTO orders ("order_date", "address_id", "menu_item_id", "chef_id", "price", "quantity")
+  const queryText = `INSERT INTO orders ("order_date", "person_id", "menu_item_id", "chef_id", "price", "quantity")
   VALUES ($1, $2, $3, $4, $5, $6);`;
 
   const queryValues = [
     newOrder.order_date,
-    newOrder.address_id,
+    newOrder.person_id,
     newOrder.menu_item_id,
     newOrder.chef_id,
     newOrder.price,

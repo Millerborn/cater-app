@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import CartHeader from '../ShoppingCart/CartHeader';
+import { withRouter } from 'react-router-dom';
+
 
 const Nav = (props) => (
   <div className="nav">
@@ -53,4 +55,4 @@ const mapStateToProps = state => ({
   total: state.total,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(withRouter(Nav));

@@ -49,11 +49,24 @@ function* editCustomer(action) {
   }
 }
 
+// add Order date to database 
+function* addDate(action) {
+  try {
+    yield call(axios.post, '/order-date', action.payload);
+    // yield put( { type: 'GET_ADDRESS', payload: action.payload } );
+  }
+  catch(error) {
+    console.log('Error in adding date generator', error);
+  }
+}
+
+
 function* AddressSaga() {
     yield takeEvery('ADD_ADDRESS', addAddress);
     yield takeEvery('FIND_ADDRESS', findAddress);
     yield takeEvery('EDIT_ADDRESS', editAddress);
     yield takeEvery('EDIT_CUSTOMER', editCustomer);
+    yield takeEvery('ADD_DATE', addDate);
 }
 
 export default AddressSaga;
