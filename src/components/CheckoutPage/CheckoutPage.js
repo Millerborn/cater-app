@@ -28,19 +28,6 @@ class CheckoutPage extends Component {
         this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
     }
 
-    // sumTotalAmount() {    
-    //     let total = 0;
-    //     let orders = this.props.orders;
-    //     for (var i = 0; i < orders.length; i++) {
-    //       total += orders[i].price * parseInt(orders[i].quantity);
-    //     }
-    //     this.setState({
-    //       ...this.state,
-    //       totalAmount: total
-    //     });
-    //     // console.log('cart total', this.state.totalAmount);
-    //   }
-
   render() {
     const orderInfo = this.props.orders.cart[0];
     let orderList = '';
@@ -94,7 +81,8 @@ class CheckoutPage extends Component {
                                 );
                             })}
                             <div>
-                                <p>Order Total: {this.props.total}</p>
+                                <p>No. People: {this.props.orders.people}</p>
+                                <p>Order Total: {this.props.orders.total}</p>
                                 <Button className="payment-button">Checkout</Button>
                             </div>
                         </div>

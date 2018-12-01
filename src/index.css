@@ -5,14 +5,12 @@
 }
 
 #main-address-form {
-    display: flex;
     padding: 20px;
     margin: 30px;
 }
 
 .address-form {
     /* justify-content: center; */
-    display: inline-block;
     margin: 15px;
     padding: 20px;
 }

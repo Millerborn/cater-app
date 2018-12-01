@@ -8,29 +8,70 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import { Carousel, CarouselCaption, CarouselInner, CarouselItem, View, Mask } from "mdbreact";
-
 
 
 class HireListItem extends Component {
 
     state = {
       selectedProduct: {},
-      quickViewProdcut: {},
       isAdded: false
   }
 
-  addToCart(order_date, address_id, menu_id, chef_id, price, quantity, title) {
+  addToCart(order_date, person_id, menu_id, chef_id, price, quantity, title) {
+    const orderInfo = {
+      order_date: order_date,
+      person_id: person_id,
+      menu_item_id: menu_id,
+      chef_id: chef_id,
+      price: price,
+      quantity: quantity,
+    }
     let order = { 
         order_date: order_date,
-        address_id: address_id,
+        person_id: person_id,
         menu_item_id: menu_id,
         chef_id: chef_id,
         price: price,
         quantity: quantity,
         title: title
      }
-    this.props.dispatch( { type: 'ADD_TO_CART', payload: order } );
+    this.props.dispatch( { type: 'ADD_TO_CART', payload: orderInfo } );
+    console.log('order', orderInfo);
+    // this.props.dispatch( { type: 'UPDATE_QUANTITY', payload: order.quantity } );
+    // this.props.dispatch( { type: 'UPDATE_TOTAL', payload: order.price } );
+    this.setState(
+      {
+        ...this.state,
+        selectedProduct: {
+          order_date: order_date,
+          person_id: person_id,
+          menu_item_id: menu_id,
+          chef_id: chef_id,
+          price: price,
+          quantity: quantity,
+          title: title
+        }
+      },
+      function() {
+        this.props.addToCart(order);
+      }
+    );
+    this.setState(
+      {
+        ...this.state,
+        isAdded: true
+      },
+      function() {
+        setTimeout(() => {
+          this.setState({
+            ...this.state,
+            isAdded: false,
+            selectedProduct: {}
+          });
+        }, 2000);
+      }
+    );
+      // this.props.dispatch({ type:  })
   }
 
   timeToMake = (time) => {
@@ -42,13 +83,17 @@ class HireListItem extends Component {
   }
 
   render() {
-    // const address = this.props.user.id;
-    // let quantity = this.props.productQuantity;
-    // let menuCard;
-    // menuCard = this.props.menu.map( (menu, i) => {
+    const person_id = this.props.user.id;
+    let quantity = this.props.productQuantity;
+    let menuCard;
+    menuCard = this.props.menu.map( (menu, i) => {
+      let menu_item_id = menu.id;
+      let order_date = '11-26-2018';
+      let chef_id = menu.chef_id;
+      let price = menu.price;
+      let title = menu.title;
         return (
-          <div>
-          {/* <Card className="card-menu" key={i}>
+          <Card className="card-menu" key={i}>
               <CardMedia
                         className="menu-item-image"
                         component="img"
@@ -62,23 +107,200 @@ class HireListItem extends Component {
                         <h5>Ingredients</h5>
                         <p>{menu.ingredients}</p>
                         <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
+                        <br></br>
+                        <h5>How many people will be having this?</h5>
                     </CardContent>
                     <CardActions>
-                    {/* <Counter
+                    <Counter
                       productQuantity={quantity}
                       updateQuantity={this.props.updateQuantity}
                       resetQuantity={this.resetQuantity}
-                    /> */}
-                    {/* <Button
-                            className={!this.state.isAdded ? "" : "added"}
-                            type="button"
-                            onClick={this.addToCart()}
-                          >
-                            {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
-                          </Button>
+                    />
+                      <Button
+                        className={!this.state.isAdded ? "" : "added"}
+                        type="button"
+                        onClick={this.addToCart.bind(
+                          this,
+                          order_date,
+                          person_id,
+                          menu_item_id,
+                          chef_id,
+                          price,
+                          quantity,
+                          title
+                        )}
+                      >
+                        {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
+                      </Button>
                     </CardActions>
-                </Card> */}
-                <Carousel activeItem={1} length={3} showControls={true} showIndicators={true} className="z-depth-1">
+                </Card>
+        )});
+    return (
+      <div className="product">
+        {menuCard}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = reduxState => ({
+    address: reduxState.address,
+    user: reduxState.user,
+    orders: reduxState.orders,
+    menu: reduxState.menu,
+});
+
+export default connect(mapStateToProps)(HireListItem);
+
+
+// import React, { Component } from "react";
+// import Counter from "../../ShoppingCart/Counter";
+// import { connect } from 'react-redux';
+// import '../../../index.css';
+
+// import Card from '@material-ui/core/Card';
+// import CardActions from '@material-ui/core/CardActions';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardMedia from '@material-ui/core/CardMedia';
+// import Button from '@material-ui/core/Button';
+// import { Carousel, CarouselCaption, CarouselInner, CarouselItem, View, Mask } from "mdbreact";
+
+
+
+// class HireListItem extends Component {
+
+//     state = {
+//       selectedProduct: {},
+//       quickViewProdcut: {},
+//       isAdded: false
+//   }
+
+//   // addToCart(order_date, person_id, menu_id, chef_id, price, quantity, title) {
+//   //   const orderInfo = {
+//   //     order_date: order_date,
+//   //     person_id: person_id,
+//   //     menu_item_id: menu_id,
+//   //     chef_id: chef_id,
+//   //     price: price,
+//   //     quantity: quantity,
+//   //   }
+//   addToCart = (order_date, person_id, menu_id, chef_id, price, quantity, title) => {
+//     let order = { 
+//         order_date: order_date,
+//         person_id: person_id,
+//         menu_item_id: menu_id,
+//         chef_id: chef_id,
+//         price: price,
+//         quantity: quantity,
+//         title: title
+//      }
+//     this.props.dispatch( { type: 'ADD_TO_CART', payload: order } );
+//     console.log('order', order);
+//     // this.props.dispatch( { type: 'UPDATE_QUANTITY', payload: order.quantity } );
+//     // this.props.dispatch( { type: 'UPDATE_TOTAL', payload: order.price } );
+//     this.setState(
+//       {
+//         ...this.state,
+//         selectedProduct: {
+//           order_date: order_date,
+//           person_id: person_id,
+//           menu_item_id: menu_id,
+//           chef_id: chef_id,
+//           price: price,
+//           quantity: quantity,
+//           title: title
+//         }
+//       },
+//       function() {
+//         this.props.addToCart(order);
+//       }
+//     );
+//     this.setState(
+//       {
+//         ...this.state,
+//         isAdded: true
+//       },
+//       function() {
+//         setTimeout(() => {
+//           this.setState({
+//             ...this.state,
+//             isAdded: false,
+//             selectedProduct: {}
+//           });
+//         }, 2000);
+//       }
+//     );
+//       // this.props.dispatch({ type:  })
+//     // this.props.dispatch( { type: 'ADD_TO_CART', payload: order } );
+//   }
+
+//   render() {
+//     const address = this.props.user.id;
+//     let quantity = this.props.productQuantity;
+//     let menuCard;
+//     menuCard = this.props.menu.map( (menu, i) => {
+//         return (
+//           <div>
+//           <Card className="card-menu" key={i}>
+//               <CardMedia
+//                         className="menu-item-image"
+//                         component="img"
+//                         alt= "https://via.placeholder.com/160x80"
+//                         height="200"
+//                         src={menu.image}
+//                         title="Contemplative Reptile"
+//                     />
+//                     <CardContent>
+//                         <h2>{menu.title}</h2>
+//                         <h5>Ingredients</h5>
+//                         <p>{menu.ingredients}</p>
+//                         <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
+//                     </CardContent>
+//                     <CardActions>
+//                     {/* <Counter
+//                       productQuantity={quantity}
+//                       updateQuantity={this.props.updateQuantity}
+//                       resetQuantity={this.resetQuantity}
+//                     /> */}
+//                     <Button
+//                         className={!this.state.isAdded ? "" : "added"}
+//                         type="button"
+//                         onClick={this.addToCart.bind(
+//                           this,
+//                           order_date,
+//                           person_id,
+//                           menu_item_id,
+//                           chef_id,
+//                           price,
+//                           quantity,
+//                           title
+//                         )}
+//                       >
+//                         {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
+//                       </Button>
+//                     </CardActions>
+//                 </Card>
+//             </div>
+  
+//          )});
+//     return (
+//       <div className="product">
+//         {menuCard}
+//       </div>
+//     );
+//   }
+// }
+
+// const mapStateToProps = reduxState => ({
+//     address: reduxState.address,
+//     user: reduxState.user,
+//     orders: reduxState.orders,
+//     menu: reduxState.menu,
+// });
+
+// export default connect(mapStateToProps)(HireListItem);
+
+{/* <Carousel activeItem={1} length={3} showControls={true} showIndicators={true} className="z-depth-1">
                 <CarouselInner className="carousel-image">
                   <CarouselItem className="carousel-image" itemId="1">
                     <View>
@@ -111,26 +333,7 @@ class HireListItem extends Component {
                     </CarouselCaption>
                   </CarouselItem>
                 </CarouselInner>
-              </Carousel>
-              </div>
-  
-        // )});
-    // return (
-    //   <div className="product">
-    //     {menuCard}
-    //   </div>
-    // );
-        )}
-}
-
-const mapStateToProps = reduxState => ({
-    address: reduxState.address,
-    user: reduxState.user,
-    orders: reduxState.orders,
-    menu: reduxState.menu,
-});
-
-export default connect(mapStateToProps)(HireListItem);
+                    </Carousel> */}
 
 
 // <Carousel activeItem={1} length={4} showControls={true} showIndicators={true} className="z-depth-1">
