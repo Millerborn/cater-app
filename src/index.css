@@ -13,6 +13,15 @@
     align-items: center;    
 }
 
+#style-list {
+    width: 100px;
+    height: 50px;
+}
+
+#cart-button {
+    background-color: #e53935;
+}
+
 .card-menu {
     min-height: 250px;
     min-width: 350px;

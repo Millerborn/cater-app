@@ -25,16 +25,14 @@ const Nav = (props) => (
           <Link className="nav-link" to="/profile">
             Profile
           </Link>
-          <Link className="nav-link" to="/address">
-            Messages
+          <Link className="nav-link" to="/about">
+            About
           </Link>
           <LogOutButton className="nav-link"/>
+          <CartHeader />
         </>
       )}
       {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/hire-chef">
-        <CartHeader history={props.history} />
-      </Link>
     </div>
   </div>
 );

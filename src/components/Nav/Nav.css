@@ -34,4 +34,5 @@
 
 .nav-right {
   float: right;
+  align-content: inherit;
 }

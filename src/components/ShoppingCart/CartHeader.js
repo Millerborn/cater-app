@@ -8,11 +8,13 @@ import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 import GridList from '@material-ui/core/GridList';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
+import '../../index.css';
 
 class CartHeader extends Component {
 
@@ -20,7 +22,7 @@ class CartHeader extends Component {
     showCart: null,
     totalItems: 0,
     totalAmount: 0,
-    cart: this.props.orders,
+    // cart: this.props.orders,
   }
 
   componentDidMount() {
@@ -30,10 +32,11 @@ class CartHeader extends Component {
 
   removeItem = (order) => {
     this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: order } );
-    this.props.removeProduct(order.id);
+    // this.props.removeProduct(order.id);
   }
 
   handleClick = event => {
+    console.log('handle click history', this.props.history);
     this.setState({
       showCart: event.currentTarget,
     });
@@ -46,47 +49,53 @@ class CartHeader extends Component {
   };
 
   handleHistoryClick = () => {
-    console.log('push to checkout', this.props.history);
     this.props.history.push('/checkout');
     this.handleClose();
+    console.log('push to checkout', this.props.history);
   }
 
-  sumTotalAmount() {    
-    let total = 0;
-    let cart = this.state.cart;
-    for (var i = 0; i < cart.length; i++) {
-      total += cart[i].price * parseInt(cart[i].quantity);
-    }
-    this.setState({
-      ...this.state,
-      totalAmount: total
-    });
-  }
+  // TotalAmount = () => {    
+  //   let total = 0;
+  //   let cart = this.props.orders.cart;
+  //   console.log('cart:',cart);
+  //   for (let i = 0; i < cart.length; i++) {
+  //     total += cart[i].price * parseInt(cart[i].quantity);
+  //   };
+  //   console.log('after for loop');
+  //   // this.setState({
+  //   //   ...this.state,
+  //   //   totalAmount: total
+  //   // });
+  //   console.log('total:', total, 'this.state.totalAmount:', this.state.totalAmount);
+  //   return (
+  //     <p>Order Total: {this.state.totalAmount}</p>
+  //   )
+  // }
 
   render() {
     const showCart = this.state.showCart;
     const open = Boolean(showCart);
     let cartItems;
-    if(this.props.orders !== undefined){
-    cartItems = this.props.orders.map( (order, i) => {
+    if(this.props.orders.cart !== undefined){
+    cartItems = this.props.orders.cart.map( (order, i) => {
       const cartOrder = <p>x{order.quantity} {order.title} ${order.price}</p>
-  return (
-      <List key={i}>
-          <ListItem>
-          <ListItemText
-              primary={cartOrder}
-          />
-          <ListItemSecondaryAction>
-              <IconButton aria-label="Delete">
-              <DeleteIcon 
-                  onClick={() => this.removeItem(order)}
-              />
-              </IconButton>
-          </ListItemSecondaryAction>
-          </ListItem>
-      </List>
-      );
-  })
+    return (
+        <List key={i}>
+            <ListItem>
+            <ListItemText
+                primary={cartOrder}
+            />
+            <ListItemSecondaryAction>
+                <IconButton aria-label="Delete">
+                <DeleteIcon 
+                    onClick={() => this.removeItem(order)}
+                />
+                </IconButton>
+            </ListItemSecondaryAction>
+            </ListItem>
+        </List>
+        );
+    })
         } else {
           cartItems=[];
     }
@@ -110,12 +119,13 @@ class CartHeader extends Component {
     return (
         <div className="container">
         <Button
+            id="cart-button"
             aria-owns={open ? 'simple-popper' : undefined}
             aria-haspopup="true"
             variant="contained"
             onClick={this.handleClick}
         >
-            View Cart
+           <ShoppingCart/>
         </Button>
         <Popover
                 id="simple-popper"
@@ -133,23 +143,23 @@ class CartHeader extends Component {
               >
           <div className="cart">
             <div className="cart-info">
-            {JSON.stringify('cart')}
-            {JSON.stringify(this.state.cart)}
+            {/* {JSON.stringify('cart')} */}
+            {/* {JSON.stringify(this.props.orders)} */}
               <table>
                 <tbody>
                   <tr>
-                    <td>No. of items</td>
+                    <td>No. of People</td>
                     <td>:</td>
                     <td>
-                    <strong>{cartItems.length}</strong>
-                    {/* {JSON.stringify(cartItems.quantity)} */}
+                    <strong>{this.props.orders.people}</strong>
                     </td>
                   </tr>
                   <tr>
                     <td>Sub Total</td>
                     <td>:</td>
                     <td>
-                        <strong>${this.props.totalAmount}</strong>
+                        <strong>${this.props.orders.total}</strong>
+                        {/* <strong><this.TotalAmount /></strong> */}
                     </td>
                   </tr>
                 </tbody>

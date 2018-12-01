@@ -1,7 +1,17 @@
-const orderReducer = (state=[], action) => {
+const orderReducer = (state={cart: [], total: 0, people: 0}, action) => {
     switch (action.type) {
       case 'GET_ORDER':
-        return action.payload;
+        let total = 0;
+        let cart = action.payload;
+        for (let i = 0; i < cart.length; i++) {
+          total += cart[i].price * parseInt(cart[i].quantity);
+        };
+        let people = 0;
+        let quantity = action.payload;
+        for (let i = 0; i < quantity.length; i++) {
+          people += quantity[i].quantity;
+        };
+        return {cart: action.payload, total: total, people: people};
       default:
         return state;
     }

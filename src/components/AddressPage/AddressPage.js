@@ -10,6 +10,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import CreateCustomer from './CreateCustomer';
 import CreateCustomerAddress from './CreateCustomerAddress';
 import OrderDate from './OrderDate';
+import List from '@material-ui/core/List';
+import '../../index.css';
+
 
 class AddressPage extends Component {
 
@@ -73,10 +76,10 @@ class AddressPage extends Component {
                         <TextField required type='text' label="address type" name="address_type" margin="normal" variant="outlined"
                             value={customerAddress.address_type} onChange={this.handleChange} />
                         </FormControl>
-                        <br></br>
-                        {/* <FormControl>
+                        <List>
                         <InputLabel htmlFor="style" className="input-label">Style</InputLabel>
                         <Select
+                            id="style-list"
                             placeholder="style"
                             value={this.state.style}
                             onChange={this.handleChange}
@@ -85,11 +88,17 @@ class AddressPage extends Component {
                             <MenuItem value=''>
                             <em>None</em>
                             </MenuItem>
-                                <MenuItem value={1}>Mexican</MenuItem> 
-                                <MenuItem value={2}>Indian</MenuItem> 
-                                <MenuItem value={3}>Chinese</MenuItem> 
+                                <MenuItem value={1}>French</MenuItem> 
+                                <MenuItem value={2}>Italian</MenuItem> 
+                                <MenuItem value={3}>Mexican</MenuItem> 
+                                <MenuItem value={4}>Moroccan</MenuItem> 
+                                <MenuItem value={5}>Japanese</MenuItem> 
+                                <MenuItem value={6}>Indian</MenuItem> 
+                                <MenuItem value={7}>American</MenuItem> 
+                                <MenuItem value={8}>Japanese</MenuItem> 
+                                <MenuItem value={9}>Chinese</MenuItem> 
                             </Select>
-                        </FormControl> */}
+                        </List>
                         <FormControl className="address-form" variant="filled">
                         <TextField required type='date' name="date" margin="normal" variant="outlined"
                             value={this.state.date} onChange={this.handleChange} />

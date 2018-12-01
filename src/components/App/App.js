@@ -1,24 +1,15 @@
 import React, {Component} from 'react';
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
-
+import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import {connect} from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
 import AboutPage from '../AboutPage/AboutPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import AddressPage from '../AddressPage/AddressPage';
 import DisplayChef from '../DisplayChef/DisplayChef';
 import HirePage from '../HirePage/HirePage';
 import CheckoutPage from '../CheckoutPage/CheckoutPage'
-
 import './App.css';
 
 class App extends Component {

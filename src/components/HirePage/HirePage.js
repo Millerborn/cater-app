@@ -71,7 +71,7 @@ class HirePage extends Component {
     this.sumTotalItems(this.state.cart);
     this.sumTotalAmount(this.state.cart);
   }
-  handleRemoveProduct(id, e) {
+  handleRemoveProduct(id) {
     let cart = this.state.cart;
     let index = cart.findIndex(x => x.id === id);
     cart.splice(index, 1);
@@ -112,7 +112,6 @@ class HirePage extends Component {
       ...this.state,
       totalAmount: total
     });
-    // console.log('cart total', this.state.totalAmount);
   }
 
   //Reset Quantity
@@ -122,11 +121,6 @@ class HirePage extends Component {
       ...this.state,
       quantity: qty
     });
-  }
-
-  componentDidMount() {
-    console.log('hire page history', this.props.history);
-    // this.props.dispatch( { type: 'FETCH_HISTORY', payload: this.props.history } );
   }
 
   render() {
@@ -146,11 +140,11 @@ class HirePage extends Component {
         {chefName}
         <div>
           <CartHeader
-            history={this.props.history} 
-            orders={this.props.orders}
+            // // history={this.props.history} 
+            // orders={this.props.orders}
             totalAmount={this.state.totalAmount}
             totalItems={this.state.totalItems}
-            cartItems={this.state.cart}
+            // cartItems={this.state.cart}
             removeProduct={this.handleRemoveProduct}
           />
         </div>

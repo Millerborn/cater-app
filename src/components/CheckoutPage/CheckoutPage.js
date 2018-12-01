@@ -28,21 +28,21 @@ class CheckoutPage extends Component {
         this.props.dispatch( { type: 'FETCH_CHECKOUT', payload: user  } );
     }
 
-    sumTotalAmount() {    
-        let total = 0;
-        let orders = this.props.orders;
-        for (var i = 0; i < orders.length; i++) {
-          total += orders[i].price * parseInt(orders[i].quantity);
-        }
-        this.setState({
-          ...this.state,
-          totalAmount: total
-        });
-        // console.log('cart total', this.state.totalAmount);
-      }
+    // sumTotalAmount() {    
+    //     let total = 0;
+    //     let orders = this.props.orders;
+    //     for (var i = 0; i < orders.length; i++) {
+    //       total += orders[i].price * parseInt(orders[i].quantity);
+    //     }
+    //     this.setState({
+    //       ...this.state,
+    //       totalAmount: total
+    //     });
+    //     // console.log('cart total', this.state.totalAmount);
+    //   }
 
   render() {
-    const orderInfo = this.props.orders[0];
+    const orderInfo = this.props.orders.cart[0];
     let orderList = '';
     if (orderInfo !== undefined){
         orderList = 
@@ -74,7 +74,7 @@ class CheckoutPage extends Component {
                         <br></br>
                         <div>
                         <h3>Your Order</h3>
-                            {this.props.orders.map( (order, i) => {
+                            {this.props.orders.cart.map( (order, i) => {
                                 const cartOrder = <p>x{order.quantity} {order.title} ${order.price}</p>
                             return (
                                 <List key={i}>
