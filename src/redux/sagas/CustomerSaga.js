@@ -12,15 +12,15 @@ function* addAddress(action) {
     }
 }
 
-function* findAddress(action) {
-  try {
-    const response = yield axios.get(`/customer-information/${action.payload}`);
-    yield put({ type: 'GET_ADDRESS', payload: response.data });
-  } catch (error) {
-      alert('Unable to get user address');
-    console.log('User get request failed', error);
-  }
-}
+// function* findAddress(action) {
+//   try {
+//     const response = yield axios.get(`/customer-information/${action.payload}`);
+//     yield put({ type: 'GET_ADDRESS', payload: response.data });
+//   } catch (error) {
+//       alert('Unable to get user address');
+//     console.log('User get request failed', error);
+//   }
+// }
 
 function* editCustomer(action) {
   console.log('edit customer', action.payload);

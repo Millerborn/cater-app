@@ -6,7 +6,6 @@ import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
-import GridList from '@material-ui/core/GridList';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import List from '@material-ui/core/List';
