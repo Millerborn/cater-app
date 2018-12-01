@@ -1,38 +1,41 @@
+#cater-link {
+  vertical-align: text-bottom;
+}
+
 .nav-title {
-    font-size: 24px;
-    font-weight: 700;
-    display: inline-block;
-    color: #f2f2f2;
-    padding-left: 30px;
+  vertical-align: sub;
+  font-size: 34px;
+  font-weight: 700;
+  display: inline-block;
+  color: #f2f2f2;
+  padding-left: 30px;
 }
 
 .nav {
-  overflow: hidden;
-  background-color: #e53935;
+overflow: hidden;
+background-color: #e53935;
 }
 
 .nav-link {
-  float: left;
-  color: #f2f2f2;
-  background-color: #e53935;
-  text-align: center;
-  margin: 10px;
-  padding: 10px 10px;
-  text-decoration: none;
-  font-size: 15px;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
-  border:none;
-  cursor: pointer;
-  outline:0;
+float: left;
+color: #f2f2f2;
+background-color: #e53935;
+text-align: center;
+margin: 10px;
+padding: 10px 10px;
+text-decoration: none;
+font-size: 14px;
+/* these last two make the logout button in
+the nav bar look like another link */
+border:none;
+cursor: pointer;
+outline:0;
 }
 
 .nav-link:hover {
-  background-color: #e53935;
+background-color: #e53935;
 }
 
 .nav-right {
-  float: right;
-  align-content: inherit;
+  float: left;
 }
