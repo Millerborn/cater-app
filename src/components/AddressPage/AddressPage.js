@@ -9,7 +9,7 @@ import FilledInput from '@material-ui/core/FilledInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import CreateCustomer from './CreateCustomer';
 import CreateCustomerAddress from './CreateCustomerAddress';
-import OrderDate from './OrderDate';
+// import OrderDate from './OrderDate';
 import List from '@material-ui/core/List';
 import '../../index.css';
 
