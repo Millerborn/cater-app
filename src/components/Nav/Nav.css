@@ -17,7 +17,7 @@ background-color: #e53935;
 }
 
 .nav-link {
-float: left;
+float: right;
 color: #f2f2f2;
 background-color: #e53935;
 text-align: center;
@@ -37,5 +37,5 @@ background-color: #e53935;
 }
 
 .nav-right {
-  float: left;
+  float: right;
 }
