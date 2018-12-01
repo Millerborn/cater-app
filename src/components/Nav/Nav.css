@@ -1,10 +1,5 @@
-#cater-link {
-  vertical-align: text-bottom;
-}
-
 .nav-title {
-  vertical-align: sub;
-  font-size: 34px;
+  font-size: 24px;
   font-weight: 700;
   display: inline-block;
   color: #f2f2f2;
@@ -24,7 +19,8 @@ text-align: center;
 margin: 10px;
 padding: 10px 10px;
 text-decoration: none;
-font-size: 14px;
+font-size: 15px;
+
 /* these last two make the logout button in
 the nav bar look like another link */
 border:none;
@@ -37,5 +33,6 @@ background-color: #e53935;
 }
 
 .nav-right {
-  float: left;
+float: right;
+align-content: inherit;
 }

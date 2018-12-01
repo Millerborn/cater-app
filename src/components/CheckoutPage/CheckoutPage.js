@@ -94,8 +94,9 @@ class CheckoutPage extends Component {
                                 );
                             })}
                             <div>
-                                <p>Order Total: {this.props.total}</p>
-                                <Button className="payment-button">Checkout</Button>
+                                <p>No. People: {this.props.orders.people}</p>
+                                <p>Order Total: {this.props.orders.total}</p>
+                                <Button color="primary" className="payment-button">Checkout</Button>
                             </div>
                         </div>
                     </GridList>

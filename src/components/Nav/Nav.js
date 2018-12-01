@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import CartHeader from '../ShoppingCart/CartHeader';
+import { withRouter } from 'react-router-dom';
+
 
 const Nav = (props) => (
   <div className="nav">
@@ -11,7 +13,7 @@ const Nav = (props) => (
       <h2 className="nav-title">Cater</h2>
     </Link>
     <div className="nav-right">
-      <Link hidden className="nav-link" id="cater-link" to="/home">
+      <Link className="nav-link" to="/home">
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
@@ -20,6 +22,7 @@ const Nav = (props) => (
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
+          <CartHeader />
           <Link className="nav-link" to="/profile">
             Profile
           </Link>
@@ -27,9 +30,6 @@ const Nav = (props) => (
             About
           </Link>
           <LogOutButton className="nav-link"/>
-          <div className="nav-link">
-            <CartHeader />
-          </div>
         </>
       )}
       {/* Always show this link since the about page is not protected */}
@@ -53,4 +53,4 @@ const mapStateToProps = state => ({
   total: state.total,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(withRouter(Nav));

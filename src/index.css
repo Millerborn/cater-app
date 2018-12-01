@@ -37,8 +37,8 @@
 }
 
 .card-menu {
-    min-height: 250px;
-    min-width: 350px;
+    height: 600px;
+    width: 400px;
     /* max-height: 250px;
     max-width: 350px; */
     flex: 0ex;
@@ -123,9 +123,14 @@ body {
     background-color: #11111130;
 }
 
+.carousel-image {
+    width: 80%;
+    height: 700px;
+}
+
 .menu-item-image {
-    height: 275px;
-    max-width: 350px;
+    height: 200px;
+    max-width: 250px;
 }
 
 .login-page {
