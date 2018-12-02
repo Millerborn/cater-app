@@ -141,8 +141,11 @@ class HirePage extends Component {
             afterSlide={slideIndex => this.setState({ slideIndex })}
           >
             <img className="carousel-image" src={imageOne.image} />
+            <p>text here?</p>
             <img className="carousel-image" src={imageTwo.image} />
+            <p>text here?</p>
             <img className="carousel-image" src={imageThree.image} />
+            <p>text here?</p>
             <HireList
               total={this.state.totalAmount}
               productsList={this.state.products}
@@ -157,6 +160,7 @@ class HirePage extends Component {
       ;
       }
     return (
+      <center>
       <div className="container">
         {chefName}
         <div hidden>
@@ -198,6 +202,7 @@ class HirePage extends Component {
           />
         </div>
       </div>
+      </center>
     );
   }
 }

@@ -65,9 +65,14 @@ class CheckoutPage extends Component {
             orderList = [];
     }
 
-    return (
-        <div id="main-checkout-div">
-            <h3>Checkout</h3>
+    let cartItems = '';
+    if(this.props.orders.total === 0) {
+        cartItems =
+            <h3>Your cart is empty</h3>
+    } else {
+        cartItems =
+            <div id="main-checkout-div">
+                <h3>Checkout</h3>
                 <div id="checkout-cart" onSubmit={this.handleNextClick}>
                     <GridList className="checkout-gridList" cols={2.5} >
                         {orderList}
@@ -76,7 +81,7 @@ class CheckoutPage extends Component {
                         <h3>Your Order</h3>
                             {this.props.orders.cart.map( (order, i) => {
                                 const cartOrder = <p>x{order.quantity} {order.title} ${order.price}</p>
-                            return (
+                                        return (
                                 <List key={i}>
                                     <ListItem>
                                     <ListItemText
@@ -101,6 +106,13 @@ class CheckoutPage extends Component {
                         </div>
                     </GridList>
                 </div>
+            </div>
+    }
+
+
+    return (
+        <div>
+            {cartItems}
         </div>
     );
   }
