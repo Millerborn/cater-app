@@ -1,16 +1,11 @@
 import React, { Component } from "react";
-import Counter from "../../ShoppingCart/Counter";
 import { connect } from 'react-redux';
 import '../../../index.css';
-
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-// import Carousel from 'nuka-carousel';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
+import Counter from "../../ShoppingCart/Counter";
+
 
 
 
@@ -91,46 +86,58 @@ class HireListItem extends Component {
     let quantity = this.props.productQuantity;
     let menuCard;
     menuCard = this.props.menu.map( (menu, i) => {
+        return (
+            <div
+              id="display-menu-div"
+              key={i}
+              style={{ background: `url('${menu.image}') no-repeat center center` }}
+            >
+              <strong><h1 id="menu-card-title">{menu.title}</h1></strong>
+            </div>
+        )});
+    let menu;
+    menu = this.props.menu.map( (menu, i) => {
       let menu_item_id = menu.id;
       let order_date = '11-26-2018';
       let chef_id = menu.chef_id;
       let price = menu.price;
       let title = menu.title;
-        return (
-          <div
-            id="display-menu-div"
-            key={i}
-            style={{ background: `url('${menu.image}') no-repeat center center` }}
-          >
-            <div className="center">
-              <h1>{menu.title}</h1>
-              <p>{menu.ingredients}</p>
-              <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
-              <h5>How many people will be having this?</h5>
-                <Button
-                  className={!this.state.isAdded ? "" : "added"}
-                  type="button"
-                  onClick={this.addToCart.bind(
-                    this,
-                    order_date,
-                    person_id,
-                    menu_item_id,
-                    chef_id,
-                    price,
-                    quantity,
-                    title
-                  )}
-                >
-                  {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
-                </Button>			
-              </div>
+      return (
+        <div className="center">
+          <h1>{menu.title}</h1>
+          <p>{menu.ingredients}</p>
+          <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
+          <h5>How many people will be having this?</h5>
+            <Counter
+              productQuantity={quantity}
+              updateQuantity={this.props.updateQuantity}
+              resetQuantity={this.resetQuantity}
+            />
+            <Button
+              className={!this.state.isAdded ? "" : "added"}
+              id="hire-menu-button"
+              type="button"
+              onClick={this.addToCart.bind(
+                this,
+                order_date,
+                person_id,
+                menu_item_id,
+                chef_id,
+                price,
+                quantity,
+                title
+              )}
+            >
+              {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
+            </Button>			
           </div>
-        )});
+      )});
     return (
       <div>
         <Slider>
           {menuCard}
         </Slider>
+          {menu}
       </div>
     );
   }

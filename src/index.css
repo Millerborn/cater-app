@@ -29,6 +29,14 @@
     background-color: #e53935;
 }
 
+.center {
+    align-items: flex-end;
+}
+
+#menu-card-title {
+    align-items: flex-end;
+}
+
 .card-menu {
     height: 600px;
     width: 400px;

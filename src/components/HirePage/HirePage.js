@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import HireList from "./HireList/HireList";
-import CartHeader from '../ShoppingCart/CartHeader';
-import CheckoutPage from '../CheckoutPage/CheckoutPage';
-import Nav from '../Nav/Nav';
+// import CartHeader from '../ShoppingCart/CartHeader';
+// import CheckoutPage from '../CheckoutPage/CheckoutPage';
+// import Nav from '../Nav/Nav';
 import { withRouter } from 'react-router-dom';
-import Carousel from 'nuka-carousel';
 import '../../index.css';
 
 
@@ -134,6 +133,7 @@ class HirePage extends Component {
       chefName = 
       <div>
       <h2>Chef {chef.first_name} {chef.last_name}'s Menu</h2>
+      <br></br>
             <HireList
               addToCart={this.handleAddToCart}
               productQuantity={this.state.quantity}
@@ -147,45 +147,12 @@ class HirePage extends Component {
       <center>
       <div className="container">
         {chefName}
-        <div hidden>
-          <CartHeader
-            // cartItems={this.state.cart}
-            removeProduct={this.handleRemoveProduct}
-          />
-        </div>
-          {/* <Carousel
-            slideIndex={this.state.slideIndex}
-            afterSlide={slideIndex => this.setState({ slideIndex })}
-          >
-            <img src={imageOne.image} />
-            <img src={imageTwo.image} />
-            <img src={imageThree.image} />
-            <HireList
-              total={this.state.totalAmount}
-              productsList={this.state.products}
-              searchTerm={this.state.term}
-              addToCart={this.handleAddToCart}
-              productQuantity={this.state.quantity}
-              updateQuantity={this.updateQuantity}
-              history={this.props.history}
-              />
-            </Carousel> */}
-        <div hidden>
-          <CheckoutPage
-            history={this.props.history} 
-            total={this.state.totalAmount}
-          />
-        </div>
-        <div hidden>
-          <Nav
-            history={this.props.history} 
-          />
-        </div>
       </div>
       </center>
     );
   }
 }
+
 const mapStateToProps = reduxState => ({
     address: reduxState.address,
     menu: reduxState.menu,
@@ -194,67 +161,3 @@ const mapStateToProps = reduxState => ({
     user: reduxState.user,
 });
 export default connect(mapStateToProps)(withRouter(HirePage));
-
-
-
-// import React, { Component } from "react";
-// import { connect } from 'react-redux';
-// import HireListItem from "./HireListItem/HireListItem";
-// import compose from 'recompose/compose';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import '../../index.css';
-// import { withStyles } from '@material-ui/core/styles';
-
-
-// const styles = theme => ({
-//   container: {
-//     display: 'flex',
-//     flexWrap: 'wrap',
-//   },
-//   textField: {
-//     marginLeft: theme.spacing.unit,
-//     marginRight: theme.spacing.unit,
-//   },
-//   dense: {
-//     marginTop: 16,
-//   },
-//   menu: {
-//     width: 200,
-//   },
-// });
-
-
-
-// class HirePage extends Component {
-
-//   render() {
-//     const chef = this.props.menu[0];
-//       let chefName = '';
-//       if (chef !== undefined){
-//       chefName = 
-//       <div>
-//       <h2>Chef {chef.first_name} {chef.last_name}'s Menu</h2>
-//       </div>
-//       ;
-//       }
-
-//     return (
-//       <div className="container">
-//           <HireListItem chef={chefName} />
-//       </div>
-//     );
-//   }
-// }
-
-// const mapStateToProps = reduxState => ({
-//     address: reduxState.address,
-//     menu: reduxState.menu,
-//     orders: reduxState.orders,
-//     chef: reduxState.chefs,
-//     user: reduxState.user,
-// });
-
-// export default 
-//   compose( 
-//   connect(mapStateToProps), 
-//   withStyles(styles))(HirePage);
