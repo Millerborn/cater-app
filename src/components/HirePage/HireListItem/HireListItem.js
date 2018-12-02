@@ -8,7 +8,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Carousel from 'nuka-carousel';
+// import Carousel from 'nuka-carousel';
+import Slider from 'react-animated-slider';
+import 'react-animated-slider/build/horizontal.css';
 
 
 
@@ -95,51 +97,39 @@ class HireListItem extends Component {
       let price = menu.price;
       let title = menu.title;
         return (
-          <Card className="card-menu" key={i}>
-              <CardMedia
-                        className="menu-item-image"
-                        component="img"
-                        alt= "https://via.placeholder.com/160x80"
-                        height="200"
-                        src={menu.image}
-                        title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                        <h2>{menu.title}</h2>
-                        <h5>Ingredients</h5>
-                        <p>{menu.ingredients}</p>
-                        <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
-                        <br></br>
-                        <h5>How many people will be having this?</h5>
-                    </CardContent>
-                    <CardActions>
-                    <Counter
-                      productQuantity={quantity}
-                      updateQuantity={this.props.updateQuantity}
-                      resetQuantity={this.resetQuantity}
-                    />
-                      <Button
-                        className={!this.state.isAdded ? "" : "added"}
-                        type="button"
-                        onClick={this.addToCart.bind(
-                          this,
-                          order_date,
-                          person_id,
-                          menu_item_id,
-                          chef_id,
-                          price,
-                          quantity,
-                          title
-                        )}
-                      >
-                        {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
-                      </Button>
-                    </CardActions>
-                </Card>
+          <div
+            key={i}
+            style={{ background: `url('${menu.image}') no-repeat center center` }}
+          >
+            <div className="center">
+              <h1>{menu.title}</h1>
+              <p>{menu.ingredients}</p>
+              <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
+              <h5>How many people will be having this?</h5>
+                <Button
+                  className={!this.state.isAdded ? "" : "added"}
+                  type="button"
+                  onClick={this.addToCart.bind(
+                    this,
+                    order_date,
+                    person_id,
+                    menu_item_id,
+                    chef_id,
+                    price,
+                    quantity,
+                    title
+                  )}
+                >
+                  {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}
+                </Button>			
+              </div>
+          </div>
         )});
     return (
       <div className="product">
-        {menuCard}
+        <Slider>
+          {menuCard}
+        </Slider>
       </div>
     );
   }

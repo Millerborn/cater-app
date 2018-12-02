@@ -9,6 +9,7 @@ import Carousel from 'nuka-carousel';
 import '../../index.css';
 
 
+
 class HirePage extends Component {
   constructor() {
     super();
@@ -136,16 +137,6 @@ class HirePage extends Component {
       chefName = 
       <div>
       <h2>Chef {chef.first_name} {chef.last_name}'s Menu</h2>
-      <Carousel
-            slideIndex={this.state.slideIndex}
-            afterSlide={slideIndex => this.setState({ slideIndex })}
-          >
-            <img className="carousel-image" src={imageOne.image} />
-            <p>text here?</p>
-            <img className="carousel-image" src={imageTwo.image} />
-            <p>text here?</p>
-            <img className="carousel-image" src={imageThree.image} />
-            <p>text here?</p>
             <HireList
               total={this.state.totalAmount}
               productsList={this.state.products}
@@ -155,7 +146,6 @@ class HirePage extends Component {
               updateQuantity={this.updateQuantity}
               history={this.props.history}
               />
-            </Carousel>
       </div>
       ;
       }
