@@ -158,7 +158,6 @@ class CartHeader extends Component {
                     <td>:</td>
                     <td>
                         <strong>${this.props.orders.total}</strong>
-                        {/* <strong><this.TotalAmount /></strong> */}
                     </td>
                   </tr>
                 </tbody>

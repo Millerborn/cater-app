@@ -128,9 +128,6 @@ class HirePage extends Component {
   }
 
   render() {
-    const imageOne = this.props.menu[0];
-    const imageTwo = this.props.menu[1];
-    const imageThree = this.props.menu[2];
     const chef = this.props.menu[0];
       let chefName = '';
       if (chef !== undefined){
@@ -138,9 +135,6 @@ class HirePage extends Component {
       <div>
       <h2>Chef {chef.first_name} {chef.last_name}'s Menu</h2>
             <HireList
-              total={this.state.totalAmount}
-              productsList={this.state.products}
-              searchTerm={this.state.term}
               addToCart={this.handleAddToCart}
               productQuantity={this.state.quantity}
               updateQuantity={this.updateQuantity}
@@ -155,10 +149,6 @@ class HirePage extends Component {
         {chefName}
         <div hidden>
           <CartHeader
-            // // history={this.props.history} 
-            // orders={this.props.orders}
-            totalAmount={this.state.totalAmount}
-            totalItems={this.state.totalItems}
             // cartItems={this.state.cart}
             removeProduct={this.handleRemoveProduct}
           />

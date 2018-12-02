@@ -20,12 +20,9 @@
     height: 50px;
 }
 
-.carousel-image {
-    text-align: center;
-}
-
 .container {
-    max-height: 800px;
+    max-height: 1200px;
+    width: 100%;
 }
 
 #cart-button {
@@ -42,9 +39,15 @@
     margin: 20px;
 }
 
+/* #display-menu-div {
+    height: 1200px;
+    width: 100%;
+} */
+
 .chef-list-item {
     background-color: white;
     min-height: 40px;
+    width: 100%;
     overflow: auto;
     display: inline-block;
 }

@@ -98,6 +98,7 @@ class HireListItem extends Component {
       let title = menu.title;
         return (
           <div
+            id="display-menu-div"
             key={i}
             style={{ background: `url('${menu.image}') no-repeat center center` }}
           >
@@ -126,7 +127,7 @@ class HireListItem extends Component {
           </div>
         )});
     return (
-      <div className="product">
+      <div>
         <Slider>
           {menuCard}
         </Slider>
