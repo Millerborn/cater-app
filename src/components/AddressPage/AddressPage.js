@@ -124,6 +124,11 @@ class AddressPage extends Component {
             <center>
                 {customerList}
             </center>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     );
   }
