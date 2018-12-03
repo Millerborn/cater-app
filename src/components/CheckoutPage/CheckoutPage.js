@@ -10,6 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import { withRouter } from 'react-router-dom';
 import CheckoutButton from './CheckoutButton';
+import moment from 'moment';
 class CheckoutPage extends Component {
 
     state = {
@@ -99,6 +100,7 @@ class CheckoutPage extends Component {
                             })}
                             <div>
                                 <p>No. People: {this.props.orders.people}</p>
+                                <p>Date: {moment(orderInfo.order_date).format('ll')}</p>
                                 <p>Order Total: {this.props.orders.total}</p>
                                 <CheckoutButton
                                     amount={1}

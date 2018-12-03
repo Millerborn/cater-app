@@ -51,10 +51,10 @@
     margin: 20px;
 }
 
-/* #display-menu-div {
-    height: 1200px;
-    width: 100%;
-} */
+#display-menu-div {
+    min-height: 100%;
+    min-width: 100%;
+}
 
 .chef-list-item {
     background-color: white;

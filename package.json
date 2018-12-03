@@ -15,6 +15,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.16.4",
     "mdbreact": "^4.8.4",
+    "moment": "^2.22.2",
     "nuka-carousel": "^4.4.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

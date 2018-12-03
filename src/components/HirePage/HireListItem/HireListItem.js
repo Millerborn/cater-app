@@ -98,7 +98,7 @@ class HireListItem extends Component {
     let menu;
     menu = this.props.menu.map( (menu, i) => {
       let menu_item_id = menu.id;
-      let order_date = '11-26-2018';
+      let order_date = '12-7-2018';
       let chef_id = menu.chef_id;
       let price = menu.price;
       let title = menu.title;
@@ -107,7 +107,7 @@ class HireListItem extends Component {
           <h1>{menu.title}</h1>
           <h5>Please have these ingredients ready for your chef when they arrive</h5>
           <p>{menu.ingredients}</p>
-          <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
+          <div>{this.timeToMake(menu.time_to_make)}</div>
           <h5>How many people will be having this?</h5>
             <Counter
               productQuantity={quantity}
@@ -144,6 +144,9 @@ class HireListItem extends Component {
         <br></br>
           <h3 id="hire-list-break">What would you like?</h3>
           {menu}
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
     );
   }
