@@ -4,8 +4,7 @@
     /* align-content: space-around; */
 }
 
-#main-address-form {
-    display: inline;
+/* #main-address-form {
     padding: 20px;
     margin: 30px;
 }
@@ -13,6 +12,11 @@
 .address-form {
     margin: 15px;
     padding: 20px;
+} */
+
+#chef-image {
+    min-height: 350px;
+    min-width: 350px;
 }
 
 #style-list {
@@ -127,6 +131,22 @@ body {
     max-width: 800px;
     margin: 0 auto;
     background-color: #11111130;
+}
+
+#menu-card-title {
+    line-height: 700px;
+}
+
+#hire-menu-button {
+    padding: 15px;
+    margin: 5px;
+}
+
+#hire-list-break {
+    margin: 35px;
+    padding: 15px;
+    background-color: #e53935;
+    color: white;
 }
 
 .carousel-image {

@@ -54,7 +54,7 @@ class AddressPage extends Component {
     let customerList = '';
     if (customerAddress !== undefined){
         customerList = 
-        <form id="main-address-form" onSubmit={this.handleClick}>
+        <form className="main-address-form" onSubmit={this.handleClick}>
                     <h4>What's your address?</h4>
                     <FormControl className="address-form" variant="filled">
                         <TextField required type='text' label="street" name="street" margin="normal" variant="outlined"

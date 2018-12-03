@@ -105,6 +105,7 @@ class HireListItem extends Component {
       return (
         <div className="center">
           <h1>{menu.title}</h1>
+          <h5>Please have these ingredients ready for your chef when they arrive</h5>
           <p>{menu.ingredients}</p>
           <div>{this.timeToMake(menu.time_to_make)} ${menu.price}</div>
           <h5>How many people will be having this?</h5>
@@ -114,6 +115,8 @@ class HireListItem extends Component {
               resetQuantity={this.resetQuantity}
             />
             <Button
+              color="primary"
+              variant="contained"
               className={!this.state.isAdded ? "" : "added"}
               id="hire-menu-button"
               type="button"
@@ -137,6 +140,9 @@ class HireListItem extends Component {
         <Slider>
           {menuCard}
         </Slider>
+        <br></br>
+        <br></br>
+          <h3 id="hire-list-break">What would you like?</h3>
           {menu}
       </div>
     );

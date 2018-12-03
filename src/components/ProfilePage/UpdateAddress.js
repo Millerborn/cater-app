@@ -66,6 +66,7 @@ class updateCustomer extends Component {
                             <TextField required type='text' label={profileInfo.address_type} name="address_type" margin="normal" variant="outlined"
                                 value={this.state.address_type} onChange={this.handleChange} />
                         </FormControl>
+                        <br></br>
                         <Button 
                             margin="normal" 
                             variant="outlined" 

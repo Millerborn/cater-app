@@ -39,12 +39,11 @@ class ProfilePage extends Component {
         <center>
             <div>
                 <br></br>
-                <p>{profileInfo.first_name} {profileInfo.last_name}</p>
-                <p>Address</p>
+                <h3>{profileInfo.first_name} {profileInfo.last_name}</h3>
                 <p>
                     {profileInfo.street} {profileInfo.city} {profileInfo.state} {profileInfo.zip}
                 </p> 
-                    <p>{profileInfo.address_type}</p>
+                    <p>Address type: {profileInfo.address_type}</p>
                 <p>{profileInfo.email}</p>
                 <p>{profileInfo.phone}</p>
                 <br></br>
@@ -71,8 +70,10 @@ class ProfilePage extends Component {
                     horizontal: 'center',
                     }}
                 >
+                <center>
                     <UpdateAddress handleClose={this.handleClose} address={this.props.address} />
                     <UpdateCustomer handleClose={this.handleClose} address={this.props.address} />
+                </center>
                 </Popover>
             </div>
         </center>

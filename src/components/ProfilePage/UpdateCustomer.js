@@ -59,6 +59,7 @@ class updateCustomer extends Component {
                             <TextField required type='number' label={profileInfo.phone} name="phone" margin="normal" variant="outlined"
                                 value={this.state.phone} onChange={this.handleChange} />
                         </FormControl>
+                        <br></br>
                         <Button margin="normal" variant="outlined" type='submit'>
                             Submit
                         </Button>

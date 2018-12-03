@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
 import '../../index.css';
 import GridList from '@material-ui/core/GridList';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -10,7 +9,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import { withRouter } from 'react-router-dom';
-
+import CheckoutButton from './CheckoutButton';
 class CheckoutPage extends Component {
 
     state = {
@@ -77,7 +76,7 @@ class CheckoutPage extends Component {
                     <GridList className="checkout-gridList" cols={2.5} >
                         {orderList}
                         <br></br>
-                        <div>
+                        <center>
                         <h3>Your Order</h3>
                             {this.props.orders.cart.map( (order, i) => {
                                 const cartOrder = <p>x{order.quantity} {order.title} ${order.price}</p>
@@ -101,9 +100,12 @@ class CheckoutPage extends Component {
                             <div>
                                 <p>No. People: {this.props.orders.people}</p>
                                 <p>Order Total: {this.props.orders.total}</p>
-                                <Button color="primary" className="payment-button">Checkout</Button>
+                                <CheckoutButton
+                                    amount={1}
+                                />
+                                {/* <Button color="primary" className="payment-button">Checkout</Button> */}
                             </div>
-                        </div>
+                        </center>
                     </GridList>
                 </div>
             </div>

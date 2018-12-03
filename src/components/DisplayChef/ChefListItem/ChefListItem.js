@@ -21,11 +21,13 @@ const styles = theme => ({
       display: 'flex',
     },
     details: {
-      display: 'flex',
+      display: 'inline-block',
       flexDirection: 'row',
     },
     content: {
       flex: '1 0 auto',
+      float: 'right',
+
     },
     cover: {
       width: 350,
@@ -42,6 +44,10 @@ const styles = theme => ({
       height: 38,
       width: 38,
     },
+    button: {
+        float: 'right',
+
+    }
   });
   
 
@@ -54,13 +60,48 @@ class ChefListItem extends Component {
         this.props.history.push('/hire-chef');
     }
 
+    rating = (rating) => {
+        if(rating === 4) {
+            return (
+                <IconButton>
+                    <StarRate /><StarRate /><StarRate /><StarRate />
+                </IconButton>
+            )
+        } else {
+            if(rating === 5) {
+                return (
+                    <IconButton>
+                        <StarRate /><StarRate /><StarRate /><StarRate /><StarRate />
+                    </IconButton>
+                )
+            }
+        }
+    }
+
     // Displaying details for chefs
     render() {
         const { classes } = this.props;
         const key = this.props.chef.id;
+        // const rating = this.props.chef.rating;
+        // let rating;
+        // if(this.props.chef.rating === 4) {
+        // rating =
+        //         <IconButton>
+        //             <StarRate /><StarRate /><StarRate /><StarRate />
+        //         </IconButton>
+        // } else {
+        //     if(this.props.chef.rating === 5) {
+        //         rating =
+        //             <IconButton>
+        //                 <StarRate /><StarRate /><StarRate /><StarRate /><StarRate />
+        //             </IconButton>
+        //     }
+        // }
+
         return (
                 <Card className={classes.card}>
                 <CardMedia
+                id="chef-image"
                 className={classes.cover}
                 image={this.props.chef.profile_pic}
                 title="Live from space album cover"
@@ -70,34 +111,45 @@ class ChefListItem extends Component {
                     <Typography component="h5" variant="h5">
                     {this.props.chef.first_name} {this.props.chef.last_name}
                     </Typography>
+                    <br></br>
                     <Typography variant="subtitle1" color="textSecondary">
                     Specialties: {this.props.chef.specialty}
                     </Typography>
+                    <br></br>
                     <Typography variant="subtitle1" color="textSecondary">
                     Years of experience: {this.props.chef.years_of_experience}
                     </Typography>
+                    <br></br>
                     <Typography variant="subtitle1" color="textSecondary">
                     Description: {this.props.chef.description}
                     </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                    Rating: {this.props.chef.rating}
-                    <IconButton>
-                        <StarRate /><StarRate /><StarRate /><StarRate /><StarRate />
-                    </IconButton>
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        Hourly Rate: {this.props.chef.hourly_rate}
-                    </Typography>
-                    
-                        <Button 
-                            className="hire-chef-button" 
-                            color="primary" 
-                            variant="contained" 
-                            onClick={() => this.handleClick(key)}
-                        >
-                            Hire Chef
-                        </Button>
                 </CardContent>
+                </div>
+                <div className={classes.details}>
+                    <CardContent className={classes.content}>
+                        <Typography variant="subtitle1" color="textSecondary">
+                        <strong>Rating:</strong><IconButton><StarRate /><StarRate /><StarRate /><StarRate /><StarRate /></IconButton>
+                        </Typography>
+                    </CardContent>
+                </div>
+                <div className={classes.details}>
+                    <CardContent className={classes.content}>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            <strong>Hourly Rate: </strong>${this.props.chef.hourly_rate}
+                        </Typography>
+                    </CardContent>
+                </div>
+                    <div className={classes.button}>
+                        <CardContent>
+                            <Button 
+                                className="hire-chef-button" 
+                                color="primary" 
+                                variant="contained" 
+                                onClick={() => this.handleClick(key)}
+                            >
+                                Hire Chef
+                            </Button>
+                        </CardContent>
                 </div>
             </Card>
         );

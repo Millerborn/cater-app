@@ -12,9 +12,9 @@ const successPayment = data => {
   alert('Payment Successful');
 };
 
-const errorPayment = data => {
-  alert('Payment Error');
-};
+// const errorPayment = data => {
+//   alert('Payment Error');
+// };
 
 const onToken = (amount, description) => token =>
   axios.post(PAYMENT_SERVER_URL,
@@ -25,7 +25,7 @@ const onToken = (amount, description) => token =>
       amount: fromDollarToCent(amount)
     })
     .then(successPayment)
-    .catch(errorPayment);
+    .catch();
 
 const CheckoutButton = ({ name, description, amount }) =>
   <StripeCheckout
