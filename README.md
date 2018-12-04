@@ -30,6 +30,4 @@ Cooper Miller
 
 ### Acknowledgements
 
-Prime Digital Academy,
-Mary Mosman,
-Krish Szafranski
+Prime Digital Academy, Mary Mosman and Krish Szafranski
