@@ -55,7 +55,6 @@ quantity = (quantity) => {
   render() {
     const person_id = this.props.user.id;
     let quantity = this.state.quantity;
-    let total = this.state.totalAmount;
     let menuCard;
     menuCard = this.props.menu.map( (menu, i) => {
         return (
