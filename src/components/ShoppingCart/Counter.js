@@ -2,27 +2,32 @@ import React, { Component } from "react";
 
 class Counter extends Component {
 
-  state = {
-    quantity: 0,
-  }
+state = {
+  quantity: 0,
+}
 
-  increment = () => {
-    console.log('increment quantity', this.state.quantity);
-    const newCount = Number(this.state.quantity) + 1;
-    this.setState({
-      ...this.state,
-      quantity: newCount, 
-    });
-  }
+decrement = () => {
+  const newCount = Number(this.state.quantity) - 1;
+  console.log('decrement props quantity', newCount);
+  this.updateQuantity(newCount);
+  this.setState({
+    quantity: newCount, 
+  });
+}
 
-  decrement = () => {
-    console.log('decrement quantity', this.state.quantity);
-    const newCount = Number(this.state.quantity) - 1;
-    this.setState({
-      ...this.state,
-      quantity: newCount, 
-    });
-  }
+increment = () => {
+  const newCount = Number(this.state.quantity) + 1;
+  console.log('increment props quantity', newCount);
+  this.updateQuantity(newCount);
+  this.setState({
+    quantity: newCount, 
+  });
+}
+
+updateQuantity = (count) => {  
+  console.log('update quantity', count);
+  this.props.quantity(count);
+}
 
   render() {
     return (
@@ -33,6 +38,7 @@ class Counter extends Component {
         >
           –
         </button>
+        <a>{this.state.quantity}</a>
         <button 
           className="increment" 
           onClick={this.increment}

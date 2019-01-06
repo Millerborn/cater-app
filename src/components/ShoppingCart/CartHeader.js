@@ -53,23 +53,23 @@ class CartHeader extends Component {
     console.log('push to checkout', this.props.history);
   }
 
-  // TotalAmount = () => {    
-  //   let total = 0;
-  //   let cart = this.props.orders.cart;
-  //   console.log('cart:',cart);
-  //   for (let i = 0; i < cart.length; i++) {
-  //     total += cart[i].price * parseInt(cart[i].quantity);
-  //   };
-  //   console.log('after for loop');
-  //   // this.setState({
-  //   //   ...this.state,
-  //   //   totalAmount: total
-  //   // });
-  //   console.log('total:', total, 'this.state.totalAmount:', this.state.totalAmount);
-  //   return (
-  //     <p>Order Total: {this.state.totalAmount}</p>
-  //   )
-  // }
+totalAmount = () => {    
+  let total = 0;
+  let cart = this.props.orders.cart;
+  console.log('cart:',cart);
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].price * parseInt(cart[i].quantity);
+  };
+  console.log('after for loop total');
+  this.setState({
+    ...this.state,
+    totalAmount: total
+  });
+  console.log('total:', total, 'this.state.totalAmount:', this.state.totalAmount);
+  return (
+    <p>Order Total: {this.state.totalAmount}</p>
+  )
+}
 
   render() {
     const showCart = this.state.showCart;
@@ -142,8 +142,8 @@ class CartHeader extends Component {
               >
           <div className="cart">
             <div className="cart-info">
-            {JSON.stringify('orders')}
-            {JSON.stringify(this.props.orders)}
+            {/* {JSON.stringify('total amount')}
+            {JSON.stringify(this.props.order)} */}
               <table>
                 <tbody>
                   <tr>

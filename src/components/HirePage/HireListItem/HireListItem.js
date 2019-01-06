@@ -8,45 +8,54 @@ import Counter from "../../ShoppingCart/Counter";
 
 class HireListItem extends Component {
 
-    state = {
-      selectedProduct: {},
-      isAdded: false
-  }
+state = {
+  selectedProduct: {},
+  isAdded: false,
+  totalAmount: 0,
+  quantity: 0,
+}
 
-  addToCart(order_date, person_id, menu_id, chef_id, price, quantity, title) {
-    const orderInfo = {
+addToCart = (order_date, person_id, menu_id, chef_id, price, quantity, title) => {
+  const orderInfo = {
+    order_date: order_date,
+    person_id: person_id,
+    menu_item_id: menu_id,
+    chef_id: chef_id,
+    price: price,
+    quantity: quantity,
+  }
+  let order = { 
       order_date: order_date,
       person_id: person_id,
       menu_item_id: menu_id,
       chef_id: chef_id,
       price: price,
       quantity: quantity,
+      title: title
     }
-    let order = { 
-        order_date: order_date,
-        person_id: person_id,
-        menu_item_id: menu_id,
-        chef_id: chef_id,
-        price: price,
-        quantity: quantity,
-        title: title
-     }
-    this.props.dispatch( { type: 'ADD_TO_CART', payload: orderInfo } );
-    console.log('orderInfo', orderInfo);
-    console.log('order', order);
-  }
+  this.props.dispatch( { type: 'ADD_TO_CART', payload: orderInfo } );
+  console.log('orderInfo', orderInfo);
+  console.log('order', order);
+}
 
-  timeToMake = (time) => {
-    if(time <= 1){
-      return (<p>{time} Hour to make</p>);
-    } else if (time > 1) {
-      return (<p>{time} Hours to make</p>);
-    }
+timeToMake = (time) => {
+  if(time <= 1){
+    return (<p>{time} Hour to make</p>);
+  } else if (time > 1) {
+    return (<p>{time} Hours to make</p>);
   }
+}
+
+quantity = (quantity) => {
+  this.setState({
+    quantity: quantity,
+  })
+}
 
   render() {
     const person_id = this.props.user.id;
-    let quantity = this.props.productQuantity;
+    let quantity = this.state.quantity;
+    let total = this.state.totalAmount;
     let menuCard;
     menuCard = this.props.menu.map( (menu, i) => {
         return (
@@ -54,6 +63,7 @@ class HireListItem extends Component {
               id="display-menu-div"
               key={i}
               style={{ background: `url('${menu.image}') no-repeat center center` }}
+              src={menu.image}
             >
               <strong><h1 id="menu-card-title">{menu.title}</h1></strong>
             </div>
@@ -66,17 +76,16 @@ class HireListItem extends Component {
       let price = menu.menu_price;
       let title = menu.title;
       return (
-        <div className="center">
+        <div className="center" key={i}>
           <h1>{menu.title}</h1>
           <h5>Please have these ingredients ready for your chef when they arrive</h5>
           <p>{menu.ingredients}</p>
           <div>{this.timeToMake(menu.time_to_make)}</div>
           <h5>How many people will be having this?</h5>
-            <Counter />
+            <Counter quantity={this.quantity} />
             <Button
               color="primary"
               variant="contained"
-              className={!this.state.isAdded ? "" : "added"}
               id="hire-menu-button"
               type="button"
               onClick={this.addToCart.bind(
@@ -90,7 +99,7 @@ class HireListItem extends Component {
                 title
               )}
             >
-              {!this.state.isAdded ? "ADD TO CART" : "✔"}
+            add
             </Button>			
           </div>
       )});
@@ -100,6 +109,8 @@ class HireListItem extends Component {
           {menuCard}
         </Slider>
           <h3 id="hire-list-break">What would you like?</h3>
+          {JSON.stringify('this.state.quantity ->')}
+          {JSON.stringify(this.state.quantity)}
           {menu}
       </div>
     );
