@@ -5,7 +5,13 @@ const router = express.Router();
 router.post('/', (req, res) => {
     console.log(`in customer.router.js POST for`, req.body);
     const newCustomer = req.body;
-    const queryText = `INSERT INTO customers ("first_name", "last_name", "favorites", "email", "phone", "person_id")
+    const queryText = `INSERT INTO customers 
+    ("first_name", 
+    "last_name", 
+    "favorites", 
+    "email", 
+    "phone", 
+    "person_id")
     VALUES ($1, $2, $3, $4, $5, $6);`;
 
     const queryValues = [

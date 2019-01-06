@@ -1,81 +1,47 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 class Counter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: this.props.productQuantity };
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
+
+  state = {
+    quantity: 0,
   }
 
-  increment(e) {
-    this.setState(
-      prevState => ({
-        value: Number(prevState.value) + 1
-      }),
-      function() {
-        this.props.updateQuantity(this.state.value);
-      }
-    );
-    e.preventDefault();
-  }
-
-  decrement(e) {
-    e.preventDefault();
-    if (this.state.value <= 1) {
-      return this.state.value;
-    } else {
-      this.setState(
-        prevState => ({
-          value: Number(prevState.value) - 1
-        }),
-        function() {
-          this.props.updateQuantity(this.state.value);
-        }
-      );
-    }
-  }
-
-  feed(e) {
-    this.setState(
-      {
-        value: this.refs.feedQty.value
-      },
-      function() {
-        this.props.updateQuantity(this.state.value);
-      }
-    );
-  }
-
-  resetQuantity() {
+  increment = () => {
+    console.log('increment quantity', this.state.quantity);
+    const newCount = Number(this.state.quantity) + 1;
     this.setState({
-      value: 1
+      ...this.state,
+      quantity: newCount, 
     });
   }
+
+  decrement = () => {
+    console.log('decrement quantity', this.state.quantity);
+    const newCount = Number(this.state.quantity) - 1;
+    this.setState({
+      ...this.state,
+      quantity: newCount, 
+    });
+  }
+
   render() {
     return (
       <div className="stepper-input">
-        <a href="/hire-chef" className="decrement" onClick={this.decrement}>
+        <button 
+          className="decrement" 
+          onClick={this.decrement}
+        >
           –
-        </a>
-        <input
-          ref="feedQty"
-          type="number"
-          className="quantity"
-          value={this.state.value}
-          onChange={this.feed.bind(this)}
-        />
-        <a href="/hire-chef" className="increment" onClick={this.increment}>
+        </button>
+        <button 
+          className="increment" 
+          onClick={this.increment}
+        >
           +
-        </a>
+        </button>
       </div>
     );
   }
 }
-
-Counter.propTypes = {
-  value: PropTypes.number
-};
 
 export default Counter;

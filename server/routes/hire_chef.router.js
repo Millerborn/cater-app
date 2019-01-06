@@ -12,30 +12,15 @@ router.get('/:id', (req, res) => {
       chef_profile.first_name, chef_profile.last_name, chef_profile.hourly_rate
       FROM menu_item
       JOIN chef_profile ON chef_profile.chef_id = menu_item.chef_id
-      WHERE chef_profile.id=$1;
+      WHERE chef_profile.id=${chefInfo};
     `;
-    pool.query(queryText, [chefInfo])
+    pool.query(queryText)
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error completing SELECT chef info query', err);
         res.sendStatus(500);
       });
   });
-
-// Return Chef info and chef menu from Server
-router.get('/:id', (req, res) => {
-  const chefId = req.params.id;
-  console.log('GET chef menu from id', chefId);
-  const queryText = `SELECT menu_item.*, chef_profile.id FROM menu_item
-    JOIN chef_profile ON chef_profile.chef_id = menu_item.chef_id
-    WHERE chef_profile.id=${chefId};`;
-  pool.query(queryText)
-    .then((result) => { res.send(result.rows); })
-    .catch((err) => {
-      console.log('Error completing SELECT chef menu query', err);
-      res.sendStatus(500);
-    });
-});
 
 // router.post('/', (req, res) => {
 //   console.log(`in hire_chef.router.js POST for`, req.body);

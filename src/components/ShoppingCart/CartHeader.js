@@ -142,8 +142,8 @@ class CartHeader extends Component {
               >
           <div className="cart">
             <div className="cart-info">
-            {/* {JSON.stringify('cart')} */}
-            {/* {JSON.stringify(this.props.orders)} */}
+            {JSON.stringify('orders')}
+            {JSON.stringify(this.props.orders)}
               <table>
                 <tbody>
                   <tr>
