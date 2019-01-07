@@ -57,16 +57,16 @@ quantity = (quantity) => {
     let quantity = this.state.quantity;
     let menuCard;
     menuCard = this.props.menu.map( (menu, i) => {
-        return (
-            <div
-              id="display-menu-div"
-              key={i}
-              style={{ background: `url('${menu.image}') no-repeat center center` }}
-              src={menu.image}
-            >
-              <strong><h1 id="menu-card-title">{menu.title}</h1></strong>
-            </div>
-        )});
+      return (
+          <div
+            id="display-menu-div"
+            key={i}
+            style={{ background: `url('${menu.image}') no-repeat center center` }}
+            src={menu.image}
+          >
+            <strong><h1 id="menu-card-title">{menu.title}</h1></strong>
+          </div>
+      )});
     let menu;
     menu = this.props.menu.map( (menu, i) => {
       let menu_item_id = menu.id;

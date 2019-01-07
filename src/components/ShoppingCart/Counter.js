@@ -38,7 +38,7 @@ updateQuantity = (count) => {
         >
           –
         </button>
-        <a>{this.state.quantity}</a>
+        <span>{this.state.quantity}</span>
         <button 
           className="increment" 
           onClick={this.increment}
