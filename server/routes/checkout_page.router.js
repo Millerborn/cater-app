@@ -25,7 +25,10 @@ router.get('/:id', (req, res) => {
     JOIN menu_item ON menu_item.id = orders.menu_item_id
     WHERE person.id=${personId};`;
     pool.query(queryText)
-      .then((result) => { res.send(result.rows); })
+      .then((result) => { 
+        res.send(result.rows);
+        console.log('order results', result.rows);
+      })
       .catch((err) => {
         console.log('Error completing SELECT project query', err);
         res.sendStatus(500);

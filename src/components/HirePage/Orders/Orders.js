@@ -11,7 +11,6 @@ class Orders extends Component {
         return (
             <div className="chef-list">
                 {time}
-                {JSON.stringify(this.props.chefInfo.hourly_rate)}
             </div>
         );
     }

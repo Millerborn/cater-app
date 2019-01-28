@@ -4,11 +4,14 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 // add order to database 
 function* addOrder(action) {
     const actionResponse = action.payload.person_id;
-    console.log('Add order Saga: ', action.payload.person_id);
+    console.log('Add order Saga: ', actionResponse);
     try {
       yield call(axios.post, '/add-order', action.payload);
       const response = yield call (axios.get, `/checkout/${actionResponse}`);
+      console.log('get response ', response);
+      
       yield put( { type: 'GET_ORDER', payload: response.data } );
+      console.log('get order payload', response.data);
     }
     catch(error) {
       console.log('Error in adding order generator', error);

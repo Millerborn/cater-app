@@ -21,7 +21,6 @@ class CartHeader extends Component {
     showCart: null,
     totalItems: 0,
     totalAmount: 0,
-    // cart: this.props.orders,
   }
 
   componentDidMount() {
@@ -31,7 +30,6 @@ class CartHeader extends Component {
 
   removeItem = (order) => {
     this.props.dispatch( { type: 'REMOVE_FROM_CART', payload: order } );
-    // this.props.removeProduct(order.id);
   }
 
   handleClick = event => {
@@ -52,24 +50,6 @@ class CartHeader extends Component {
     this.handleClose();
     console.log('push to checkout', this.props.history);
   }
-
-totalAmount = () => {    
-  let total = 0;
-  let cart = this.props.orders.cart;
-  console.log('cart:',cart);
-  for (let i = 0; i < cart.length; i++) {
-    total += cart[i].price * parseInt(cart[i].quantity);
-  };
-  console.log('after for loop total');
-  this.setState({
-    ...this.state,
-    totalAmount: total
-  });
-  console.log('total:', total, 'this.state.totalAmount:', this.state.totalAmount);
-  return (
-    <p>Order Total: {this.state.totalAmount}</p>
-  )
-}
 
   render() {
     const showCart = this.state.showCart;
@@ -142,8 +122,6 @@ totalAmount = () => {
               >
           <div className="cart">
             <div className="cart-info">
-            {/* {JSON.stringify('total amount')}
-            {JSON.stringify(this.props.order)} */}
               <table>
                 <tbody>
                   <tr>

@@ -82,6 +82,7 @@ quantity = (quantity) => {
           <div>{this.timeToMake(menu.time_to_make)}</div>
           <h5>How many people will be having this?</h5>
             <Counter quantity={this.quantity} />
+          <h5>${price}</h5>
             <Button
               color="primary"
               variant="contained"
@@ -108,8 +109,6 @@ quantity = (quantity) => {
           {menuCard}
         </Slider>
           <h3 id="hire-list-break">What would you like?</h3>
-          {JSON.stringify('this.state.quantity ->')}
-          {JSON.stringify(this.state.quantity)}
           {menu}
       </div>
     );

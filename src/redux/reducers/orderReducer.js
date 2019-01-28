@@ -1,4 +1,5 @@
 const orderReducer = (state={cart: [], total: 0, people: 0}, action) => {
+  console.log('order reducer state', state);
     switch (action.type) {
       case 'GET_ORDER':
         let total = 0;
